@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>사이트 설정 | 중앙부동산 Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-side">
+      <div class="admin-brand"><span class="admin-logo"><img src="../images/logo.png" alt="중앙공인중개사사무소 로고"></span><div><strong>중앙공인중개사사무소 Admin</strong><span>JUNGANG REAL ESTATE</span></div></div>
+      <a href="index.html">대시보드</a>
+      <a href="inquiries.html">문의 목록</a>
+      <a href="properties-mgmt.html">매물 관리</a>
+      <a class="active" href="settings.html">사이트 설정</a>
+      <a href="../index.html">사이트로 돌아가기</a>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-top"><div><h1>사이트 설정</h1><p>전화번호, 주소, SNS 링크와 문자 알림 설정을 변경합니다.</p></div></div>
+      <form class="card contact-card" data-settings-form>
+        <div class="form-grid">
+          <div class="field"><label>사무소 전화</label><input name="phone_office"></div>
+          <div class="field"><label>대표 휴대폰</label><input name="phone_mobile"></div>
+          <div class="field"><label>팩스</label><input name="fax"></div>
+          <div class="field"><label>영업시간</label><input name="business_hours"></div>
+          <div class="field full"><label>주소</label><input name="address"></div>
+          <div class="field"><label>등록번호</label><input name="registration_no"></div>
+          <div class="field"><label>블로그 URL</label><input name="sns_blog"></div>
+          <div class="field"><label>네이버 프로필 URL</label><input name="sns_naver_profile" placeholder="예: https://naver.me/..."></div>
+          <div class="field"><label>유튜브 URL</label><input name="sns_youtube"></div>
+          <div class="field"><label>인스타그램 URL</label><input name="sns_instagram"></div>
+          <div class="field full"><label>지도 임베드 URL</label><input name="map_embed_url"></div>
+          <div class="field"><label>문자 알림 수신번호</label><input name="sms_notify_phone" placeholder="010-4122-0321"></div>
+          <div class="field full"><label>문자나라 발송 URL</label><input name="sms_notify_url" placeholder="나중에 Cloudflare Worker URL 입력"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">설정 저장</button>
+      </form>
+    </main>
+  </div>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
+

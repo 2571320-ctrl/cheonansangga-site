@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" role="img" aria-label="HS logo">
+  <circle cx="26" cy="26" r="22.5" fill="#fff" stroke="#111" stroke-width="2.4"/>
+  <text x="17.3" y="36.2" fill="#050505" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="800" letter-spacing="-2.7">H</text>
+  <text x="27.8" y="38.2" fill="#050505" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="900" letter-spacing="-2.4">S</text>
+  <path d="M17.2 26.1H35.2" stroke="#050505" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

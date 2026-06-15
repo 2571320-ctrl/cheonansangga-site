@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>매물 관리 | 중앙부동산 Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-side">
+      <div class="admin-brand"><span class="admin-logo"><img src="../images/logo.png" alt="중앙공인중개사사무소 로고"></span><div><strong>중앙공인중개사사무소 Admin</strong><span>JUNGANG REAL ESTATE</span></div></div>
+      <a href="index.html">대시보드</a>
+      <a href="inquiries.html">문의 목록</a>
+      <a class="active" href="properties-mgmt.html">매물 관리</a>
+      <a href="settings.html">사이트 설정</a>
+      <a href="../index.html">사이트로 돌아가기</a>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-top"><div><h1>매물 관리</h1><p>저장한 매물은 상가매물 페이지에 자동 반영됩니다.</p></div></div>
+      <form class="card contact-card property-admin-form" data-property-form novalidate style="margin-bottom:24px">
+        <h2 data-property-form-title>매물 등록</h2>
+        <p class="admin-help">표시·광고 전 실제 의뢰 여부, 가격·면적·주소, 건축물대장, 토지정보, 사진 현황 일치를 확인해 주세요. 필수 항목 누락 시 등록되지 않습니다.</p>
+        <div class="registry-links">
+          <a class="btn btn-secondary btn-sm" href="https://www.eais.go.kr/" target="_blank" rel="noopener">세움터 건축물대장 확인</a>
+          <a class="btn btn-secondary btn-sm" href="https://www.gov.kr/" target="_blank" rel="noopener">정부24 민원 확인</a>
+          <a class="btn btn-secondary btn-sm" href="https://www.kras.go.kr/" target="_blank" rel="noopener">일사편리 토지정보 확인</a>
+          <a class="btn btn-secondary btn-sm" href="https://landad.naver.com/" target="_blank" rel="noopener">네이버 부동산 광고센터</a>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label>매물명</label><input name="title" required></div>
+          <div class="field"><label>시·도</label><select name="province" required><option>충청남도</option><option>서울특별시</option><option>경기도</option><option>대전광역시</option><option>세종특별자치시</option><option>충청북도</option><option>기타</option></select></div>
+          <div class="field"><label>시·군·구</label><select name="city" required><option>천안시 서북구</option><option>천안시 동남구</option><option>아산시</option><option>기타</option></select></div>
+          <div class="field"><label>읍·면·동</label><select name="area" required><option>두정동</option><option>성정동</option><option>불당동</option><option>원성동</option><option>신방동</option><option>백석동</option><option>쌍용동</option><option>배방읍</option><option>기타</option></select></div>
+          <div class="field"><label>상세주소</label><input name="address_detail" placeholder="예: 원두정9길 18, 101호" required></div>
+          <div class="field"><label>매물 분류</label><select name="property_type" required><option>상가점포</option><option>상가건물</option><option>사무실</option><option>근린상가</option><option>상가주택</option><option>토지</option><option>기타</option></select></div>
+          <div class="field"><label>업종/용도</label><select name="category" required><option>음식점</option><option>카페</option><option>소매점</option><option>사무실</option><option>프랜차이즈</option><option>학원/교육</option><option>병원/의원</option><option>미용/뷰티</option><option>기타</option></select></div>
+          <div class="field"><label>거래유형</label><select name="deal_type" required><option>월세</option><option>매매</option><option>전세</option><option>임대</option></select></div>
+          <div class="field"><label>가격정보</label><input name="price_info" placeholder="예: 보증금 3,000/월 150" required></div>
+          <div class="field"><label>관리비</label><input name="maintenance_fee" placeholder="예: 월 10만원 / 없음 / 확인필요"></div>
+          <div class="field"><label>면적(㎡)</label><input name="size_m2" type="number"></div>
+          <div class="field"><label>전용/계약면적 구분</label><select name="area_basis"><option>전용면적</option><option>계약면적</option><option>공급면적</option><option>대지면적</option><option>확인필요</option></select></div>
+          <div class="field"><label>해당층</label><input name="floor" placeholder="예: 1층 / 2층 전체"></div>
+          <div class="field"><label>전체층</label><input name="total_floor" placeholder="예: 지상 5층 / 지하1층~지상5층"></div>
+          <div class="field"><label>방향</label><select name="direction"><option>확인필요</option><option>동향</option><option>서향</option><option>남향</option><option>북향</option><option>남동향</option><option>남서향</option><option>북동향</option><option>북서향</option></select></div>
+          <div class="field"><label>입주/사용 가능일</label><select name="available_date"><option>즉시</option><option>협의</option><option>임대차 종료 후</option><option>확인필요</option></select></div>
+          <div class="field"><label>주차</label><select name="parking"><option>가능</option><option>불가</option><option>인근 주차장</option><option>확인필요</option></select></div>
+          <div class="field"><label>건축물 용도</label><select name="building_use"><option>제1종 근린생활시설</option><option>제2종 근린생활시설</option><option>업무시설</option><option>판매시설</option><option>일반음식점 가능</option><option>건축물대장 확인필요</option><option>기타</option></select></div>
+          <div class="field"><label>사용승인일</label><input name="approval_date" placeholder="예: 2015-03-20 / 확인필요"></div>
+          <div class="field"><label>위반건축물 여부</label><select name="violation_status" required><option>해당없음</option><option>위반건축물</option><option>확인필요</option></select></div>
+          <div class="field"><label>엘리베이터</label><select name="elevator"><option>있음</option><option>없음</option><option>확인필요</option></select></div>
+          <div class="field"><label>냉난방/시설</label><input name="facilities" placeholder="예: 시스템에어컨, 도시가스"></div>
+          <div class="field"><label>거래상태</label><select name="transaction_status" required><option>거래가능</option><option>예약중</option><option>거래완료</option><option>확인필요</option></select></div>
+          <div class="field"><label>매물확인일</label><input name="verified_date" type="date" required></div>
+          <div class="field"><label>건축물대장 확인일</label><input name="building_register_checked_at" type="date"></div>
+          <div class="field"><label>토지정보 확인일</label><input name="land_register_checked_at" type="date"></div>
+          <div class="field"><label>태그(쉼표 구분)</label><input name="tags"></div>
+          <div class="field full"><label>매물 사진</label><input name="photo_file" type="file" accept="image/png,image/jpeg,image/webp"><small>jpg, png, webp 권장. 등록 전 실제 현황과 일치하는 사진인지 확인하세요.</small><img class="admin-photo-preview" data-photo-preview alt=""></div>
+          <div class="field full"><label>설명</label><textarea name="description"></textarea></div>
+          <label class="privacy-check"><input type="checkbox" name="is_featured"> 추천 매물</label>
+        </div>
+        <div class="compliance-box">
+          <h3>표시·광고 전 확인사항</h3>
+          <label><input type="checkbox" name="confirm_owner" required> 소유자 또는 정당한 의뢰권자의 광고 의뢰를 확인했습니다.</label>
+          <label><input type="checkbox" name="confirm_actual" required> 현재 거래 가능한 실제 매물이며 중복·허위 매물이 아닙니다.</label>
+          <label><input type="checkbox" name="confirm_register" required> 건축물대장 또는 토지 관련 공부에서 용도, 면적, 층수, 위반건축물 여부를 확인했습니다.</label>
+          <label><input type="checkbox" name="confirm_price" required> 가격, 면적, 층수, 주소, 관리비, 방향, 입주가능일 등 주요 정보가 사실과 일치합니다.</label>
+          <label><input type="checkbox" name="confirm_photo" required> 업로드한 사진은 해당 매물의 현재 상태와 일치하며 사용할 권리가 있습니다.</label>
+          <label><input type="checkbox" name="confirm_broker" required> 중개사무소명, 등록번호, 연락처 등 광고 주체 정보를 함께 표시하는 것에 동의합니다.</label>
+        </div>
+        <div class="admin-form-status" data-property-status></div>
+        <div class="property-form-actions">
+          <button class="btn btn-primary" data-property-submit type="submit">매물 추가</button>
+          <button class="btn btn-secondary" data-property-cancel type="button" hidden>수정 취소</button>
+        </div>
+      </form>
+      <div class="admin-table-toolbar">
+        <h2>등록 매물 목록</h2>
+        <button class="btn btn-secondary btn-sm" type="button" data-clear-properties>전체 삭제</button>
+      </div>
+      <table class="admin-table"><thead><tr><th>매물명</th><th>주소/분류</th><th>거래</th><th>가격</th><th>확인일</th><th>상태</th><th>추천</th><th>관리</th></tr></thead><tbody data-properties-body></tbody></table>
+    </main>
+  </div>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
+

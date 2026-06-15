@@ -1,0 +1,123 @@
+.properties-layout {
+  align-items: start;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) 350px;
+}
+
+.filter-panel {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  margin: 22px 0;
+  padding: 16px;
+}
+
+.filter-panel input,
+.filter-panel select {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  min-height: 46px;
+  padding: 10px 12px;
+}
+
+.property-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.property-thumb {
+  align-items: center;
+  background: linear-gradient(145deg, #edf2fb, #d6e1f2);
+  color: var(--navy-700);
+  display: flex;
+  font-size: 44px;
+  height: 150px;
+  justify-content: center;
+  position: relative;
+}
+
+.property-thumb img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.wish-btn {
+  background: rgba(255, 255, 255, 0.92);
+  border: 0;
+  border-radius: 50%;
+  color: var(--danger);
+  height: 38px;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 38px;
+}
+
+.property-body {
+  padding: 18px;
+}
+
+.property-body h3 {
+  min-height: 56px;
+}
+
+.property-meta {
+  color: var(--gray-500);
+  font-size: var(--text-sm);
+}
+
+.property-price {
+  color: var(--gold-500);
+  font-family: var(--font-number);
+  font-size: var(--text-xl);
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+.property-address,
+.property-broker {
+  color: var(--gray-500);
+  font-size: var(--text-sm);
+}
+
+.property-broker {
+  border-top: 1px solid var(--gray-100);
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.alert-panel {
+  background: var(--navy-800);
+  border-radius: var(--radius-md);
+  color: var(--white);
+  padding: 24px;
+  position: sticky;
+  top: 92px;
+}
+
+.alert-panel .field label {
+  color: var(--white);
+}
+
+@media (max-width: 1024px) {
+  .properties-layout,
+  .filter-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .alert-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 680px) {
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+}

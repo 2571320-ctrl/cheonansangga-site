@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --navy-900: #0b1c3d;
+  --navy-800: #112244;
+  --navy-700: #1a3260;
+  --navy-600: #1e5196;
+  --navy-500: #2a6bc4;
+  --gold-500: #ff8a1f;
+  --gold-400: #ff9f3f;
+  --gold-100: #fff2e4;
+  --white: #ffffff;
+  --gray-50: #f8f9fc;
+  --gray-100: #eef1f8;
+  --gray-300: #c8d0e0;
+  --gray-500: #7a88a8;
+  --gray-700: #3d4a60;
+  --gray-900: #141b2a;
+  --success: #1b9e6e;
+  --danger: #d94040;
+  --warning: #e8893a;
+  --font-display: "Noto Serif KR", serif;
+  --font-body: "Noto Sans KR", sans-serif;
+  --font-number: "Roboto", sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.75rem;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --shadow-card: 0 4px 24px rgba(11, 28, 61, 0.1);
+  --shadow-hover: 0 12px 40px rgba(11, 28, 61, 0.18);
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --max-width: 1280px;
+}

@@ -1,0 +1,323 @@
+.investment-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.investment-card img {
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.investment-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px 26px 28px;
+}
+
+.investment-card h3 {
+  color: var(--gray-900);
+  margin-bottom: 14px;
+}
+
+.investment-card p {
+  color: var(--gray-700);
+}
+
+.yield-copy {
+  color: var(--navy-700) !important;
+  font-family: var(--font-number);
+  font-size: var(--text-lg);
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.yield-bar {
+  background: var(--gray-100);
+  border-radius: 999px;
+  height: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.yield-bar span {
+  background: linear-gradient(90deg, var(--navy-600), var(--gold-500));
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  width: var(--rate);
+}
+
+.investment-request-head {
+  margin: 0 auto 24px;
+  max-width: 760px;
+  text-align: center;
+}
+
+.investment-request-head .section-title {
+  margin-bottom: 14px;
+}
+
+.investment-request-head p {
+  color: var(--gray-600);
+  font-size: var(--text-lg);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.investment-check-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 249, 252, 0.98));
+}
+
+.investment-check-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 24px;
+}
+
+.investment-check-grid article {
+  background: var(--white);
+  border: 1px solid rgba(200, 208, 224, 0.82);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 26px 24px;
+}
+
+.investment-check-grid span {
+  color: var(--gold-500);
+  display: block;
+  font-family: var(--font-number);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.investment-check-grid h3 {
+  color: var(--gray-900);
+  font-size: var(--text-xl);
+  margin-bottom: 12px;
+}
+
+.investment-check-grid p {
+  color: var(--gray-700);
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.investment-check-grid ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.investment-check-grid li {
+  background: var(--gray-50);
+  border-radius: 999px;
+  color: var(--navy-700);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  list-style: none;
+  padding: 8px 12px;
+}
+
+.investment-simulation-panel {
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy-700), #102d56);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+  color: var(--white);
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr 1.08fr;
+  overflow: hidden;
+  padding: 30px;
+}
+
+.investment-simulation-panel > div > span {
+  color: var(--gold-500);
+  display: block;
+  font-family: var(--font-number);
+  font-size: var(--text-xs);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.investment-simulation-panel h3 {
+  color: var(--white);
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+.investment-simulation-panel p {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.85;
+  margin: 0;
+}
+
+.investment-simulation-panel dl {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+}
+
+.investment-simulation-panel dl div {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.investment-simulation-panel dt {
+  color: var(--gold-400);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.investment-simulation-panel dd {
+  color: var(--white);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.investment-feature {
+  align-items: stretch;
+  background: var(--white);
+  border: 1px solid rgba(200, 208, 224, 0.72);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1.08fr 0.92fr;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+.investment-feature img {
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.investment-feature div {
+  align-self: center;
+  padding: 34px;
+}
+
+.investment-feature span {
+  color: var(--gold-500);
+  display: block;
+  font-family: var(--font-number);
+  font-size: var(--text-xs);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.investment-feature h3 {
+  color: var(--gray-900);
+  font-size: clamp(1.45rem, 2.7vw, 2.1rem);
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.investment-feature p {
+  color: var(--gray-700);
+  line-height: 1.85;
+  margin: 0;
+}
+
+.process-line {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.process-line .step {
+  background: var(--white);
+  border: 1px solid rgba(200, 208, 224, 0.72);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  min-height: 230px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.process-step-photo {
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.process-step-body {
+  padding: 22px 20px 24px;
+}
+
+.process-line .step-num {
+  align-items: center;
+  background: var(--navy-600);
+  border-radius: 999px;
+  color: var(--white);
+  display: inline-flex;
+  font-family: var(--font-number);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  height: 34px;
+  justify-content: center;
+  margin-bottom: 14px;
+  width: 34px;
+}
+
+.process-line .step h3 {
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+
+.process-line .step p {
+  color: var(--gray-700);
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .investment-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .process-line {
+    grid-template-columns: 1fr;
+  }
+
+  .investment-check-grid,
+  .investment-simulation-panel,
+  .investment-simulation-panel dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .investment-feature div,
+  .investment-body {
+    padding: 24px 22px;
+  }
+
+  .investment-feature img {
+    min-height: 220px;
+  }
+}

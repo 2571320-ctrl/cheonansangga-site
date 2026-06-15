@@ -1,0 +1,45 @@
+.contact-layout {
+  align-items: start;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.8fr);
+}
+
+.contact-card {
+  padding: 22px;
+}
+
+.office-placeholder {
+  border-radius: var(--radius-md);
+  height: 160px;
+  margin-bottom: 14px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.hours-card {
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+.hours-card h3 {
+  color: var(--white);
+}
+
+.hours-card p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.map-frame {
+  background: var(--gray-100);
+  border: 0;
+  border-radius: var(--radius-md);
+  height: 280px;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}

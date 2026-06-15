@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--gray-700);
+  background: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.72;
+  word-break: keep-all;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--gray-900);
+  line-height: 1.24;
+  letter-spacing: 0;
+}
+
+p {
+  margin-bottom: 0;
+}
