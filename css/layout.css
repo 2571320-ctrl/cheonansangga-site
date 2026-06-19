@@ -932,19 +932,42 @@
   }
 
   .section {
-    padding: 42px 0;
+    padding: 38px 0;
   }
 
   .section-sm {
-    padding: 34px 0;
+    padding: 30px 0;
   }
 
   .section-head {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
+    text-align: center;
   }
 
   .container {
     padding: 0 18px;
+  }
+
+  .section-title {
+    font-size: clamp(1.65rem, 7vw, 2.15rem);
+    line-height: 1.28;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 32rem;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    text-align: center;
   }
 
   .brand {
@@ -962,8 +985,32 @@
     right: 10px;
   }
 
+  .page-hero {
+    min-height: 190px;
+    padding: 34px 0;
+  }
+
+  .page-hero .container {
+    text-align: center;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.85rem, 9vw, 2.35rem);
+    line-height: 1.2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .page-hero p {
+    line-height: 1.65;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 22rem;
+  }
+
   .page-hero .hero-summary {
     gap: 8px;
+    justify-content: center;
   }
 
   .page-hero .hero-summary span {
