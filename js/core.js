@@ -4,10 +4,10 @@ const SITE_DEFAULTS = {
   fax: "041-552-0035",
   address: "충청남도 천안시 서북구 원두정9길 18, 101호",
   business_hours: "평일·주말 09:00 – 24:00",
-  sns_blog: "https://search.naver.com/search.naver?where=blog&query=%EA%B9%80%ED%98%84%EC%8B%9D%20%EC%A4%91%EC%95%99%EB%B6%80%EB%8F%99%EC%82%B0",
+  sns_blog: "https://blog.naver.com/2571320",
   sns_naver_profile: "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjky&pkid=1&os=39660109&qvt=0&query=%EA%B9%80%ED%98%84%EC%8B%9D",
-  sns_youtube: "https://www.youtube.com/results?search_query=%EA%B9%80%ED%98%84%EC%8B%9D%20%EC%A4%91%EC%95%99%EB%B6%80%EB%8F%99%EC%82%B0",
-  sns_instagram: "",
+  sns_youtube: "https://www.youtube.com/@%EC%83%81%EA%B6%8C%EC%97%B0%EA%B5%AC%EC%86%8C",
+  sns_instagram: "https://www.instagram.com/hyunsickim1",
   map_embed_url: "",
   sms_notify_phone: "010-4122-0321",
   sms_notify_url: "",
@@ -21,13 +21,14 @@ function normalizeUrl(value) {
 }
 
 function normalizeSocialValue(key, value) {
-  const oldBrokenLinks = {
-    sns_blog: "https://blog.naver.com/hyunsickim1",
-    sns_youtube: "https://youtube.com/@hyunsickim1",
-    sns_instagram: "https://instagram.com/hyunsickim1"
+  const canonicalSocialLinks = {
+    sns_blog: SITE_DEFAULTS.sns_blog,
+    sns_naver_profile: SITE_DEFAULTS.sns_naver_profile,
+    sns_youtube: SITE_DEFAULTS.sns_youtube,
+    sns_instagram: SITE_DEFAULTS.sns_instagram
   };
-  if (oldBrokenLinks[key] && value === oldBrokenLinks[key]) {
-    return SITE_DEFAULTS[key] || "";
+  if (canonicalSocialLinks[key]) {
+    return canonicalSocialLinks[key];
   }
   return value;
 }
@@ -61,6 +62,24 @@ function initSiteSettings() {
   });
   document.querySelectorAll("[data-map-frame]").forEach((frame) => {
     frame.src = settings.map_embed_url || "about:blank";
+  });
+}
+
+function initFixedSocialLinks() {
+  const links = {
+    ".fixed-social-item.social-naver": SITE_DEFAULTS.sns_naver_profile,
+    ".fixed-social-item.social-youtube": SITE_DEFAULTS.sns_youtube,
+    ".fixed-social-item.social-instagram": SITE_DEFAULTS.sns_instagram,
+    ".fixed-social-item.social-blog": SITE_DEFAULTS.sns_blog
+  };
+
+  Object.entries(links).forEach(([selector, href]) => {
+    document.querySelectorAll(selector).forEach((link) => {
+      link.href = href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.hidden = false;
+    });
   });
 }
 
@@ -170,5 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
   markActiveNav();
   initScrollFadeIn();
   initPartnerSlider();
+  initFixedSocialLinks();
   initBackToTop();
 });

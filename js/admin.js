@@ -7,10 +7,10 @@ const ADMIN_SITE_DEFAULTS = {
   fax: "041-552-0035",
   address: "충청남도 천안시 서북구 원두정9길 18, 101호",
   business_hours: "평일·주말 09:00 – 24:00",
-  sns_blog: "https://search.naver.com/search.naver?where=blog&query=%EA%B9%80%ED%98%84%EC%8B%9D%20%EC%A4%91%EC%95%99%EB%B6%80%EB%8F%99%EC%82%B0",
+  sns_blog: "https://blog.naver.com/2571320",
   sns_naver_profile: "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjky&pkid=1&os=39660109&qvt=0&query=%EA%B9%80%ED%98%84%EC%8B%9D",
-  sns_youtube: "https://www.youtube.com/results?search_query=%EA%B9%80%ED%98%84%EC%8B%9D%20%EC%A4%91%EC%95%99%EB%B6%80%EB%8F%99%EC%82%B0",
-  sns_instagram: "",
+  sns_youtube: "https://www.youtube.com/@%EC%83%81%EA%B6%8C%EC%97%B0%EA%B5%AC%EC%86%8C",
+  sns_instagram: "https://www.instagram.com/hyunsickim1",
   map_embed_url: "",
   sms_notify_phone: "010-4122-0321",
   sms_notify_url: "",
@@ -361,6 +361,9 @@ function initSettingsForm() {
   const form = document.querySelector("[data-settings-form]");
   if (!form) return;
   const settings = { ...ADMIN_SITE_DEFAULTS, ...JSON.parse(localStorage.getItem("site_settings") || "{}") };
+  ["sns_blog", "sns_naver_profile", "sns_youtube", "sns_instagram"].forEach((key) => {
+    settings[key] = ADMIN_SITE_DEFAULTS[key];
+  });
   Object.entries(settings).forEach(([key, value]) => {
     if (form.elements[key]) form.elements[key].value = value;
   });
