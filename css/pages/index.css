@@ -1078,7 +1078,34 @@
   }
 
   .hero-content {
-    padding-top: 76px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    padding: 82px 0 168px;
+  }
+
+  .hero-badge {
+    justify-content: center;
+    line-height: 1.45;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 9.4vw, 2.4rem);
+    line-height: 1.18;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-desc {
+    line-height: 1.7;
+    margin-bottom: 26px;
+  }
+
+  .hero-cta .btn {
+    justify-content: center;
+    min-width: min(100%, 150px);
   }
 
   .hero-stats {
