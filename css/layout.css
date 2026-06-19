@@ -164,6 +164,10 @@
   width: 100%;
 }
 
+.mobile-nav-socials {
+  display: none;
+}
+
 .header-cta {
   align-items: center;
   display: flex;
@@ -826,6 +830,46 @@
     display: none;
   }
 
+  .mobile-nav-socials {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 42px);
+    justify-content: center;
+    padding: 16px 14px 4px;
+  }
+
+  .mobile-nav-socials a {
+    align-items: center;
+    border: 0;
+    border-radius: 12px;
+    color: var(--white);
+    display: inline-flex;
+    font-size: 17px;
+    font-weight: 900;
+    height: 42px;
+    justify-content: center;
+    padding: 0;
+    width: 42px;
+  }
+
+  .mobile-nav-socials .blog-text {
+    font-size: 8px;
+    letter-spacing: -0.08em;
+  }
+
+  .mobile-nav-socials .social-naver,
+  .mobile-nav-socials .social-blog {
+    background: #03c75a;
+  }
+
+  .mobile-nav-socials .social-youtube {
+    background: #ff0033;
+  }
+
+  .mobile-nav-socials .social-instagram {
+    background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 16%, #fd5949 42%, #d6249f 65%, #285aeb 100%);
+  }
+
   .header-cta {
     display: none;
   }
@@ -898,31 +942,27 @@
   .fixed-social-rail {
     align-items: center;
     border-radius: 18px;
-    bottom: 12px;
     display: flex;
-    gap: 6px;
-    left: 50%;
-    padding: 7px;
-    right: auto;
-    top: auto;
-    transform: translateX(-50%);
+    flex-direction: column;
+    gap: 5px;
+    left: auto;
+    padding: 7px 5px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: auto;
     z-index: 1002;
   }
 
-  .fixed-social-title {
-    display: none;
-  }
-
   .fixed-social-item {
-    border-radius: 13px;
-    min-height: 46px;
+    border-radius: 10px;
+    min-height: 48px;
     min-width: 48px;
-    padding: 6px 5px;
+    padding: 6px 4px;
   }
 
   .fixed-social-item:hover {
-    transform: translateY(-2px);
+    transform: translateX(-2px);
   }
 }
 
@@ -1037,12 +1077,7 @@
   }
 
   .fixed-social-rail {
-    max-width: calc(100vw - 24px);
-  }
-
-  .fixed-social-item {
-    min-height: 44px;
-    min-width: 46px;
+    display: none;
   }
 
   .partner-links {

@@ -996,7 +996,9 @@
   .quick-items {
     display: grid;
     grid-column: auto;
+    gap: 12px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
   }
 
   .visual-strip-head .section-title {
@@ -1004,7 +1006,10 @@
   }
 
   .quick-inner {
+    gap: 16px;
     grid-template-columns: 1fr;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .quick-inner > .btn {
@@ -1074,14 +1079,16 @@
 
 @media (max-width: 560px) {
   .home-hero {
-    min-height: 720px;
+    align-items: stretch;
+    display: block;
+    min-height: 0;
   }
 
   .hero-content {
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
-    padding: 82px 0 168px;
+    padding: 70px 0 34px;
   }
 
   .hero-badge {
@@ -1092,24 +1099,85 @@
   }
 
   .hero-title {
-    font-size: clamp(2rem, 9.4vw, 2.4rem);
+    font-size: clamp(1.92rem, 9vw, 2.28rem);
     line-height: 1.18;
     margin-left: auto;
     margin-right: auto;
   }
 
   .hero-desc {
+    font-size: 0.83rem;
     line-height: 1.7;
     margin-bottom: 26px;
   }
 
+  .hero-desc br {
+    display: none;
+  }
+
+  .hero-cta {
+    gap: 10px;
+  }
+
   .hero-cta .btn {
     justify-content: center;
-    min-width: min(100%, 150px);
+    min-width: min(100%, 168px);
   }
 
   .hero-stats {
     grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .stat {
+    padding: 20px 10px;
+  }
+
+  .quick-bar {
+    padding: 14px 0 16px;
+  }
+
+  .quick-inner {
+    gap: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .quick-inner > .btn {
+    width: min(100%, 170px);
+  }
+
+  .quick-items {
+    gap: 9px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quick-item {
+    align-items: center;
+    background: var(--gray-50);
+    border: 1px solid rgba(11, 28, 61, 0.08);
+    border-radius: 12px;
+    column-gap: 5px;
+    font-size: 0.78rem;
+    grid-template-columns: 16px auto;
+    padding: 9px 8px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .quick-icon {
+    font-size: 0.9rem;
+    width: 16px;
+  }
+
+  .quick-label {
+    font-size: 0.75rem;
+  }
+
+  .quick-value {
+    font-size: 0.82rem;
+    grid-column: 2;
+    line-height: 1.25;
   }
 
   .insight-grid {
