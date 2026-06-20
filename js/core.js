@@ -10,7 +10,7 @@ const SITE_DEFAULTS = {
   sns_instagram: "https://www.instagram.com/hyunsickim1",
   map_embed_url: "",
   sms_notify_phone: "010-4122-0321",
-  sms_notify_url: "",
+  sms_notify_url: "/api/munjanara-sms",
   registration_no: "제44133-2015-04204호"
 };
 

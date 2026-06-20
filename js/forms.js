@@ -1,9 +1,11 @@
 const API_BASE = "";
+const DEFAULT_SMS_ENDPOINT = "/api/munjanara-sms";
 
 function getFormSettings() {
   const defaults = typeof SITE_DEFAULTS === "object" ? SITE_DEFAULTS : {};
   try {
-    return { ...defaults, ...JSON.parse(localStorage.getItem("site_settings") || "{}") };
+    const saved = JSON.parse(localStorage.getItem("site_settings") || "{}");
+    return { ...defaults, ...saved };
   } catch {
     return { ...defaults };
   }
@@ -20,14 +22,14 @@ function formatSmsMessage(tableName, data) {
   const name = data.name || data.customer_name || "이름 미입력";
   const phone = data.phone || data.customer_phone || "연락처 미입력";
   const inquiry = data.inquiry || data.message || data.preferred_category || "";
-  return `[중앙부동산 문의접수]\n유형: ${typeMap[tableName] || tableName}\n이름: ${name}\n연락처: ${phone}${inquiry ? `\n내용: ${String(inquiry).slice(0, 80)}` : ""}`;
+  const preview = inquiry ? `\n내용: ${String(inquiry).replace(/\s+/g, " ").slice(0, 80)}` : "";
+  return `[중앙공인중개사사무소 상담신청]\n유형: ${typeMap[tableName] || tableName}\n이름: ${name}\n연락처: ${phone}${preview}`;
 }
 
 async function notifySms(tableName, data) {
   const settings = getFormSettings();
-  const webhookUrl = settings.sms_notify_url;
+  const webhookUrl = settings.sms_notify_url || DEFAULT_SMS_ENDPOINT;
   const recipient = settings.sms_notify_phone || settings.phone_mobile || "010-4122-0321";
-  if (!webhookUrl) return { skipped: true };
 
   try {
     const response = await fetch(webhookUrl, {
@@ -86,7 +88,7 @@ function handleFormSubmit() {
       const result = await submitForm(table, formToData(form));
       if (result.ok) {
         form.reset();
-        showToast("상담 신청이 저장되었습니다. 빠르게 연락드리겠습니다.");
+        showToast("상담 신청이 접수되었습니다. 빠르게 연락드리겠습니다.");
       } else {
         showToast("저장 중 문제가 발생했습니다.", "error");
       }
