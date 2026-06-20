@@ -99,10 +99,8 @@ export async function onRequest({ request, env = {} }) {
       allow_mms: "1"
     });
 
-    const response = await fetch(MUNJANARA_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString()
+    const response = await fetch(`${MUNJANARA_URL}?${params.toString()}`, {
+      method: "GET"
     });
     const raw = asciiFromBytes(await response.arrayBuffer());
     const result = parseMunjanaraResult(raw);
