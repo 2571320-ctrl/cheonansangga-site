@@ -1,4 +1,4 @@
-const MUNJANARA_URL = "https://munjanara.co.kr/send.sys";
+const MUNJANARA_URL = "http://munjanara.co.kr/send.sys";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
