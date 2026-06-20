@@ -27,6 +27,13 @@ function parseMunjanaraResult(raw) {
   };
 }
 
+function asciiFromBytes(buffer) {
+  return Array.from(new Uint8Array(buffer))
+    .map((byte) => (byte >= 32 && byte <= 126 ? String.fromCharCode(byte) : ""))
+    .join("")
+    .trim();
+}
+
 export async function onRequest({ request, env = {} }) {
   try {
     if (request.method !== "POST") {
@@ -97,7 +104,7 @@ export async function onRequest({ request, env = {} }) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params.toString()
     });
-    const raw = await response.text();
+    const raw = asciiFromBytes(await response.arrayBuffer());
     const result = parseMunjanaraResult(raw);
 
     return jsonResponse({
