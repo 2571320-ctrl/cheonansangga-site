@@ -1,4 +1,4 @@
-const MUNJANARA_URL = "http://munjanara.co.kr/send.sys";
+const MUNJANARA_URL = "https://munjanara.co.kr/send.sys";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -99,8 +99,10 @@ export async function onRequest({ request, env = {} }) {
       allow_mms: "1"
     });
 
-    const response = await fetch(`${MUNJANARA_URL}?${params.toString()}`, {
-      method: "GET"
+    const response = await fetch(MUNJANARA_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString()
     });
     const raw = asciiFromBytes(await response.arrayBuffer());
     const result = parseMunjanaraResult(raw);
