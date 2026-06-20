@@ -45,6 +45,18 @@ export async function onRequest({ request, env = {} }) {
     const sender = onlyDigits(env.MUNJANARA_SENDER || "");
     const receiver = onlyDigits(input.to || env.SMS_NOTIFY_PHONE || "01041220321");
     const message = String(input.message || "").trim().slice(0, 1900);
+    const url = new URL(request.url);
+
+    if (url.searchParams.get("debug") === "1") {
+      return jsonResponse({
+        ok: true,
+        hasUserid: Boolean(userid),
+        hasPasswd: Boolean(passwd),
+        hasSender: Boolean(sender),
+        receiver,
+        hasMessage: Boolean(message)
+      });
+    }
 
     if (!userid || !passwd || !sender) {
       return jsonResponse({
@@ -65,7 +77,7 @@ export async function onRequest({ request, env = {} }) {
       sender,
       receiver,
       message,
-      sender_name: "중앙공인중개사",
+      sender_name: "Jungang",
       receiver_name: receiverName.slice(0, 20),
       end_alert: "1",
       allow_mms: "1"
@@ -73,8 +85,8 @@ export async function onRequest({ request, env = {} }) {
 
     const response = await fetch(MUNJANARA_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
-      body: params
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString()
     });
     const raw = await response.text();
     const result = parseMunjanaraResult(raw);
