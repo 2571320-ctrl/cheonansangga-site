@@ -27,45 +27,50 @@ function parseMunjanaraResult(raw) {
   };
 }
 
-export async function onRequestPost({ request, env }) {
-  let input = {};
+export async function onRequest({ request, env = {} }) {
   try {
-    input = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: "잘못된 요청 형식입니다." }, 400);
-  }
+    if (request.method !== "POST") {
+      return jsonResponse({ ok: false, error: "POST 요청만 사용할 수 있습니다." }, 405);
+    }
 
-  const userid = env.MUNJANARA_USERID || "";
-  const passwd = env.MUNJANARA_PASSWD || "";
-  const sender = onlyDigits(env.MUNJANARA_SENDER || "");
-  const receiver = onlyDigits(input.to || env.SMS_NOTIFY_PHONE || "01041220321");
-  const message = String(input.message || "").trim().slice(0, 1900);
+    let input = {};
+    try {
+      input = await request.json();
+    } catch {
+      return jsonResponse({ ok: false, error: "잘못된 요청 형식입니다." }, 400);
+    }
 
-  if (!userid || !passwd || !sender) {
-    return jsonResponse({
-      ok: false,
-      error: "문자나라 환경변수가 설정되지 않았습니다.",
-      required: ["MUNJANARA_USERID", "MUNJANARA_PASSWD", "MUNJANARA_SENDER"]
-    }, 500);
-  }
+    const userid = env.MUNJANARA_USERID || "";
+    const passwd = env.MUNJANARA_PASSWD || "";
+    const sender = onlyDigits(env.MUNJANARA_SENDER || "");
+    const receiver = onlyDigits(input.to || env.SMS_NOTIFY_PHONE || "01041220321");
+    const message = String(input.message || "").trim().slice(0, 1900);
 
-  if (!receiver || !message) {
-    return jsonResponse({ ok: false, error: "수신번호 또는 문자 내용이 없습니다." }, 400);
-  }
+    if (!userid || !passwd || !sender) {
+      return jsonResponse({
+        ok: false,
+        error: "문자나라 환경변수가 설정되지 않았습니다.",
+        required: ["MUNJANARA_USERID", "MUNJANARA_PASSWD", "MUNJANARA_SENDER"]
+      }, 500);
+    }
 
-  const params = new URLSearchParams({
-    userid,
-    passwd,
-    sender,
-    receiver,
-    message,
-    sender_name: "중앙공인중개사",
-    receiver_name: String(input.data?.name || "상담알림").slice(0, 20),
-    end_alert: "1",
-    allow_mms: "1"
-  });
+    if (!receiver || !message) {
+      return jsonResponse({ ok: false, error: "수신번호 또는 문자 내용이 없습니다." }, 400);
+    }
 
-  try {
+    const receiverName = input.data && input.data.name ? String(input.data.name) : "상담알림";
+    const params = new URLSearchParams({
+      userid,
+      passwd,
+      sender,
+      receiver,
+      message,
+      sender_name: "중앙공인중개사",
+      receiver_name: receiverName.slice(0, 20),
+      end_alert: "1",
+      allow_mms: "1"
+    });
+
     const response = await fetch(MUNJANARA_URL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
@@ -80,10 +85,9 @@ export async function onRequestPost({ request, env }) {
       result
     }, response.ok && result.ok ? 200 : 502);
   } catch (error) {
-    return jsonResponse({ ok: false, error: error.message || "문자 발송에 실패했습니다." }, 502);
+    return jsonResponse({
+      ok: false,
+      error: error && error.message ? error.message : "문자 발송에 실패했습니다."
+    }, 500);
   }
-}
-
-export async function onRequestGet() {
-  return jsonResponse({ ok: false, error: "POST 요청만 사용할 수 있습니다." }, 405);
 }
