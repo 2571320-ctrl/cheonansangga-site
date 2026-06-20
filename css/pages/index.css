@@ -698,16 +698,21 @@
 }
 
 .pfv-brand-lockup {
+  display: grid;
+  justify-items: center;
   padding: 24px 30px 16px;
   text-align: center;
 }
 
 .pfv-brand-lockup .section-title {
   color: var(--white);
-  font-size: clamp(1.7rem, 2.6vw, 2.25rem);
+  font-size: clamp(1.62rem, 2.35vw, 2.08rem);
   line-height: 1.12;
   margin-bottom: 8px;
+  max-width: 100%;
+  text-align: center;
   white-space: nowrap;
+  width: 100%;
 }
 
 .pfv-brand-lockup p {
@@ -732,6 +737,7 @@
   display: block;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   width: 100%;
 }
 
