@@ -58,6 +58,15 @@ export async function onRequest({ request, env = {} }) {
       });
     }
 
+    if (url.searchParams.get("probe") === "1") {
+      const probeResponse = await fetch(MUNJANARA_URL, { method: "GET" });
+      return jsonResponse({
+        ok: true,
+        munjanaraStatus: probeResponse.status,
+        munjanaraContentType: probeResponse.headers.get("content-type") || ""
+      });
+    }
+
     if (!userid || !passwd || !sender) {
       return jsonResponse({
         ok: false,
