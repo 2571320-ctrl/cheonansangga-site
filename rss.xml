@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>중앙부동산공인중개사사무소</title>
+    <link>https://xn--o39ao70bljdnqj.com/</link>
+    <description>천안 상가중개, 창업컨설팅, 투자상담, 상권분석 정보를 제공하는 중앙부동산공인중개사사무소 RSS 피드입니다.</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0900</lastBuildDate>
+    <ttl>1440</ttl>
+    <item>
+      <title>뉴스</title>
+      <link>https://xn--o39ao70bljdnqj.com/news.html</link>
+      <guid isPermaLink="true">https://xn--o39ao70bljdnqj.com/news.html</guid>
+      <description>천안 상권 흐름, 창업 정보, 투자 전략, 부동산 뉴스를 확인할 수 있습니다.</description>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0900</pubDate>
+      <category>뉴스</category>
+    </item>
+    <item>
+      <title>창업컨설팅</title>
+      <link>https://xn--o39ao70bljdnqj.com/consulting.html</link>
+      <guid isPermaLink="true">https://xn--o39ao70bljdnqj.com/consulting.html</guid>
+      <description>상권분석부터 매물 검토, 계약, 오픈 초기 운영까지 창업 과정을 단계별로 지원합니다.</description>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0900</pubDate>
+      <category>창업컨설팅</category>
+    </item>
+    <item>
+      <title>투자상담</title>
+      <link>https://xn--o39ao70bljdnqj.com/investment.html</link>
+      <guid isPermaLink="true">https://xn--o39ao70bljdnqj.com/investment.html</guid>
+      <description>입지, 임대수요, 공실 가능성, 회수기간을 함께 검토해 상가 투자 방향을 설계합니다.</description>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0900</pubDate>
+      <category>투자상담</category>
+    </item>
+    <item>
+      <title>상권분석</title>
+      <link>https://xn--o39ao70bljdnqj.com/news-detail.html?category=market</link>
+      <guid isPermaLink="false">https://xn--o39ao70bljdnqj.com/news-detail.html?category=market</guid>
+      <description>유동인구, 업종 흐름, 배후수요, 경쟁 밀도를 바탕으로 천안 주요 상권을 분석합니다.</description>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0900</pubDate>
+      <category>상권분석</category>
+    </item>
+  </channel>
+</rss>

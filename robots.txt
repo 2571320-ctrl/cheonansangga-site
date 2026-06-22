@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://xn--o39ao70bljdnqj.com/sitemap.xml
+RSS: https://xn--o39ao70bljdnqj.com/rss.xml
