@@ -44,6 +44,28 @@ export async function onRequest({ request, env = {} }) {
     });
   }
 
+  if (url.searchParams.get("postprobe") === "1") {
+    const probeParams = new URLSearchParams({
+      key: "x",
+      user_id: "x",
+      sender: "01000000000",
+      receiver: "01000000000",
+      msg: "test",
+      msg_type: "SMS"
+    });
+    const probeResponse = await fetch(ALIGO_SEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: probeParams.toString()
+    });
+    return jsonResponse({
+      ok: true,
+      aligoStatus: probeResponse.status,
+      aligoContentType: probeResponse.headers.get("content-type") || "",
+      body: await probeResponse.text()
+    });
+  }
+
   if (!key || !userId || !sender || !receiver) {
     return jsonResponse({
       ok: false,
