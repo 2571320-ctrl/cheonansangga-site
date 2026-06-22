@@ -29,8 +29,8 @@ export async function onRequest({ request, env = {} }) {
   }
 
   const url = new URL(request.url);
-  const key = env.ALIGO_API_KEY || "";
-  const userId = env.ALIGO_USER_ID || "";
+  const key = String(env.ALIGO_API_KEY || "").trim();
+  const userId = String(env.ALIGO_USER_ID || "").trim();
   const sender = onlyDigits(env.ALIGO_SENDER || "");
   const receiver = onlyDigits(env.ADMIN_PHONE || "");
 
