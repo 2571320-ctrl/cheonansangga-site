@@ -1,5 +1,6 @@
 const API_BASE = "";
 const DEFAULT_SMS_ENDPOINT = "/api/aligo-sms";
+const DEFAULT_TELEGRAM_ENDPOINT = "/api/telegram";
 
 function getFormSettings() {
   const defaults = typeof SITE_DEFAULTS === "object" ? SITE_DEFAULTS : {};
@@ -74,6 +75,41 @@ async function notifySms(tableName, data) {
   }
 }
 
+function getFormType(tableName, data) {
+  const labels = {
+    general_inquiries: "일반상담",
+    consulting_requests: "창업컨설팅",
+    investment_requests: "투자상담",
+    property_inquiries: "매물문의"
+  };
+  return labels[tableName] || data.inquiry_type || tableName;
+}
+
+async function notifyTelegram(tableName, data) {
+  try {
+    const response = await fetch(DEFAULT_TELEGRAM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        table: tableName,
+        formType: getFormType(tableName, data),
+        timestamp: data.submitted_at || new Date().toISOString(),
+        data
+      })
+    });
+    let body = null;
+    try {
+      body = await response.json();
+    } catch {
+      body = null;
+    }
+    return { ok: response.ok && (!body || body.ok !== false), status: response.status, body };
+  } catch (error) {
+    console.warn("Telegram notification failed", error);
+    return { ok: false, error: error.message || String(error) };
+  }
+}
+
 async function submitForm(tableName, data) {
   const payload = { ...data, id: Date.now(), status: "new", submitted_at: new Date().toISOString() };
   if (API_BASE) {
@@ -82,14 +118,14 @@ async function submitForm(tableName, data) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    if (response.ok) await notifySms(tableName, payload);
+    if (response.ok) await notifyTelegram(tableName, payload);
     return response;
   }
   const stored = JSON.parse(localStorage.getItem(tableName) || "[]");
   stored.push(payload);
   localStorage.setItem(tableName, JSON.stringify(stored));
-  const sms = await notifySms(tableName, payload);
-  return { ok: true, sms };
+  const telegram = await notifyTelegram(tableName, payload);
+  return { ok: true, telegram };
 }
 
 function formToData(form) {
