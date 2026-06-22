@@ -1,5 +1,5 @@
 const API_BASE = "";
-const DEFAULT_SMS_ENDPOINT = "/api/munjanara-sms";
+const DEFAULT_SMS_ENDPOINT = "/api/aligo-sms";
 
 function getFormSettings() {
   const defaults = typeof SITE_DEFAULTS === "object" ? SITE_DEFAULTS : {};
@@ -12,23 +12,38 @@ function getFormSettings() {
 }
 
 function formatSmsMessage(tableName, data) {
-  const typeMap = {
-    general_inquiries: data.inquiry_type || "일반문의",
-    consulting_requests: "창업컨설팅",
-    investment_requests: "투자상담",
-    property_inquiries: "매물문의",
-    newsletter: "뉴스레터"
-  };
-  const name = data.name || data.customer_name || "이름 미입력";
-  const phone = data.phone || data.customer_phone || "연락처 미입력";
-  const inquiry = data.inquiry || data.message || data.preferred_category || "";
-  const preview = inquiry ? `\n내용: ${String(inquiry).replace(/\s+/g, " ").slice(0, 80)}` : "";
-  return `[중앙공인중개사사무소 상담신청]\n유형: ${typeMap[tableName] || tableName}\n이름: ${name}\n연락처: ${phone}${preview}`;
+  const pick = (...values) => values.map((value) => String(value || "").trim()).find(Boolean) || "-";
+  const name = pick(data.name, data.customer_name);
+  const phone = pick(data.phone, data.customer_phone);
+  const region = pick(data.region, data.preferred_area, data.area, data.address);
+  const business = pick(data.business, data.preferred_category, data.preferred_item, data.inquiry_type, data.category);
+  const message = pick(data.message, data.inquiry, data.memo, data.content);
+  return `[상권연구소]\n\n신규 상담 신청\n\n이름 : ${name}\n연락처 : ${phone}\n지역 : ${region}\n업종 : ${business}\n\n문의내용 :\n${message}`;
+}
+
+function saveSmsFailureLog(tableName, data, result) {
+  try {
+    const logs = JSON.parse(localStorage.getItem("sms_failure_logs") || "[]");
+    logs.push({
+      id: Date.now(),
+      table: tableName,
+      name: data.name || data.customer_name || "",
+      phone: data.phone || data.customer_phone || "",
+      submitted_at: data.submitted_at || new Date().toISOString(),
+      result
+    });
+    localStorage.setItem("sms_failure_logs", JSON.stringify(logs.slice(-100)));
+  } catch (error) {
+    console.warn("SMS failure log save failed", error);
+  }
 }
 
 async function notifySms(tableName, data) {
   const settings = getFormSettings();
-  const webhookUrl = settings.sms_notify_url || DEFAULT_SMS_ENDPOINT;
+  const savedWebhookUrl = settings.sms_notify_url || "";
+  const webhookUrl = !savedWebhookUrl || savedWebhookUrl.includes("munjanara-sms")
+    ? DEFAULT_SMS_ENDPOINT
+    : savedWebhookUrl;
   const recipient = settings.sms_notify_phone || settings.phone_mobile || "010-4122-0321";
 
   try {
@@ -42,10 +57,20 @@ async function notifySms(tableName, data) {
         data
       })
     });
-    return { ok: response.ok };
+    let body = null;
+    try {
+      body = await response.json();
+    } catch {
+      body = null;
+    }
+    const result = { ok: response.ok && (!body || body.ok !== false), status: response.status, body };
+    if (!result.ok) saveSmsFailureLog(tableName, data, result);
+    return result;
   } catch (error) {
     console.warn("SMS notification failed", error);
-    return { ok: false };
+    const result = { ok: false, error: error.message || String(error) };
+    saveSmsFailureLog(tableName, data, result);
+    return result;
   }
 }
 
