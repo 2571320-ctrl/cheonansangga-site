@@ -99,7 +99,7 @@ export async function sendAligoSms({ env = {}, to, data = {}, message }) {
     }
     return {
       ok,
-      status: ok ? 200 : 502,
+      status: 200,
       httpStatus: response.status,
       result
     };

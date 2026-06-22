@@ -119,7 +119,7 @@ export async function onRequest({ request, env = {} }) {
     if (!ok) {
       console.error("ALIGO_TEST_SMS_FAILED", { status: response.status, result, receiver });
     }
-    return jsonResponse({ ok, httpStatus: response.status, result }, ok ? 200 : 502);
+    return jsonResponse({ ok, httpStatus: response.status, result }, 200);
   } catch (error) {
     console.error("ALIGO_TEST_SMS_ERROR", {
       error: error && error.message ? error.message : String(error),
