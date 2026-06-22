@@ -14,6 +14,15 @@ function onlyDigits(value) {
   return String(value || "").replace(/[^0-9]/g, "");
 }
 
+function fingerprint(value) {
+  const text = String(value || "").trim();
+  return {
+    length: text.length,
+    first2: text.slice(0, 2),
+    last4: text.slice(-4)
+  };
+}
+
 function pick(...values) {
   for (const value of values) {
     const text = String(value || "").trim();
@@ -138,7 +147,11 @@ export async function onRequest({ request, env = {} }) {
       hasKey: Boolean(env.ALIGO_API_KEY),
       hasUserId: Boolean(env.ALIGO_USER_ID),
       hasSender: Boolean(env.ALIGO_SENDER),
-      hasAdminPhone: Boolean(env.ADMIN_PHONE)
+      hasAdminPhone: Boolean(env.ADMIN_PHONE),
+      userId: fingerprint(env.ALIGO_USER_ID),
+      apiKey: fingerprint(env.ALIGO_API_KEY),
+      sender: fingerprint(onlyDigits(env.ALIGO_SENDER || "")),
+      adminPhone: fingerprint(onlyDigits(env.ADMIN_PHONE || ""))
     });
   }
 

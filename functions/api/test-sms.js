@@ -14,6 +14,15 @@ function onlyDigits(value) {
   return String(value || "").replace(/[^0-9]/g, "");
 }
 
+function fingerprint(value) {
+  const text = String(value || "").trim();
+  return {
+    length: text.length,
+    first2: text.slice(0, 2),
+    last4: text.slice(-4)
+  };
+}
+
 export async function onRequest({ request, env = {} }) {
   if (request.method !== "GET" && request.method !== "POST") {
     return jsonResponse({ ok: false, error: "GET 또는 POST 요청만 사용할 수 있습니다." }, 405);
@@ -31,7 +40,11 @@ export async function onRequest({ request, env = {} }) {
       hasKey: Boolean(key),
       hasUserId: Boolean(userId),
       hasSender: Boolean(sender),
-      hasReceiver: Boolean(receiver)
+      hasReceiver: Boolean(receiver),
+      userId: fingerprint(userId),
+      apiKey: fingerprint(key),
+      sender: fingerprint(sender),
+      receiver: fingerprint(receiver)
     });
   }
 
