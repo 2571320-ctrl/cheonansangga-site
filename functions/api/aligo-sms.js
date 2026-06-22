@@ -129,7 +129,28 @@ export async function onRequest({ request, env = {} }) {
     return jsonResponse({ ok: false, error: "잘못된 요청 형식입니다." }, 400);
   }
 
+  const url = new URL(request.url);
   const data = { ...(input.data || {}), table: input.table || "" };
+
+  if (url.searchParams.get("debug") === "1") {
+    return jsonResponse({
+      ok: true,
+      hasKey: Boolean(env.ALIGO_API_KEY),
+      hasUserId: Boolean(env.ALIGO_USER_ID),
+      hasSender: Boolean(env.ALIGO_SENDER),
+      hasAdminPhone: Boolean(env.ADMIN_PHONE)
+    });
+  }
+
+  if (url.searchParams.get("probe") === "1") {
+    const probeResponse = await fetch(ALIGO_SEND_URL, { method: "GET" });
+    return jsonResponse({
+      ok: true,
+      aligoStatus: probeResponse.status,
+      aligoContentType: probeResponse.headers.get("content-type") || ""
+    });
+  }
+
   const result = await sendAligoSms({
     env,
     to: input.to || env.ADMIN_PHONE,

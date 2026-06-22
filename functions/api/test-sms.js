@@ -19,10 +19,30 @@ export async function onRequest({ request, env = {} }) {
     return jsonResponse({ ok: false, error: "GET 또는 POST 요청만 사용할 수 있습니다." }, 405);
   }
 
+  const url = new URL(request.url);
   const key = env.ALIGO_API_KEY || "";
   const userId = env.ALIGO_USER_ID || "";
   const sender = onlyDigits(env.ALIGO_SENDER || "");
   const receiver = onlyDigits(env.ADMIN_PHONE || "");
+
+  if (url.searchParams.get("debug") === "1") {
+    return jsonResponse({
+      ok: true,
+      hasKey: Boolean(key),
+      hasUserId: Boolean(userId),
+      hasSender: Boolean(sender),
+      hasReceiver: Boolean(receiver)
+    });
+  }
+
+  if (url.searchParams.get("probe") === "1") {
+    const probeResponse = await fetch(ALIGO_SEND_URL, { method: "GET" });
+    return jsonResponse({
+      ok: true,
+      aligoStatus: probeResponse.status,
+      aligoContentType: probeResponse.headers.get("content-type") || ""
+    });
+  }
 
   if (!key || !userId || !sender || !receiver) {
     return jsonResponse({
