@@ -195,6 +195,10 @@ function bindPropertyEvents() {
 function initPropertyPage() {
   if (!window.PropertyService || !document.querySelector("[data-property-grid]")) return;
   propertyState.properties = window.PropertyService.getProperties();
+  const requestedCategory = new URLSearchParams(window.location.search).get("category");
+  if (requestedCategory && window.PropertyService.categories.includes(requestedCategory)) {
+    propertyState.category = requestedCategory;
+  }
   renderCategoryRail();
   renderPropertyCards();
   bindPropertyEvents();

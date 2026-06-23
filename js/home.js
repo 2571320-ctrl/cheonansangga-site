@@ -46,7 +46,47 @@ function initCountUp() {
   });
 }
 
+function initCategorySlider() {
+  const slider = document.querySelector("[data-category-slider]");
+  if (!slider) return;
+
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let resumeTimer;
+
+  function resumeMotion() {
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      slider.classList.remove("is-dragging");
+    }, 1200);
+  }
+
+  slider.addEventListener("pointerdown", (event) => {
+    isDown = true;
+    startX = event.clientX;
+    startScrollLeft = slider.scrollLeft;
+    slider.classList.add("is-dragging");
+    slider.setPointerCapture?.(event.pointerId);
+  });
+
+  slider.addEventListener("pointermove", (event) => {
+    if (!isDown) return;
+    const delta = event.clientX - startX;
+    slider.scrollLeft = startScrollLeft - delta;
+  });
+
+  ["pointerup", "pointercancel", "pointerleave"].forEach((type) => {
+    slider.addEventListener(type, () => {
+      if (!isDown) return;
+      isDown = false;
+      resumeMotion();
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initParticles();
   initCountUp();
+  initCategorySlider();
 });
