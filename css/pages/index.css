@@ -173,6 +173,7 @@
   overflow-y: hidden;
   padding: 0 max(18px, calc((100vw - 1180px) / 2)) 4px;
   scrollbar-width: none;
+  touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -190,7 +191,7 @@
 }
 
 .category-slider-track {
-  animation: categoryFlow 32s linear infinite;
+  animation: categoryFlow 34s linear infinite;
   display: flex;
   gap: 16px;
   width: max-content;
@@ -200,18 +201,19 @@
 .home-category-card {
   background: var(--white);
   border: 1px solid rgba(11, 28, 61, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 18px 42px rgba(11, 28, 61, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 20px 46px rgba(11, 28, 61, 0.09);
   color: var(--navy-900);
   display: grid;
   flex: 0 0 clamp(190px, 17vw, 250px);
   overflow: hidden;
   position: relative;
+  user-select: none;
 }
 
 .home-category-card img {
-  aspect-ratio: 1.7;
-  filter: saturate(0.92) contrast(1.03);
+  aspect-ratio: 1.62;
+  filter: saturate(0.9) contrast(1.04);
   height: auto;
   object-fit: cover;
   transform: scale(1.01);
@@ -220,7 +222,7 @@
 }
 
 .home-category-card::after {
-  background: linear-gradient(180deg, rgba(11, 28, 61, 0), rgba(11, 28, 61, 0.12));
+  background: linear-gradient(180deg, rgba(11, 28, 61, 0), rgba(11, 28, 61, 0.16));
   content: "";
   inset: 0 0 48px;
   pointer-events: none;
@@ -229,7 +231,7 @@
 
 .home-category-card span {
   align-items: center;
-  background: #fff;
+  background: linear-gradient(180deg, #fff, #fbfcff);
   display: flex;
   font-size: 1rem;
   font-weight: 900;
