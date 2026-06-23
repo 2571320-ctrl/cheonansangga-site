@@ -1,8 +1,5 @@
 .properties-layout {
-  align-items: start;
-  display: grid;
-  gap: 28px;
-  grid-template-columns: minmax(0, 1fr) 350px;
+  display: block;
 }
 
 .properties-main {
@@ -136,7 +133,7 @@
 .property-grid {
   display: grid;
   gap: 22px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .property-card {
@@ -260,19 +257,6 @@
   grid-column: 1 / -1;
   padding: 32px;
   text-align: center;
-}
-
-.alert-panel {
-  background: var(--navy-800);
-  border-radius: var(--radius-md);
-  color: var(--white);
-  padding: 24px;
-  position: sticky;
-  top: 92px;
-}
-
-.alert-panel .field label {
-  color: var(--white);
 }
 
 .property-modal[hidden] {
@@ -454,13 +438,69 @@
   overflow: hidden;
 }
 
-@media (max-width: 1120px) {
-  .properties-layout {
-    grid-template-columns: 1fr;
-  }
+.property-cta-section {
+  padding-top: 0;
+}
 
-  .alert-panel {
-    position: static;
+.property-cta-panel {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(8, 24, 54, 0.94), rgba(8, 24, 54, 0.84)),
+    url("../../images/premium/premium-market-flow.jpg") center/cover;
+  border-radius: var(--radius-md);
+  color: #fff;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: clamp(28px, 4vw, 46px);
+}
+
+.property-cta-panel h2 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.25;
+  margin: 8px 0 10px;
+}
+
+.property-cta-panel p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.75;
+}
+
+.property-cta-actions {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.property-phone-cta {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  display: grid;
+  gap: 2px;
+  min-width: 190px;
+  padding: 10px 16px;
+}
+
+.property-phone-cta span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--text-sm);
+}
+
+.property-phone-cta strong {
+  color: #fff;
+  font-family: var(--font-number);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1240px) {
+  .property-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -470,7 +510,7 @@
   }
 
   .property-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .property-modal-panel {
@@ -479,6 +519,14 @@
 
   .property-modal-visual {
     height: 260px;
+  }
+
+  .property-cta-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .property-cta-actions {
+    justify-content: flex-start;
   }
 }
 
@@ -508,5 +556,15 @@
   .property-modal-panel {
     max-height: 92vh;
     width: min(calc(100vw - 20px), 1080px);
+  }
+
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .property-cta-actions,
+  .property-cta-actions .btn,
+  .property-phone-cta {
+    width: 100%;
   }
 }
