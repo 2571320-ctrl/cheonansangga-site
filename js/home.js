@@ -51,8 +51,11 @@ function initCategorySlider() {
   if (!slider) return;
 
   let isDown = false;
+  let didDrag = false;
+  let suppressClick = false;
   let startX = 0;
   let startScrollLeft = 0;
+  let startTarget = null;
   let resumeTimer;
 
   function resumeMotion() {
@@ -64,24 +67,60 @@ function initCategorySlider() {
 
   slider.addEventListener("pointerdown", (event) => {
     isDown = true;
+    didDrag = false;
     startX = event.clientX;
     startScrollLeft = slider.scrollLeft;
-    slider.classList.add("is-dragging");
+    startTarget = event.target;
     slider.setPointerCapture?.(event.pointerId);
   });
 
   slider.addEventListener("pointermove", (event) => {
     if (!isDown) return;
     const delta = event.clientX - startX;
+    if (Math.abs(delta) > 6) {
+      didDrag = true;
+      suppressClick = true;
+      slider.classList.add("is-dragging");
+    }
     slider.scrollLeft = startScrollLeft - delta;
   });
 
   ["pointerup", "pointercancel", "pointerleave"].forEach((type) => {
-    slider.addEventListener(type, () => {
+    slider.addEventListener(type, (event) => {
       if (!isDown) return;
       isDown = false;
+      const wasDrag = didDrag;
+      if (type === "pointerup" && !didDrag) {
+        const pointTarget = document.elementFromPoint(event.clientX, event.clientY);
+        const link = pointTarget?.closest?.(".home-category-card") || startTarget?.closest?.(".home-category-card");
+        if (link?.href) {
+          window.location.href = link.href;
+          return;
+        }
+      }
+      didDrag = false;
+      startTarget = null;
       resumeMotion();
+      if (wasDrag) {
+        window.setTimeout(() => {
+          suppressClick = false;
+        }, 0);
+      }
     });
+  });
+
+  slider.addEventListener("click", (event) => {
+    if (suppressClick) {
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
+      return;
+    }
+    const pointTarget = document.elementFromPoint(event.clientX, event.clientY);
+    const link = pointTarget?.closest?.(".home-category-card") || event.target.closest?.(".home-category-card");
+    if (!link?.href) return;
+    event.preventDefault();
+    window.location.href = link.href;
   });
 }
 
