@@ -2244,3 +2244,375 @@ main > .section-sm {
     line-height: 1.58;
   }
 }
+
+/* Weverse-inspired brand landing rhythm */
+.home-hero {
+  min-height: clamp(520px, 68vh, 700px);
+}
+
+.hero-content {
+  padding: 58px 0;
+}
+
+.property-category-marquee {
+  padding: 18px 0;
+}
+
+.brand-message-section {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(255, 138, 31, 0.1), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, var(--home-ivory) 100%);
+  padding: clamp(58px, 7vw, 92px) 0;
+}
+
+.brand-message-wrap {
+  align-items: center;
+  display: grid;
+  gap: clamp(28px, 5vw, 58px);
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+  max-width: 1200px;
+}
+
+.brand-message-copy .section-title {
+  font-size: clamp(2.35rem, 5vw, 4.55rem);
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin-bottom: 22px;
+}
+
+.brand-message-copy p {
+  color: var(--gray-700);
+  font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+  line-height: 1.85;
+  margin: 0;
+  max-width: 560px;
+}
+
+.brand-message-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.brand-message-points span {
+  background: rgba(11, 28, 61, 0.06);
+  border: 1px solid rgba(11, 28, 61, 0.1);
+  border-radius: 999px;
+  color: var(--navy-900);
+  font-size: 0.88rem;
+  font-weight: 900;
+  padding: 10px 15px;
+}
+
+.brand-message-visual {
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(11, 28, 61, 0.18);
+  min-height: 460px;
+  overflow: hidden;
+  position: relative;
+}
+
+.brand-message-visual::after {
+  background: linear-gradient(180deg, rgba(11, 28, 61, 0.05), rgba(11, 28, 61, 0.34));
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.brand-message-visual img {
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  width: 100%;
+}
+
+.brand-philosophy-section {
+  padding: clamp(64px, 7vw, 96px) 0;
+}
+
+.brand-philosophy-hero {
+  border-radius: 24px;
+  grid-template-columns: minmax(0, 1fr) 280px;
+}
+
+.brand-philosophy-hero .section-title {
+  font-size: clamp(2.2rem, 4.3vw, 4rem);
+  line-height: 1.1;
+  max-width: 760px;
+}
+
+.brand-principle-grid {
+  gap: 16px;
+}
+
+.brand-principle-card {
+  min-height: 260px;
+  padding: 34px 30px;
+}
+
+.visual-strip-section {
+  padding: clamp(58px, 7vw, 86px) 0;
+}
+
+.visual-strip-head {
+  margin-bottom: 36px;
+}
+
+.visual-strip-head .section-title {
+  font-size: clamp(2rem, 3.8vw, 3.45rem);
+  line-height: 1.12;
+  white-space: normal;
+}
+
+.process-grid {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(11, 28, 61, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 20px 56px rgba(11, 28, 61, 0.08);
+  gap: 0;
+  overflow: hidden;
+}
+
+.process-grid::before {
+  display: none;
+}
+
+.process-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 260px;
+  padding: 34px 26px;
+}
+
+.process-card:not(:last-child) {
+  border-right: 1px solid rgba(11, 28, 61, 0.08);
+}
+
+.process-card::before {
+  left: 26px;
+  right: auto;
+  top: auto;
+  bottom: 0;
+  width: 44px;
+}
+
+.process-card::after {
+  color: rgba(255, 138, 31, 0.52);
+  content: "→";
+  font-size: 1.7rem;
+  font-weight: 900;
+  position: absolute;
+  right: 18px;
+  top: 36px;
+}
+
+.process-card:last-child::after {
+  content: "";
+}
+
+.process-card span {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--gold-500);
+  display: block;
+  font-size: 0.82rem;
+  height: auto;
+  justify-content: flex-start;
+  width: auto;
+}
+
+.process-card h3 {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.22;
+  margin-bottom: 16px;
+}
+
+.process-card p {
+  font-size: 0.92rem;
+}
+
+.services-section {
+  padding: clamp(56px, 7vw, 86px) 0;
+}
+
+.service-photo {
+  height: 260px;
+}
+
+.service-body {
+  min-height: 230px;
+  padding: 26px 28px 30px;
+}
+
+.service-card h3 {
+  font-size: 1.35rem;
+}
+
+.service-card p {
+  font-size: 0.96rem;
+}
+
+.company-intro-section {
+  padding: clamp(58px, 7vw, 90px) 0;
+}
+
+.company-intro-wrap {
+  border-radius: 24px;
+  padding: clamp(34px, 5vw, 54px);
+}
+
+.office-section {
+  padding: clamp(58px, 7vw, 90px) 0;
+}
+
+.office-showcase {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(11, 28, 61, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(11, 28, 61, 0.1);
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.office-photo {
+  border-radius: 18px;
+}
+
+@media (max-width: 900px) {
+  .brand-message-wrap,
+  .brand-philosophy-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-message-copy,
+  .brand-philosophy-hero {
+    text-align: center;
+  }
+
+  .brand-message-copy p,
+  .brand-message-points {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brand-message-visual {
+    min-height: 360px;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-card {
+    min-height: 0;
+  }
+
+  .process-card:not(:last-child) {
+    border-bottom: 1px solid rgba(11, 28, 61, 0.08);
+    border-right: 0;
+  }
+
+  .process-card::after {
+    content: "";
+  }
+}
+
+@media (max-width: 560px) {
+  .home-hero {
+    min-height: 0;
+  }
+
+  .brand-message-section,
+  .brand-philosophy-section,
+  .visual-strip-section,
+  .services-section,
+  .company-intro-section,
+  .office-section {
+    padding: 42px 0;
+  }
+
+  .brand-message-copy .section-title,
+  .brand-philosophy-hero .section-title,
+  .visual-strip-head .section-title {
+    font-size: clamp(1.95rem, 9vw, 2.55rem);
+  }
+
+  .brand-message-visual {
+    border-radius: 18px;
+    min-height: 250px;
+  }
+
+  .brand-philosophy-hero {
+    border-radius: 18px;
+  }
+
+  .process-grid {
+    border-radius: 18px;
+  }
+
+  .process-card {
+    padding: 24px 22px;
+  }
+
+  .service-photo {
+    height: 220px;
+  }
+
+  .service-body {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-philosophy-section {
+    padding: 36px 0;
+  }
+
+  .brand-philosophy-hero {
+    gap: 16px;
+    padding: 22px 20px;
+  }
+
+  .brand-philosophy-logo {
+    height: 112px;
+  }
+
+  .brand-principle-grid {
+    gap: 10px;
+  }
+
+  .brand-principle-card {
+    display: grid;
+    gap: 0 13px;
+    grid-template-columns: 50px minmax(0, 1fr);
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .brand-principle-card span {
+    border-radius: 14px 14px 14px 4px;
+    font-size: 1.42rem;
+    grid-row: span 4;
+    height: 50px;
+    margin-bottom: 0;
+    width: 50px;
+  }
+
+  .brand-principle-card small {
+    margin-bottom: 4px;
+  }
+
+  .brand-principle-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .brand-principle-card p {
+    font-size: 0.8rem;
+    line-height: 1.52;
+  }
+}
