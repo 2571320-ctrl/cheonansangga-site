@@ -4071,3 +4071,11 @@ body {
 .property-category-marquee .home-category-card {
   line-height: normal;
 }
+
+/* Remove outer PFV background box while keeping the logo and message layout. */
+.brand-philosophy-hero {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
