@@ -1883,3 +1883,364 @@ main > .section-sm {
     width: 100%;
   }
 }
+
+/* Premium finish pass */
+:root {
+  --home-ivory: #fbf6ee;
+  --home-navy-soft: #102a52;
+  --home-border: rgba(11, 28, 61, 0.1);
+  --home-card-shadow: 0 16px 42px rgba(11, 28, 61, 0.1);
+  --home-card-shadow-hover: 0 24px 56px rgba(11, 28, 61, 0.16);
+}
+
+.home-category-card,
+.process-card,
+.service-card,
+.brand-principle-card,
+.company-intro-wrap,
+.credential-panel,
+.office-points span,
+.final-cta-panel {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.home-category-card:hover,
+.process-card:hover,
+.service-card:hover,
+.brand-principle-card:hover {
+  border-color: rgba(255, 138, 31, 0.36);
+  box-shadow: var(--home-card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.property-category-marquee {
+  background:
+    linear-gradient(180deg, rgba(251, 246, 238, 0.96), rgba(255, 255, 255, 0.98));
+  border-bottom: 1px solid rgba(11, 28, 61, 0.07);
+}
+
+.visual-strip-section {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 138, 31, 0.08), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+}
+
+.process-grid {
+  position: relative;
+}
+
+.process-grid::before {
+  background: linear-gradient(90deg, rgba(255, 138, 31, 0), rgba(255, 138, 31, 0.55), rgba(255, 138, 31, 0));
+  content: "";
+  height: 1px;
+  left: 7%;
+  position: absolute;
+  right: 7%;
+  top: 38px;
+}
+
+.process-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 253, 255, 0.94));
+  border-color: var(--home-border);
+  box-shadow: var(--home-card-shadow);
+  position: relative;
+}
+
+.process-card::before {
+  background: var(--gold-500);
+  border-radius: 999px;
+  content: "";
+  height: 3px;
+  left: 18px;
+  position: absolute;
+  right: 18px;
+  top: 0;
+}
+
+.process-card span {
+  align-items: center;
+  background: var(--navy-800);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(11, 28, 61, 0.18);
+  color: var(--gold-400);
+  display: inline-flex;
+  height: 42px;
+  justify-content: center;
+  margin-bottom: 18px;
+  position: relative;
+  width: 42px;
+  z-index: 1;
+}
+
+.services-section {
+  background:
+    linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
+}
+
+.service-card {
+  border-color: var(--home-border);
+  box-shadow: var(--home-card-shadow);
+}
+
+.service-card::before {
+  background: linear-gradient(90deg, var(--gold-500), rgba(255, 138, 31, 0.24));
+  content: "";
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+
+.service-card .btn {
+  align-self: stretch;
+  justify-content: center;
+}
+
+.brand-philosophy-section {
+  background:
+    linear-gradient(135deg, rgba(11, 28, 61, 0.96), rgba(15, 41, 78, 0.92)),
+    url("../../images/premium/premium-street-grid.jpg");
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.brand-philosophy-section::before {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255, 138, 31, 0.22), transparent 28%),
+    radial-gradient(circle at 86% 14%, rgba(255, 255, 255, 0.1), transparent 24%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.brand-philosophy-wrap {
+  display: grid;
+  gap: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-philosophy-hero {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  padding: clamp(28px, 4vw, 42px);
+}
+
+.brand-philosophy-hero .section-title {
+  color: #fff;
+  font-size: clamp(1.8rem, 3vw, 2.45rem);
+  margin-bottom: 12px;
+}
+
+.brand-philosophy-hero p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 700px;
+}
+
+.brand-philosophy-logo {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  display: flex;
+  height: 170px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.brand-philosophy-logo img {
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+  width: 100%;
+}
+
+.brand-principle-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brand-principle-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+  color: var(--navy-900);
+  min-height: 230px;
+  padding: 28px 26px;
+  position: relative;
+}
+
+.brand-principle-card::before {
+  background: var(--gold-500);
+  border-radius: 0 0 999px 999px;
+  content: "";
+  height: 4px;
+  left: 26px;
+  position: absolute;
+  right: 26px;
+  top: 0;
+}
+
+.brand-principle-card span {
+  align-items: center;
+  background: linear-gradient(135deg, var(--gold-500), #ff9f3d);
+  border-radius: 18px 18px 18px 4px;
+  color: #fff;
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  height: 58px;
+  justify-content: center;
+  margin-bottom: 22px;
+  width: 58px;
+}
+
+.brand-principle-card small {
+  color: var(--gold-500);
+  display: block;
+  font-family: var(--font-number);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.brand-principle-card h3 {
+  color: var(--navy-900);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.brand-principle-card p {
+  color: var(--gray-700);
+  font-size: 0.93rem;
+  line-height: 1.72;
+  margin: 0;
+}
+
+.company-intro-section {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 138, 31, 0.08), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, var(--home-ivory) 100%);
+}
+
+.company-intro-wrap {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 243, 0.94));
+  border-color: rgba(255, 138, 31, 0.18);
+  box-shadow: 0 24px 66px rgba(11, 28, 61, 0.13);
+}
+
+.company-intro-wrap::before {
+  background: linear-gradient(180deg, var(--gold-500), rgba(255, 138, 31, 0.34));
+}
+
+.credential-panel {
+  border-color: rgba(11, 28, 61, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.office-section {
+  background:
+    linear-gradient(180deg, var(--home-ivory) 0%, #ffffff 100%);
+}
+
+.office-photo {
+  box-shadow: var(--home-card-shadow);
+}
+
+.office-points span {
+  box-shadow: 0 8px 26px rgba(11, 28, 61, 0.06);
+}
+
+@media (max-width: 900px) {
+  .process-grid::before {
+    display: none;
+  }
+
+  .brand-philosophy-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .brand-philosophy-hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brand-philosophy-logo {
+    justify-self: center;
+    width: min(100%, 240px);
+  }
+
+  .brand-principle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-principle-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-philosophy-section {
+    padding: 34px 0;
+  }
+
+  .brand-philosophy-hero {
+    padding: 24px 20px;
+  }
+
+  .brand-philosophy-logo {
+    height: 150px;
+  }
+
+  .brand-principle-card {
+    display: grid;
+    gap: 0 14px;
+    grid-template-columns: 54px minmax(0, 1fr);
+    min-height: 0;
+    padding: 24px 22px;
+  }
+
+  .brand-principle-card span {
+    border-radius: 16px 16px 16px 4px;
+    font-size: 1.55rem;
+    grid-row: span 4;
+    height: 54px;
+    margin-bottom: 0;
+    width: 54px;
+  }
+
+  .brand-principle-card small {
+    margin-bottom: 5px;
+  }
+
+  .brand-principle-card h3 {
+    font-size: 1.02rem;
+    margin-bottom: 6px;
+  }
+
+  .brand-principle-card p {
+    font-size: 0.82rem;
+    line-height: 1.58;
+  }
+}
