@@ -2774,3 +2774,302 @@ main > .section-sm {
     padding: 22px 20px;
   }
 }
+
+/* Master brand finish: Sangkwon Research Institute */
+.home-hero {
+  background:
+    linear-gradient(135deg, rgba(8, 24, 53, 0.58), rgba(16, 54, 98, 0.38) 48%, rgba(255, 138, 31, 0.12)),
+    url("../../images/korea-street-depth.jpg");
+  background-position: center 46%;
+  background-size: cover;
+  min-height: clamp(490px, 62vh, 650px);
+}
+
+.home-hero::before {
+  background: inherit;
+  opacity: 0.92;
+}
+
+.home-hero::after {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.11), transparent 34%),
+    linear-gradient(180deg, rgba(8, 24, 53, 0.05), rgba(8, 24, 53, 0.26));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.hero-content {
+  padding: 48px 0 64px;
+  z-index: 2;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.12);
+}
+
+.hero-title {
+  text-shadow: 0 14px 40px rgba(3, 12, 28, 0.36);
+}
+
+.hero-desc,
+.hero-subtitle {
+  text-shadow: 0 10px 28px rgba(3, 12, 28, 0.28);
+}
+
+.hero-trust-strip {
+  background:
+    linear-gradient(90deg, rgba(255, 250, 243, 0.96), rgba(255, 255, 255, 0.98) 48%, rgba(255, 250, 243, 0.96));
+  border-bottom: 1px solid rgba(11, 28, 61, 0.08);
+  border-top: 1px solid rgba(255, 138, 31, 0.16);
+}
+
+.hero-trust-inner {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1180px;
+  padding-bottom: 18px;
+  padding-top: 18px;
+}
+
+.hero-trust-inner div {
+  align-content: center;
+  border-right: 1px solid rgba(11, 28, 61, 0.08);
+  display: grid;
+  min-height: 54px;
+  padding: 0 22px;
+  text-align: center;
+}
+
+.hero-trust-inner div:last-child {
+  border-right: 0;
+}
+
+.hero-trust-inner strong {
+  color: var(--navy-900);
+  display: block;
+  font-size: clamp(1.02rem, 1.6vw, 1.28rem);
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+}
+
+.hero-trust-inner span {
+  color: rgba(11, 28, 61, 0.62);
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.hero-trust-strip + .property-category-marquee {
+  padding-top: 16px;
+}
+
+.property-category-marquee {
+  border-top: 0;
+}
+
+.brand-philosophy-section {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 138, 31, 0.14), transparent 26%),
+    radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.12), transparent 30%),
+    linear-gradient(135deg, #071225 0%, #0b1c3d 52%, #101820 100%);
+}
+
+.brand-philosophy-hero {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04)),
+    linear-gradient(90deg, rgba(255, 138, 31, 0.08), transparent 42%);
+  border-color: rgba(255, 255, 255, 0.18);
+  gap: clamp(28px, 4vw, 54px);
+  grid-template-columns: minmax(270px, 380px) minmax(0, 1fr);
+  padding: clamp(28px, 3.7vw, 42px);
+}
+
+.brand-philosophy-logo {
+  height: clamp(230px, 24vw, 305px);
+}
+
+.brand-philosophy-logo img {
+  padding: clamp(14px, 2.2vw, 22px);
+}
+
+.brand-philosophy-hero .section-eyebrow {
+  color: var(--gold-400);
+  letter-spacing: 0.2em;
+}
+
+.brand-philosophy-hero .section-title {
+  font-size: clamp(2.24rem, 4.1vw, 3.74rem);
+  line-height: 1.14;
+}
+
+.brand-philosophy-hero p {
+  border-left: 3px solid rgba(255, 138, 31, 0.84);
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 18px;
+  padding-left: 18px;
+}
+
+.brand-principle-card {
+  min-height: 182px;
+  padding: 23px 24px 22px;
+}
+
+.brand-principle-card span {
+  font-size: 1.56rem;
+  height: 46px;
+  margin-bottom: 13px;
+  width: 46px;
+}
+
+.brand-principle-card p {
+  line-height: 1.58;
+}
+
+.visual-strip-section {
+  padding-bottom: clamp(24px, 3vw, 34px);
+}
+
+.services-section {
+  padding-top: clamp(24px, 3vw, 34px);
+}
+
+.process-card,
+.service-card,
+.company-intro-wrap,
+.office-showcase,
+.final-cta-panel {
+  border-radius: 20px;
+}
+
+.service-card .btn {
+  border-radius: 10px;
+}
+
+.service-photo {
+  filter: saturate(0.94) contrast(1.03);
+}
+
+.company-intro-section {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 138, 31, 0.1), transparent 24%),
+    linear-gradient(180deg, #fff 0%, #f7f8fb 100%);
+}
+
+.company-intro-wrap {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 243, 0.94)),
+    linear-gradient(90deg, rgba(11, 28, 61, 0.04), transparent 40%);
+  border-color: rgba(255, 138, 31, 0.2);
+  box-shadow: 0 26px 70px rgba(11, 28, 61, 0.09);
+}
+
+.intro-career-list li {
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.office-showcase .btn,
+.office-showcase a.btn {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .hero-trust-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-bottom: 14px;
+    padding-top: 14px;
+  }
+
+  .hero-trust-inner div {
+    border-bottom: 1px solid rgba(11, 28, 61, 0.07);
+    min-height: 50px;
+    padding: 12px 14px;
+  }
+
+  .hero-trust-inner div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .hero-trust-inner div:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .brand-philosophy-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .brand-philosophy-logo {
+    justify-self: center;
+    max-width: 360px;
+  }
+
+  .brand-philosophy-hero p {
+    border-left: 0;
+    border-top: 3px solid rgba(255, 138, 31, 0.84);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-hero {
+    background-position: center top;
+  }
+
+  .hero-content {
+    padding: 44px 0 30px;
+  }
+
+  .hero-trust-inner {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .hero-trust-inner strong {
+    font-size: 1rem;
+  }
+
+  .hero-trust-inner span {
+    font-size: 0.75rem;
+  }
+
+  .hero-trust-strip + .property-category-marquee {
+    padding-top: 12px;
+  }
+
+  .brand-philosophy-hero {
+    padding: 22px 18px;
+  }
+
+  .brand-philosophy-logo {
+    height: 150px;
+    max-width: 230px;
+  }
+
+  .brand-principle-card {
+    min-height: 0;
+    padding: 17px 18px;
+  }
+
+  .brand-principle-card span {
+    height: 46px;
+    width: 46px;
+  }
+
+  .services-section,
+  .visual-strip-section {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+}
