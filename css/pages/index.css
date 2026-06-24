@@ -3878,3 +3878,177 @@ body {
     height: 210px;
   }
 }
+
+/* Representative / Office proof balance pass */
+.company-intro-wrap {
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 46px);
+  grid-template-columns: minmax(0, 55fr) minmax(420px, 45fr);
+  padding: clamp(34px, 4.6vw, 52px);
+}
+
+.company-intro-copy {
+  align-content: center;
+  display: grid;
+  min-width: 0;
+}
+
+.company-profile-card {
+  align-items: stretch;
+  align-self: stretch;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(184px, 0.95fr) minmax(0, 1.05fr);
+  height: 100%;
+}
+
+.intro-profile-media,
+.credential-panel {
+  height: 100%;
+  min-height: 320px;
+}
+
+.intro-profile-media {
+  align-self: stretch;
+  border: 1px solid rgba(7, 26, 56, 0.1);
+  box-shadow: 0 18px 44px rgba(7, 26, 56, 0.08);
+  overflow: hidden;
+}
+
+.intro-profile-media .profile-photo {
+  flex: 1 1 auto;
+  height: auto;
+  max-width: none;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center 8%;
+}
+
+.intro-profile-media .profile-overlay {
+  flex: 0 0 auto;
+}
+
+.credential-panel {
+  align-self: stretch;
+  background: #fff;
+  border: 1px solid rgba(7, 26, 56, 0.1);
+  box-shadow: 0 18px 44px rgba(7, 26, 56, 0.06);
+  justify-content: center;
+  padding: clamp(20px, 2.2vw, 28px);
+}
+
+.intro-career-list {
+  gap: 9px;
+}
+
+.intro-career-list li {
+  font-size: clamp(0.82rem, 0.82vw, 0.9rem);
+}
+
+.intro-trust-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.intro-trust-row span {
+  align-content: center;
+  min-height: 76px;
+  text-align: center;
+}
+
+.office-showcase {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(28px, 3.8vw, 44px);
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+  max-width: var(--wire-container);
+}
+
+.office-photo {
+  align-self: stretch;
+  display: block;
+  height: auto;
+  min-height: 360px;
+}
+
+.office-copy {
+  align-content: center;
+  display: grid;
+  min-width: 0;
+  padding: clamp(8px, 1vw, 12px) clamp(4px, 1.2vw, 16px);
+}
+
+.office-showcase .section-title {
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+  line-height: 1.16;
+  max-width: 620px;
+  white-space: normal;
+}
+
+.office-showcase .section-desc {
+  max-width: 580px;
+}
+
+@media (max-width: 1080px) {
+  .company-intro-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .company-profile-card {
+    grid-template-columns: minmax(220px, 0.42fr) minmax(0, 0.58fr);
+  }
+
+  .office-showcase {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .company-intro-wrap {
+    gap: 22px;
+    padding: 24px 18px;
+    text-align: left;
+  }
+
+  .company-profile-card {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-profile-media,
+  .credential-panel {
+    min-height: 0;
+  }
+
+  .intro-profile-media .profile-photo {
+    height: 360px;
+  }
+
+  .intro-trust-row {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-trust-row span {
+    min-height: 0;
+    text-align: left;
+  }
+
+  .office-showcase {
+    gap: 20px;
+    padding: 18px;
+    text-align: left;
+  }
+
+  .office-photo {
+    min-height: 0;
+  }
+
+  .office-copy {
+    padding: 0 2px 4px;
+  }
+
+  .office-showcase .section-title {
+    font-size: clamp(1.72rem, 8vw, 2.16rem);
+  }
+}
