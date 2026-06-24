@@ -3557,7 +3557,7 @@ body {
 .property-category-marquee {
   background: #fff;
   border-bottom: 1px solid var(--wire-line);
-  padding: 22px 0;
+  padding: 0;
 }
 
 .home-category-card {
@@ -3866,7 +3866,7 @@ body {
   }
 
   .property-category-marquee {
-    padding: 16px 0;
+    padding: 0;
   }
 
   .brand-philosophy-hero,
@@ -4053,4 +4053,21 @@ body {
   .office-showcase .section-title {
     font-size: clamp(1.72rem, 8vw, 2.16rem);
   }
+}
+
+/* Final spacing override: keep the property category slider tight to the divider. */
+.hero-trust-strip + .property-category-marquee,
+.property-category-marquee {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.property-category-marquee .category-slider-viewport {
+  line-height: 0;
+  padding-bottom: 0;
+}
+
+.property-category-marquee .category-slider-track,
+.property-category-marquee .home-category-card {
+  line-height: normal;
 }
