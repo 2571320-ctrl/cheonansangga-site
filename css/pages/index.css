@@ -3073,3 +3073,324 @@ main > .section-sm {
     padding-top: 30px;
   }
 }
+
+/* Bright premium consulting reset */
+:root {
+  --home-white: #ffffff;
+  --home-soft: #fffaf4;
+  --home-line-soft: rgba(11, 28, 61, 0.08);
+  --home-navy-text: #071a38;
+  --home-premium-shadow: 0 22px 58px rgba(11, 28, 61, 0.08);
+}
+
+body {
+  background: var(--home-white);
+}
+
+.home-hero {
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.22), rgba(14, 42, 78, 0.3) 44%, rgba(255, 138, 31, 0.14)),
+    url("../../images/korea-street-depth.jpg");
+  background-position: center 43%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: clamp(460px, 56vh, 600px);
+}
+
+.home-hero::before {
+  opacity: 0.74;
+}
+
+.home-hero::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(6, 20, 45, 0.16)),
+    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.2), transparent 36%);
+}
+
+.hero-content {
+  padding: clamp(42px, 5vw, 62px) 0 clamp(46px, 5.5vw, 68px);
+}
+
+.hero-badge {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.68);
+  color: #fff;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6.6vw, 5.65rem);
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.08rem, 1.65vw, 1.32rem);
+}
+
+.hero-desc {
+  opacity: 0.96;
+}
+
+.hero-trust-strip {
+  background: #fff;
+  border-bottom: 1px solid var(--home-line-soft);
+  border-top: 0;
+}
+
+.hero-trust-inner {
+  padding-bottom: 14px;
+  padding-top: 14px;
+}
+
+.hero-trust-inner div {
+  min-height: 48px;
+}
+
+.property-category-marquee {
+  background: #fff;
+  border-bottom: 1px solid var(--home-line-soft);
+  padding: 14px 0 18px;
+}
+
+.home-category-card {
+  border-color: rgba(11, 28, 61, 0.1);
+  box-shadow: 0 10px 26px rgba(11, 28, 61, 0.07);
+}
+
+.brand-philosophy-section,
+.services-section,
+.office-section,
+.home-final-cta {
+  background: #fff;
+}
+
+.brand-philosophy-section {
+  padding: clamp(72px, 7vw, 104px) 0 clamp(62px, 6vw, 88px);
+}
+
+.brand-philosophy-wrap {
+  gap: clamp(24px, 3vw, 38px);
+}
+
+.brand-philosophy-hero {
+  background:
+    linear-gradient(135deg, rgba(255, 250, 244, 0.98), rgba(255, 255, 255, 0.98)),
+    radial-gradient(circle at 14% 20%, rgba(255, 138, 31, 0.14), transparent 34%);
+  border: 1px solid rgba(255, 138, 31, 0.18);
+  box-shadow: var(--home-premium-shadow);
+  color: var(--home-navy-text);
+  grid-template-columns: minmax(220px, 330px) minmax(0, 1fr);
+  padding: clamp(30px, 4vw, 52px);
+}
+
+.brand-philosophy-logo {
+  background: #070707;
+  border: 1px solid rgba(11, 28, 61, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(11, 28, 61, 0.12);
+  height: clamp(210px, 20vw, 270px);
+}
+
+.brand-philosophy-hero .section-eyebrow {
+  color: var(--gold-500);
+}
+
+.brand-philosophy-hero .section-title {
+  color: var(--home-navy-text);
+  font-size: clamp(2.42rem, 4.4vw, 4.18rem);
+  max-width: 900px;
+}
+
+.brand-philosophy-hero p {
+  border-left-color: var(--gold-500);
+  color: rgba(7, 26, 56, 0.72);
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+}
+
+.brand-principle-grid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid rgba(11, 28, 61, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 16px 44px rgba(11, 28, 61, 0.06);
+}
+
+.brand-principle-card {
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 156px;
+  padding: 24px 26px;
+}
+
+.brand-principle-card:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.brand-principle-card span {
+  border-radius: 14px;
+  height: 42px;
+  margin-bottom: 12px;
+  width: 42px;
+}
+
+.visual-strip-section {
+  background: #fff;
+  padding: clamp(56px, 6vw, 76px) 0 clamp(36px, 4vw, 46px);
+}
+
+.visual-strip-head {
+  max-width: 920px;
+}
+
+.process-grid {
+  background: #fff;
+  border-bottom: 1px solid var(--home-line-soft);
+  border-top: 1px solid var(--home-line-soft);
+  gap: 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.process-card {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--home-line-soft);
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 0;
+  padding: 28px 22px;
+}
+
+.process-card:last-child {
+  border-right: 0;
+}
+
+.process-card:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.process-card span {
+  color: var(--gold-500);
+  font-size: 0.82rem;
+}
+
+.services-section {
+  padding: clamp(38px, 4vw, 52px) 0 clamp(62px, 6vw, 82px);
+}
+
+.services-section .section-head {
+  margin-bottom: 28px;
+}
+
+.service-card {
+  border: 1px solid rgba(11, 28, 61, 0.09);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(11, 28, 61, 0.07);
+  overflow: hidden;
+}
+
+.service-card:hover {
+  box-shadow: 0 22px 58px rgba(11, 28, 61, 0.11);
+}
+
+.company-intro-section {
+  background: linear-gradient(180deg, #fff, #fffaf4 100%);
+  padding: clamp(62px, 6vw, 84px) 0;
+}
+
+.company-intro-wrap {
+  background: #fff;
+  border: 1px solid rgba(255, 138, 31, 0.18);
+  border-radius: 22px;
+  box-shadow: var(--home-premium-shadow);
+}
+
+.office-section {
+  padding: clamp(58px, 6vw, 78px) 0;
+}
+
+.office-showcase {
+  background: #fff;
+  border: 1px solid rgba(11, 28, 61, 0.08);
+  box-shadow: 0 18px 48px rgba(11, 28, 61, 0.07);
+}
+
+.home-final-cta {
+  padding: 0 0 clamp(60px, 6vw, 86px);
+}
+
+.final-cta-panel {
+  background:
+    linear-gradient(135deg, rgba(255, 250, 244, 0.98), rgba(255, 255, 255, 1));
+  border: 1px solid rgba(255, 138, 31, 0.18);
+  box-shadow: var(--home-premium-shadow);
+}
+
+main > .section,
+main > .section-sm {
+  border-top: 0;
+}
+
+@media (max-width: 900px) {
+  .brand-philosophy-hero,
+  .brand-principle-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-philosophy-hero {
+    text-align: center;
+  }
+
+  .brand-philosophy-hero p {
+    border-left: 0;
+    border-top: 3px solid var(--gold-500);
+  }
+
+  .brand-principle-card,
+  .process-card {
+    border-bottom: 1px solid var(--home-line-soft);
+    border-right: 0;
+  }
+
+  .brand-principle-card:last-child,
+  .process-card:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-hero {
+    min-height: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 12vw, 3.25rem);
+  }
+
+  .brand-philosophy-section,
+  .company-intro-section,
+  .office-section {
+    padding: 46px 0;
+  }
+
+  .brand-philosophy-logo {
+    height: 142px;
+    max-width: 230px;
+  }
+
+  .brand-philosophy-hero .section-title {
+    font-size: clamp(1.85rem, 8vw, 2.45rem);
+  }
+
+  .visual-strip-section,
+  .services-section {
+    padding: 38px 0;
+  }
+}
