@@ -11,6 +11,37 @@
   position: relative;
 }
 
+main > .section,
+main > .section-sm {
+  padding: clamp(38px, 4vw, 54px) 0;
+}
+
+main .card,
+.home-category-card,
+.visual-tile,
+.company-intro-wrap,
+.company-profile-card,
+.credential-panel,
+.pfv-hero-panel,
+.pfv-principle,
+.pfv-proof-card,
+.office-photo,
+.office-points span {
+  border-radius: 12px;
+}
+
+main .card,
+.home-category-card,
+.visual-tile,
+.company-profile-card,
+.credential-panel,
+.pfv-proof-card,
+.office-photo,
+.office-points span {
+  border: 1px solid rgba(200, 208, 224, 0.72);
+  box-shadow: 0 10px 34px rgba(11, 28, 61, 0.08);
+}
+
 .home-hero::before {
   animation: heroBgZoom 9s ease-out forwards;
   background: inherit;
@@ -105,9 +136,9 @@
 }
 
 .hero-stats {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(201, 168, 76, 0.38);
+  background: rgba(247, 250, 252, 0.86);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(11, 28, 61, 0.08);
   bottom: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -118,7 +149,7 @@
 }
 
 .stat {
-  padding: 16px 14px;
+  padding: 12px 14px;
   text-align: center;
 }
 
@@ -126,43 +157,21 @@
   color: var(--navy-700);
   display: block;
   font-family: var(--font-number);
-  font-size: clamp(1.68rem, 3.3vw, 2.18rem);
+  font-size: clamp(1.48rem, 2.8vw, 1.95rem);
   line-height: 1.1;
 }
 
 .stat span {
-  color: var(--gray-700);
-  font-size: var(--text-sm);
+  color: var(--gray-600);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .property-category-marquee {
-  background: linear-gradient(180deg, #fff, var(--gray-50));
+  background: linear-gradient(180deg, #fff, #f7f9fc);
   border-bottom: 1px solid rgba(11, 28, 61, 0.08);
   overflow: hidden;
-  padding: 20px 0 24px;
-}
-
-.category-marquee-head {
-  align-items: end;
-  display: flex;
-  gap: 18px;
-  justify-content: space-between;
-  margin-bottom: 18px;
-}
-
-.category-marquee-head h2 {
-  color: var(--navy-900);
-  font-family: var(--font-display);
-  font-size: clamp(1.45rem, 2.5vw, 2.05rem);
-  line-height: 1.25;
-  margin-top: 6px;
-}
-
-.category-marquee-head a {
-  color: var(--orange-500);
-  flex: 0 0 auto;
-  font-size: var(--text-sm);
-  font-weight: 900;
+  padding: 16px 0 22px;
 }
 
 .category-slider-viewport {
@@ -201,8 +210,6 @@
 .home-category-card {
   background: var(--white);
   border: 1px solid rgba(11, 28, 61, 0.1);
-  border-radius: 18px;
-  box-shadow: 0 20px 46px rgba(11, 28, 61, 0.09);
   color: var(--navy-900);
   display: grid;
   flex: 0 0 clamp(190px, 17vw, 250px);
@@ -259,7 +266,7 @@
   background: var(--white);
   border-bottom: 1px solid var(--gray-100);
   box-shadow: 0 2px 12px rgba(11, 28, 61, 0.06);
-  padding: 18px 0;
+  padding: 14px 0;
 }
 
 .quick-inner {
@@ -318,12 +325,12 @@
 }
 
 .visual-strip-section {
-  background: linear-gradient(180deg, var(--white), var(--gray-50));
+  background: var(--white);
 }
 
 .visual-strip-head {
-  margin-bottom: 24px;
-  max-width: 1120px;
+  margin-bottom: 20px;
+  max-width: 960px;
 }
 
 .visual-strip-head .section-title {
@@ -339,8 +346,6 @@
 
 .visual-tile {
   aspect-ratio: 1.48;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
   overflow: hidden;
   position: relative;
 }
@@ -394,7 +399,7 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  margin: 22px auto 0;
+  margin: 18px auto 0;
 }
 
 .service-brief span {
@@ -411,19 +416,20 @@
 .service-card {
   display: flex;
   flex-direction: column;
-  min-height: 275px;
+  min-height: 100%;
   overflow: hidden;
   padding: 0;
   position: relative;
 }
 
 .service-card.featured {
-  border-top: 4px solid var(--gold-500);
+  border-top: 3px solid var(--gold-500);
 }
 
 .service-photo {
   aspect-ratio: 16 / 9;
   display: block;
+  height: 210px;
   object-fit: cover;
   width: 100%;
 }
@@ -432,7 +438,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 26px 30px 30px;
+  padding: 24px 26px 28px;
 }
 
 .service-label {
@@ -529,7 +535,7 @@
 
 .company-intro-section {
   background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
-  padding: clamp(22px, 3vw, 34px) 0 clamp(34px, 4vw, 46px);
+  padding: clamp(38px, 4vw, 54px) 0;
 }
 
 .company-intro-wrap {
@@ -537,7 +543,6 @@
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.94));
   border: 1px solid rgba(11, 28, 61, 0.1);
-  border-radius: var(--radius-lg);
   box-shadow: 0 24px 60px rgba(11, 28, 61, 0.1);
   display: grid;
   gap: clamp(24px, 4vw, 42px);
@@ -575,7 +580,7 @@
 }
 
 .company-intro-copy .section-title {
-  font-size: clamp(1.9rem, 2.7vw, 2.55rem);
+  font-size: clamp(1.82rem, 2.5vw, 2.35rem);
   line-height: 1.2;
   margin-bottom: 14px;
 }
@@ -675,7 +680,6 @@
 .credential-panel {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(11, 28, 61, 0.09);
-  border-radius: var(--radius-md);
   box-shadow: none;
   display: flex;
   flex-direction: column;
@@ -774,7 +778,7 @@
     url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80") center / cover;
   color: var(--white);
   overflow: hidden;
-  padding: clamp(42px, 5vw, 58px) 0;
+  padding: clamp(42px, 5vw, 60px) 0;
   position: relative;
 }
 
@@ -810,7 +814,6 @@
 .pfv-hero-panel {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.56));
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-lg);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
   display: grid;
   grid-area: hero;
@@ -895,7 +898,6 @@
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 247, 251, 0.94));
   border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: var(--radius-md);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
   color: var(--gray-900);
   display: grid;
@@ -1002,7 +1004,6 @@
 }
 
 .pfv-proof-card {
-  border-radius: var(--radius-md);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
   min-height: 174px;
   overflow: hidden;
@@ -1053,7 +1054,7 @@
 
 .office-showcase {
   align-items: center;
-  gap: 42px;
+  gap: 34px;
 }
 
 .office-showcase .section-title {
@@ -1071,7 +1072,6 @@
 .office-points span {
   background: var(--gray-50);
   border: 1px solid var(--gray-100);
-  border-radius: var(--radius-sm);
   color: var(--gray-700);
   font-size: var(--text-sm);
   line-height: 1.55;
@@ -1087,8 +1087,6 @@
 
 .office-photo {
   aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-hover);
   object-fit: cover;
   width: 100%;
 }
@@ -1141,12 +1139,6 @@
   .quick-inner > .btn {
     grid-column: auto;
     justify-self: center;
-  }
-
-  .category-marquee-head {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
   }
 
   .category-slider-viewport {
@@ -1290,7 +1282,7 @@
   }
 
   .stat {
-    padding: 14px 10px;
+    padding: 12px 10px;
   }
 
   .quick-bar {
