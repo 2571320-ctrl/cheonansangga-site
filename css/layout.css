@@ -881,11 +881,16 @@
     border: 1px solid rgba(11, 28, 61, 0.12);
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(11, 28, 61, 0.08);
-    display: block;
+    display: flex;
     flex: 0 0 44px;
     height: 44px;
     justify-content: center;
     width: 44px;
+  }
+
+  .mobile-toggle i {
+    display: block;
+    line-height: 1;
   }
 
   .brand-mark {
