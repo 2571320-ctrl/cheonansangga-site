@@ -1,6 +1,7 @@
 import { buildTelegramMessage, sendTelegramMessage } from "./telegram.js";
 
 const KV_BINDING_NAMES = ["INQUIRIES_KV", "INQUIRY_KV", "CONTACTS_KV"];
+const CACHE_STORAGE_URL = "https://sangkwon.local/admin-inquiries-cache";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -39,11 +40,7 @@ function normalizeRecord(input = {}) {
 async function storeInquiry(env, record) {
   const kv = getInquiryKV(env);
   if (!kv) {
-    return {
-      ok: false,
-      configured: false,
-      error: "Cloudflare KV binding INQUIRIES_KV가 설정되지 않았습니다."
-    };
+    return storeInquiryInCache(record);
   }
 
   const key = `inquiry:${record.submitted_at}:${record.id}`;
@@ -54,12 +51,7 @@ async function storeInquiry(env, record) {
 async function listInquiries(env) {
   const kv = getInquiryKV(env);
   if (!kv) {
-    return {
-      ok: false,
-      configured: false,
-      records: [],
-      error: "Cloudflare KV binding INQUIRIES_KV가 설정되지 않았습니다."
-    };
+    return listInquiriesFromCache();
   }
 
   const listed = await kv.list({ prefix: "inquiry:", limit: 500 });
@@ -76,6 +68,59 @@ async function listInquiries(env) {
     records: records
       .filter(Boolean)
       .sort((a, b) => String(b.submitted_at).localeCompare(String(a.submitted_at)))
+  };
+}
+
+async function readCacheRecords() {
+  if (typeof caches === "undefined") return [];
+  const response = await caches.default.match(new Request(CACHE_STORAGE_URL));
+  if (!response) return [];
+  const body = await response.json().catch(() => null);
+  return Array.isArray(body?.records) ? body.records : [];
+}
+
+async function writeCacheRecords(records) {
+  if (typeof caches === "undefined") {
+    return {
+      ok: false,
+      configured: false,
+      storage: "cache",
+      error: "Cloudflare Cache API를 사용할 수 없습니다."
+    };
+  }
+
+  await caches.default.put(
+    new Request(CACHE_STORAGE_URL),
+    new Response(JSON.stringify({ records }), {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000"
+      }
+    })
+  );
+  return { ok: true, configured: true, storage: "cache" };
+}
+
+async function storeInquiryInCache(record) {
+  const records = await readCacheRecords();
+  records.unshift(record);
+  const limitedRecords = records.slice(0, 500);
+  const result = await writeCacheRecords(limitedRecords);
+  return {
+    ...result,
+    key: `cache:${record.submitted_at}:${record.id}`,
+    warning: "INQUIRIES_KV가 없어 Cloudflare Cache에 임시 저장했습니다. 영구 저장은 KV 바인딩을 권장합니다."
+  };
+}
+
+async function listInquiriesFromCache() {
+  const records = await readCacheRecords();
+  return {
+    ok: true,
+    configured: false,
+    storage: "cache",
+    warning: "INQUIRIES_KV가 없어 Cloudflare Cache에서 문의를 읽고 있습니다.",
+    records: records.sort((a, b) => String(b.submitted_at).localeCompare(String(a.submitted_at)))
   };
 }
 
