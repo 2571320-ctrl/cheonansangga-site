@@ -1,5 +1,6 @@
 const ADMIN_PASSWORD_KEY = "admin_password";
 const DEFAULT_PASSWORD = "jungang2026";
+const NEWS_REPORT_CATEGORIES = ["상권분석", "창업정보", "투자전략", "부동산뉴스"];
 
 const ADMIN_SITE_DEFAULTS = {
   phone_office: "041-552-0014",
@@ -43,6 +44,14 @@ function getProperties() {
 
 function setProperties(properties) {
   write("properties", properties);
+}
+
+function getNewsReports() {
+  return read("news_reports");
+}
+
+function setNewsReports(reports) {
+  write("news_reports", reports);
 }
 
 function ensurePropertySeed() {
@@ -97,11 +106,13 @@ function renderDashboard() {
   const consulting = read("consulting_requests").length;
   const alerts = read("property_inquiries").length;
   const newsletter = read("newsletter").length;
+  const newsReports = getNewsReports().length;
   root.innerHTML = [
     ["총 문의", inquiries.length],
     ["상담 신청", consulting],
     ["매물알림", alerts],
-    ["뉴스레터", newsletter]
+    ["뉴스레터", newsletter],
+    ["뉴스·리포트", newsReports]
   ].map(([label, value]) => `<article class="card stat-card"><span>${label}</span><strong>${value}</strong></article>`).join("");
 }
 
@@ -357,6 +368,136 @@ async function saveProperty(form) {
   }
 }
 
+function setNewsReportStatus(message, type = "error") {
+  const status = document.querySelector("[data-news-report-status]");
+  if (!status) {
+    if (type === "error") alert(message);
+    return;
+  }
+  status.textContent = message;
+  status.className = `admin-form-status visible ${type}`;
+  status.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function renderNewsReportTable() {
+  const body = document.querySelector("[data-news-reports-body]");
+  if (!body) return;
+  const reports = getNewsReports();
+  body.innerHTML = reports.map((report, index) => `
+    <tr>
+      <td>${report.title || "-"}</td>
+      <td>${report.category || "-"}</td>
+      <td>${report.date || "-"}</td>
+      <td>${report.views || 0}</td>
+      <td class="admin-actions">
+        <button type="button" class="btn btn-secondary btn-sm" data-news-report-edit="${index}">수정</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-news-report-delete="${index}">삭제</button>
+      </td>
+    </tr>
+  `).join("") || `<tr><td colspan="5">아직 등록한 뉴스·리포트가 없습니다.</td></tr>`;
+}
+
+function setNewsReportFormMode(mode, index = "") {
+  const form = document.querySelector("[data-news-report-form]");
+  const submit = document.querySelector("[data-news-report-submit]");
+  const cancel = document.querySelector("[data-news-report-cancel]");
+  const title = document.querySelector("[data-news-report-form-title]");
+  if (!form) return;
+  form.dataset.mode = mode;
+  form.dataset.editIndex = String(index);
+  if (submit) submit.textContent = mode === "edit" ? "뉴스·리포트 수정 저장" : "뉴스·리포트 추가";
+  if (cancel) cancel.hidden = mode !== "edit";
+  if (title) title.textContent = mode === "edit" ? "뉴스·리포트 수정" : "뉴스·리포트 등록";
+}
+
+function resetNewsReportForm() {
+  const form = document.querySelector("[data-news-report-form]");
+  if (!form) return;
+  form.reset();
+  if (form.elements.date) form.elements.date.value = new Date().toISOString().slice(0, 10);
+  if (form.elements.views) form.elements.views.value = 0;
+  setNewsReportFormMode("create");
+}
+
+function reportBodyToText(body = []) {
+  return body.map(([, content]) => Array.isArray(content) ? content.join("\n") : content).join("\n\n");
+}
+
+function textToReportBody(text = "") {
+  const paragraphs = String(text).split(/\n{2,}/).map((item) => item.trim()).filter(Boolean);
+  return paragraphs.map((content, index) => [index === 0 ? "핵심 내용" : "상세 내용", content]);
+}
+
+function populateNewsReportForm(index) {
+  const form = document.querySelector("[data-news-report-form]");
+  if (!form) return;
+  const report = getNewsReports()[index];
+  if (!report) return;
+  form.reset();
+  ["title", "subtitle", "category", "point", "area", "check", "date", "views", "image", "heading", "lead"].forEach((key) => {
+    if (form.elements[key]) form.elements[key].value = report[key] ?? "";
+  });
+  if (form.elements.body_text) form.elements.body_text.value = reportBodyToText(report.body);
+  setNewsReportFormMode("edit", index);
+  setNewsReportStatus("수정할 내용을 반영한 뒤 '뉴스·리포트 수정 저장'을 눌러주세요.", "success");
+}
+
+function saveNewsReport(form) {
+  const data = Object.fromEntries(new FormData(form));
+  const required = ["title", "subtitle", "category", "date", "image", "heading", "lead", "body_text"];
+  const missing = required.find((key) => !String(data[key] || "").trim());
+  if (missing) {
+    form.elements[missing]?.focus?.();
+    setNewsReportStatus("필수 항목을 확인해 주세요.", "error");
+    return;
+  }
+  if (!NEWS_REPORT_CATEGORIES.includes(data.category)) {
+    setNewsReportStatus("카테고리는 상권분석, 창업정보, 투자전략, 부동산뉴스 중 하나만 선택할 수 있습니다.", "error");
+    return;
+  }
+
+  const reports = getNewsReports();
+  const mode = form.dataset.mode || "create";
+  const editIndex = Number(form.dataset.editIndex);
+  const previous = mode === "edit" ? reports[editIndex] || {} : {};
+  const report = {
+    id: previous.id || `admin-report-${Date.now()}`,
+    title: data.title.trim(),
+    subtitle: data.subtitle.trim(),
+    category: data.category,
+    point: (data.point || data.category).trim(),
+    heading: data.heading.trim(),
+    lead: data.lead.trim(),
+    area: (data.area || "-").trim(),
+    check: (data.check || "-").trim(),
+    date: data.date,
+    views: Number(data.views || 0),
+    image: data.image.trim(),
+    body: textToReportBody(data.body_text)
+  };
+
+  if (mode === "edit" && Number.isInteger(editIndex) && reports[editIndex]) {
+    reports[editIndex] = report;
+  } else {
+    reports.unshift(report);
+  }
+  setNewsReports(reports);
+  renderNewsReportTable();
+  resetNewsReportForm();
+  setNewsReportStatus("뉴스·리포트가 저장되었습니다. 뉴스 페이지의 최신 상권 리포트 목록에 자동 반영됩니다.", "success");
+}
+
+function bindNewsReportForm() {
+  const form = document.querySelector("[data-news-report-form]");
+  if (!form) return;
+  resetNewsReportForm();
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveNewsReport(form);
+  });
+  document.querySelector("[data-news-report-cancel]")?.addEventListener("click", resetNewsReportForm);
+}
+
 function initSettingsForm() {
   const form = document.querySelector("[data-settings-form]");
   if (!form) return;
@@ -416,8 +557,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderDashboard();
   renderInquiries();
   renderPropertyTable();
+  renderNewsReportTable();
   initSettingsForm();
   bindPropertyForm();
+  bindNewsReportForm();
   document.querySelector("[data-export]")?.addEventListener("click", exportCSV);
 
   document.addEventListener("click", (event) => {
@@ -439,12 +582,33 @@ document.addEventListener("DOMContentLoaded", () => {
       setPropertyStatus("매물이 삭제되었습니다.", "success");
     }
 
+    const reportEdit = event.target.closest("[data-news-report-edit]");
+    if (reportEdit) populateNewsReportForm(Number(reportEdit.dataset.newsReportEdit));
+
+    const reportDelete = event.target.closest("[data-news-report-delete]");
+    if (reportDelete && confirm("이 뉴스·리포트를 삭제할까요?")) {
+      const reports = getNewsReports();
+      reports.splice(Number(reportDelete.dataset.newsReportDelete), 1);
+      setNewsReports(reports);
+      renderNewsReportTable();
+      resetNewsReportForm();
+      setNewsReportStatus("뉴스·리포트가 삭제되었습니다.", "success");
+    }
+
     const clear = event.target.closest("[data-clear-properties]");
     if (clear && confirm("등록된 매물을 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
       setProperties([]);
       renderPropertyTable();
       resetPropertyForm();
       setPropertyStatus("모든 매물이 삭제되었습니다.", "success");
+    }
+
+    const clearReports = event.target.closest("[data-clear-news-reports]");
+    if (clearReports && confirm("등록한 뉴스·리포트를 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
+      setNewsReports([]);
+      renderNewsReportTable();
+      resetNewsReportForm();
+      setNewsReportStatus("모든 뉴스·리포트가 삭제되었습니다.", "success");
     }
   });
 });

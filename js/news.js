@@ -1,16 +1,35 @@
 (() => {
-  const reports = Object.entries(window.NEWS_REPORTS || {});
+  const readAdminReports = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem("news_reports") || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch {
+      localStorage.removeItem("news_reports");
+      return [];
+    }
+  };
+
+  const escapeHTML = (value = "") => String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  })[char]);
+
+  const adminReports = Object.fromEntries(readAdminReports().map((item) => [item.id, item]));
+  const reports = Object.entries({ ...(window.NEWS_REPORTS || {}), ...adminReports });
   const grid = document.querySelector("[data-news-grid]");
 
   if (grid && reports.length) {
     grid.innerHTML = reports.map(([id, item]) => `
-      <a class="card news-card" data-category="${item.category}" href="news-detail.html?id=${id}">
-        <img class="news-thumb" src="${item.image}" alt="${item.title}">
+      <a class="card news-card" data-category="${escapeHTML(item.category)}" href="news-detail.html?id=${encodeURIComponent(id)}">
+        <img class="news-thumb" src="${escapeHTML(item.image)}" alt="${escapeHTML(item.title)}">
         <div class="news-body">
-          <span class="badge">${item.category}</span>
-          <h3>${item.title}</h3>
-          <p>${item.subtitle}</p>
-          <div class="news-meta">${item.date} · 조회 ${item.views}</div>
+          <span class="badge">${escapeHTML(item.category)}</span>
+          <h3>${escapeHTML(item.title)}</h3>
+          <p>${escapeHTML(item.subtitle)}</p>
+          <div class="news-meta">${escapeHTML(item.date)} · 조회 ${escapeHTML(item.views || 0)}</div>
           <span class="read-more">상세 리포트 보기</span>
         </div>
       </a>

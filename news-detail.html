@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="naver-site-verification" content="9c5942901ece553586e3f6266d8fd8fc719401d6" />
   <link rel="canonical" href="https://xn--o39ao70bljdnqj.com/news-detail.html">
-  <title>상권 리포트 상세 | 중앙부동산</title>
+  <title>뉴스 & 상권 리포트 상세 | 중앙부동산</title>
   <meta name="description" content="천안 상가중개, 창업컨설팅, 투자상담을 23년 현장 경험과 데이터 분석으로 돕는 중앙공인중개사사무소입니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="중앙공인중개사사무소">
@@ -141,7 +141,7 @@
           <a href="properties.html">상가매물</a>
           <a href="consulting.html">창업컨설팅</a>
           <a href="investment.html">투자상담</a>
-          <a href="news.html">뉴스/블로그</a>
+          <a href="news.html">뉴스</a>
           <a href="contact.html">찾아오시는 길</a>
         </nav>
         <div class="footer-grid">
@@ -169,7 +169,7 @@
     </div>
   </footer>
 
-  <script src="js/news-data.js"></script>
+  <script src="js/news-data.js?v=20260626-news1"></script>
   <script>
     const reports = {
       "dujeong-report": {
@@ -270,10 +270,29 @@
       }
     };
 
-    const reportStore = { ...reports, ...(window.NEWS_REPORTS || {}) };
+    const readAdminReports = () => {
+      try {
+        const value = JSON.parse(localStorage.getItem("news_reports") || "[]");
+        return Array.isArray(value) ? value : [];
+      } catch {
+        localStorage.removeItem("news_reports");
+        return [];
+      }
+    };
+
+    const escapeHTML = (value = "") => String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    })[char]);
+
+    const adminReports = Object.fromEntries(readAdminReports().map((item) => [item.id, item]));
+    const reportStore = { ...reports, ...(window.NEWS_REPORTS || {}), ...adminReports };
     const params = new URLSearchParams(location.search);
     const report = reportStore[params.get("id")] || reportStore["market-dujeong-2026"] || reports["dujeong-report"];
-    document.title = `${report.title} | 중앙부동산`;
+    document.title = `${report.title} | 뉴스 & 상권 리포트 상세 | 중앙부동산`;
 
     const setText = (selector, value) => {
       const el = document.querySelector(selector);
@@ -302,9 +321,9 @@
     if (body) {
       body.innerHTML = report.body.map(([title, content]) => {
         if (Array.isArray(content)) {
-          return `<h3>${title}</h3><ul class="report-list">${content.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+          return `<h3>${escapeHTML(title)}</h3><ul class="report-list">${content.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`;
         }
-        return `<h3>${title}</h3><p>${content}</p>`;
+        return `<h3>${escapeHTML(title)}</h3><p>${escapeHTML(content)}</p>`;
       }).join("");
     }
   </script>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>뉴스·리포트 관리 | 중앙부동산 Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-side">
+      <div class="admin-brand"><span class="admin-logo"><img src="../images/logo.png" alt="중앙공인중개사사무소 로고"></span><div><strong>중앙공인중개사사무소 Admin</strong><span>JUNGANG REAL ESTATE</span></div></div>
+      <a href="index.html">대시보드</a>
+      <a href="inquiries.html">문의 목록</a>
+      <a href="properties-mgmt.html">매물 관리</a>
+      <a class="active" href="news-reports.html">뉴스·리포트 관리</a>
+      <a href="settings.html">사이트 설정</a>
+      <a href="../index.html">사이트로 돌아가기</a>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-top"><div><h1>뉴스·리포트 관리</h1><p>등록한 글은 뉴스 페이지의 최신 상권 리포트 카드 목록에 자동 반영됩니다.</p></div></div>
+      <form class="card contact-card property-admin-form" data-news-report-form novalidate style="margin-bottom:24px">
+        <h2 data-news-report-form-title>뉴스·리포트 등록</h2>
+        <p class="admin-help">카테고리는 사용자 화면의 필터와 같은 명칭으로만 저장됩니다. 전체는 사용자 화면 필터 전용입니다.</p>
+        <div class="form-grid">
+          <div class="field full"><label>글 제목</label><input name="title" required></div>
+          <div class="field full"><label>요약 문구</label><input name="subtitle" required></div>
+          <div class="field"><label>카테고리</label><select name="category" required><option>상권분석</option><option>창업정보</option><option>투자전략</option><option>부동산뉴스</option></select></div>
+          <div class="field"><label>핵심 문구</label><input name="point" placeholder="예: 입지와 업종 적합성"></div>
+          <div class="field"><label>검토 지역</label><input name="area" placeholder="예: 천안 두정역 상권"></div>
+          <div class="field"><label>핵심 체크</label><input name="check" placeholder="예: 유동인구, 업종 분포, 임대 조건"></div>
+          <div class="field"><label>작성일</label><input name="date" type="date" required></div>
+          <div class="field"><label>조회수</label><input name="views" type="number" min="0" value="0"></div>
+          <div class="field full"><label>대표 이미지 경로</label><input name="image" placeholder="예: images/korea-street-flow.jpg" required></div>
+          <div class="field full"><label>상세 소제목</label><input name="heading" required></div>
+          <div class="field full"><label>상세 리드문</label><textarea name="lead" required></textarea></div>
+          <div class="field full"><label>본문</label><textarea name="body_text" placeholder="문단을 줄바꿈으로 구분해 입력하세요." required></textarea></div>
+        </div>
+        <div class="admin-form-status" data-news-report-status></div>
+        <div class="property-form-actions">
+          <button class="btn btn-primary" data-news-report-submit type="submit">뉴스·리포트 추가</button>
+          <button class="btn btn-secondary" data-news-report-cancel type="button" hidden>수정 취소</button>
+        </div>
+      </form>
+      <div class="admin-table-toolbar">
+        <h2>등록 뉴스·리포트 목록</h2>
+        <button class="btn btn-secondary btn-sm" type="button" data-clear-news-reports>전체 삭제</button>
+      </div>
+      <table class="admin-table"><thead><tr><th>제목</th><th>카테고리</th><th>작성일</th><th>조회</th><th>관리</th></tr></thead><tbody data-news-reports-body></tbody></table>
+    </main>
+  </div>
+  <script src="../js/admin.js?v=20260626-news1"></script>
+</body>
+</html>
