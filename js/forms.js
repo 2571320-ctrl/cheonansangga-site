@@ -1,4 +1,5 @@
 const API_BASE = "";
+const DEFAULT_INQUIRY_ENDPOINT = "/api/inquiries";
 const DEFAULT_SMS_ENDPOINT = "/api/aligo-sms";
 const DEFAULT_TELEGRAM_ENDPOINT = "/api/telegram";
 
@@ -110,6 +111,24 @@ async function notifyTelegram(tableName, data) {
   }
 }
 
+async function saveInquiryToServer(tableName, data) {
+  try {
+    const response = await fetch(DEFAULT_INQUIRY_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        table: tableName,
+        data
+      })
+    });
+    const body = await response.json().catch(() => null);
+    return { ok: response.ok && (!body || body.ok !== false), status: response.status, body };
+  } catch (error) {
+    console.warn("Inquiry server save failed", error);
+    return { ok: false, error: error.message || String(error) };
+  }
+}
+
 async function submitForm(tableName, data) {
   const payload = { ...data, id: Date.now(), status: "new", submitted_at: new Date().toISOString() };
   if (API_BASE) {
@@ -124,8 +143,9 @@ async function submitForm(tableName, data) {
   const stored = JSON.parse(localStorage.getItem(tableName) || "[]");
   stored.push(payload);
   localStorage.setItem(tableName, JSON.stringify(stored));
-  const telegram = await notifyTelegram(tableName, payload);
-  return { ok: true, telegram };
+  const server = await saveInquiryToServer(tableName, payload);
+  const telegram = server.ok ? server.body?.telegram : await notifyTelegram(tableName, payload);
+  return { ok: true, server, telegram };
 }
 
 function formToData(form) {

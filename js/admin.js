@@ -1,6 +1,8 @@
 const ADMIN_PASSWORD_KEY = "admin_password";
 const DEFAULT_PASSWORD = "jungang2026";
 const NEWS_REPORT_CATEGORIES = ["상권분석", "창업정보", "투자전략", "부동산뉴스"];
+const INQUIRY_API_ENDPOINT = "/api/inquiries";
+let SERVER_INQUIRIES = [];
 
 const ADMIN_SITE_DEFAULTS = {
   phone_office: "041-552-0014",
@@ -54,6 +56,25 @@ function setNewsReports(reports) {
   write("news_reports", reports);
 }
 
+async function loadServerInquiries() {
+  try {
+    const password = localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASSWORD;
+    let response = await fetch(INQUIRY_API_ENDPOINT, {
+      headers: { "x-admin-password": password }
+    });
+    if (response.status === 401 && password !== DEFAULT_PASSWORD) {
+      response = await fetch(INQUIRY_API_ENDPOINT, {
+        headers: { "x-admin-password": DEFAULT_PASSWORD }
+      });
+    }
+    const body = await response.json().catch(() => null);
+    SERVER_INQUIRIES = response.ok && Array.isArray(body?.records) ? body.records : [];
+  } catch (error) {
+    console.warn("Server inquiries load failed", error);
+    SERVER_INQUIRIES = [];
+  }
+}
+
 function ensurePropertySeed() {
   if (!localStorage.getItem("properties")) {
     setProperties(ADMIN_SAMPLE_PROPERTIES);
@@ -86,13 +107,31 @@ function requireAuth() {
 }
 
 function allInquiries() {
-  return [
+  const localRows = [
     ...read("general_inquiries").map((x) => ({ ...x, type: x.inquiry_type || "일반문의" })),
     ...read("consulting_requests").map((x) => ({ ...x, type: "창업컨설팅" })),
     ...read("investment_requests").map((x) => ({ ...x, type: "투자상담" })),
     ...read("property_inquiries").map((x) => ({ ...x, type: "매물알림" })),
     ...read("newsletter").map((x) => ({ ...x, type: "뉴스레터" }))
-  ].sort((a, b) => String(b.submitted_at).localeCompare(String(a.submitted_at)));
+  ];
+  const labels = {
+    general_inquiries: "일반문의",
+    consulting_requests: "창업컨설팅",
+    investment_requests: "투자상담",
+    property_inquiries: "매물문의",
+    newsletter: "뉴스레터"
+  };
+  const serverRows = SERVER_INQUIRIES.map((x) => ({
+    ...x,
+    type: x.type || x.inquiry_type || labels[x.table] || "일반문의"
+  }));
+  const seen = new Set();
+  return [...serverRows, ...localRows].filter((item) => {
+    const key = `${item.table || item.type || ""}:${item.id || ""}:${item.submitted_at || ""}:${item.phone || ""}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).sort((a, b) => String(b.submitted_at).localeCompare(String(a.submitted_at)));
 }
 
 function maskPhone(phone = "") {
@@ -120,7 +159,7 @@ function renderInquiries() {
   const body = document.querySelector("[data-inquiry-body]");
   if (!body) return;
   const data = allInquiries();
-  body.innerHTML = data.map((item, index) => `<tr><td>${index + 1}</td><td>${item.name || "-"}</td><td>${maskPhone(item.phone || "")}</td><td>${item.type}</td><td>${(item.submitted_at || "").slice(0, 10)}</td><td>${item.status || "new"}</td><td><button type="button" class="btn btn-secondary btn-sm" data-detail='${JSON.stringify(item).replaceAll("'", "&apos;")}'>상세</button></td></tr>`).join("") || `<tr><td colspan="7">아직 문의가 없습니다.</td></tr>`;
+  body.innerHTML = data.map((item, index) => `<tr><td>${index + 1}</td><td>${item.name || item.customer_name || "-"}</td><td>${maskPhone(item.phone || item.customer_phone || "")}</td><td>${item.type}</td><td>${(item.submitted_at || "").slice(0, 10)}</td><td>${item.status || "new"}</td><td><button type="button" class="btn btn-secondary btn-sm" data-detail='${JSON.stringify(item).replaceAll("'", "&apos;")}'>상세</button></td></tr>`).join("") || `<tr><td colspan="7">아직 문의가 없습니다.</td></tr>`;
 }
 
 function formatDetailDate(value) {
@@ -138,8 +177,8 @@ function renderInquiryDetail(item) {
     return;
   }
   const rows = [
-    ["이름", item.name],
-    ["연락처", item.phone],
+    ["이름", item.name || item.customer_name],
+    ["연락처", item.phone || item.customer_phone],
     ["상담유형", item.type || item.inquiry_type],
     ["접수일시", formatDetailDate(item.submitted_at)],
     ["이메일", item.email],
@@ -551,9 +590,10 @@ function bindPropertyForm() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   requireAuth();
   ensurePropertySeed();
+  await loadServerInquiries();
   renderDashboard();
   renderInquiries();
   renderPropertyTable();
