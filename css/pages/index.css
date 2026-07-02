@@ -210,18 +210,19 @@ main .card,
 .home-category-card {
   background: var(--white);
   border: 1px solid rgba(11, 28, 61, 0.1);
+  border-radius: 16px;
   color: var(--navy-900);
-  display: grid;
-  flex: 0 0 clamp(190px, 17vw, 250px);
+  display: block;
+  flex: 0 0 clamp(150px, 14vw, 188px);
+  aspect-ratio: 1;
   overflow: hidden;
   position: relative;
   user-select: none;
 }
 
 .home-category-card img {
-  aspect-ratio: 1.62;
   filter: saturate(0.9) contrast(1.04);
-  height: auto;
+  height: 100%;
   object-fit: cover;
   transform: scale(1.01);
   transition: transform 0.35s ease;
@@ -229,23 +230,32 @@ main .card,
 }
 
 .home-category-card::after {
-  background: linear-gradient(180deg, rgba(11, 28, 61, 0), rgba(11, 28, 61, 0.16));
+  background: linear-gradient(180deg, rgba(11, 28, 61, 0.02) 25%, rgba(11, 28, 61, 0.74) 100%);
   content: "";
-  inset: 0 0 48px;
+  inset: 0;
   pointer-events: none;
   position: absolute;
 }
 
 .home-category-card span {
   align-items: center;
-  background: linear-gradient(180deg, #fff, #fbfcff);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  bottom: 14px;
+  box-shadow: 0 10px 24px rgba(11, 28, 61, 0.2);
+  color: var(--navy-900);
   display: flex;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 900;
+  left: 14px;
   justify-content: center;
-  min-height: 50px;
-  padding: 12px 14px;
+  min-height: 0;
+  padding: 8px 12px;
+  position: absolute;
+  right: 14px;
   text-align: center;
+  z-index: 1;
 }
 
 .home-category-card:hover img {
@@ -4070,6 +4080,46 @@ body {
 .property-category-marquee .category-slider-track,
 .property-category-marquee .home-category-card {
   line-height: normal;
+}
+
+/* Final category card shape: square image-first cards with clear theme labels. */
+.property-category-marquee .home-category-card {
+  aspect-ratio: 1;
+  display: block;
+  flex: 0 0 clamp(152px, 14vw, 188px);
+  min-height: 0;
+}
+
+.property-category-marquee .home-category-card img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.property-category-marquee .home-category-card span {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 999px;
+  bottom: 14px;
+  left: 14px;
+  min-height: 0;
+  padding: 8px 12px;
+  position: absolute;
+  right: 14px;
+}
+
+@media (max-width: 640px) {
+  .property-category-marquee .home-category-card {
+    flex-basis: min(42vw, 158px);
+  }
+
+  .property-category-marquee .home-category-card span {
+    bottom: 10px;
+    font-size: 0.82rem;
+    left: 10px;
+    padding: 7px 9px;
+    right: 10px;
+  }
 }
 
 /* Remove outer PFV background box while keeping the logo and message layout. */
