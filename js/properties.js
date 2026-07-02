@@ -5,6 +5,45 @@ const propertyState = {
   properties: []
 };
 
+const PROPERTY_CATEGORY_IMAGES = {
+  "전체": {
+    src: "images/category/city-investment.jpg",
+    alt: "전체 매물 카테고리"
+  },
+  "상가임대": {
+    src: "images/category/store-rent.jpg",
+    alt: "상가임대 매물"
+  },
+  "상가매매": {
+    src: "images/category/store-sale.jpg",
+    alt: "상가매매 매물"
+  },
+  "상가주택매매": {
+    src: "images/category/shop-house.jpg",
+    alt: "상가주택매매 매물"
+  },
+  "상가건물매매": {
+    src: "images/category/commercial-building.jpg",
+    alt: "상가건물매매 매물"
+  },
+  "토지매매": {
+    src: "images/category/land-sale.jpg",
+    alt: "토지매매 매물"
+  },
+  "원룸건물매매": {
+    src: "images/category/studio-building.jpg",
+    alt: "원룸건물매매 매물"
+  },
+  "공장·창고": {
+    src: "images/category/warehouse.jpg",
+    alt: "공장·창고 매물"
+  },
+  "기타": {
+    src: "images/category/city-investment.jpg",
+    alt: "기타 매물"
+  }
+};
+
 function formatArea(item) {
   return item.exclusive_area || item.contract_area || "-";
 }
@@ -44,10 +83,12 @@ function renderCategoryRail() {
       ? propertyState.properties.length
       : propertyState.properties.filter((item) => item.category === category).length;
     const active = propertyState.category === category ? " active" : "";
+    const visual = PROPERTY_CATEGORY_IMAGES[category] || PROPERTY_CATEGORY_IMAGES["기타"];
     return `
       <button class="property-category-card${active}" type="button" data-property-category="${category}">
+        <img src="${visual.src}" alt="${visual.alt}">
         <span>${category}</span>
-        <em>${count}개 매물</em>
+        <em>${count}개</em>
       </button>
     `;
   }).join("");
