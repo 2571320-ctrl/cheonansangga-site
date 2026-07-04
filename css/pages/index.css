@@ -4129,3 +4129,17 @@ body {
   box-shadow: none;
   padding: 0;
 }
+
+/* PFV logo replacement: fill the existing logo box cleanly with the new square artwork. */
+.brand-philosophy-logo {
+  aspect-ratio: 1;
+  background: #030814;
+  height: auto;
+}
+
+.brand-philosophy-logo img {
+  height: 100%;
+  object-fit: cover;
+  padding: 0;
+  width: 100%;
+}
