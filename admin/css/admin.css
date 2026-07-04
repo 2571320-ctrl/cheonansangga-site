@@ -40,9 +40,7 @@ body {
 .admin-logo img {
   display: block;
   height: 100%;
-  object-fit: cover;
-  transform: scale(1.5);
-  transform-origin: center;
+  object-fit: contain;
   width: 100%;
 }
 
