@@ -69,7 +69,7 @@
 .brand {
   align-items: center;
   display: flex;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
 }
 
@@ -87,14 +87,14 @@
   border-radius: 50%;
   color: var(--navy-900);
   display: inline-flex;
-  flex: 0 0 58px;
+  flex: 0 0 54px;
   font-family: var(--font-display);
   font-weight: 700;
-  height: 58px;
+  height: 54px;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  width: 58px;
+  width: 54px;
 }
 
 .brand-mark img {
@@ -509,9 +509,9 @@
 }
 
 .site-footer .brand-mark {
-  flex-basis: 56px;
-  height: 56px;
-  width: 56px;
+  flex-basis: 54px;
+  height: 54px;
+  width: 54px;
 }
 
 .footer-title {
@@ -894,9 +894,9 @@
   }
 
   .brand-mark {
-    flex-basis: 56px;
-    height: 56px;
-    width: 56px;
+    flex-basis: 54px;
+    height: 54px;
+    width: 54px;
   }
 
   .brand-name {
@@ -1017,7 +1017,7 @@
   }
 
   .brand {
-    gap: 4px;
+    gap: 5px;
   }
 
   .mobile-toggle {
@@ -1065,9 +1065,9 @@
   }
 
   .brand-mark {
-    flex-basis: 52px;
-    height: 52px;
-    width: 52px;
+    flex-basis: 50px;
+    height: 50px;
+    width: 50px;
   }
 
 
