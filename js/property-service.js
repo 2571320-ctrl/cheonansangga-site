@@ -1,6 +1,5 @@
 const PROPERTY_CATEGORIES = [
   "상가임대",
-  "상가매매",
   "상가주택매매",
   "상가건물매매",
   "토지매매",
@@ -51,8 +50,8 @@ const MOCK_PROPERTIES = [
   {
     id: "P-2026-002",
     property_no: "CA-2602",
-    title: "불당동 신도심 코너 상가 매매",
-    category: "상가매매",
+    title: "불당동 신도심 코너 상가건물 매매",
+    category: "상가건물매매",
     deal_type: "매매",
     region: "천안시 서북구 불당동",
     address: "충청남도 천안시 서북구 불당동 상업지",

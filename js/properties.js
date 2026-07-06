@@ -5,18 +5,20 @@ const propertyState = {
   properties: []
 };
 
+const PROPERTY_CATEGORY_ORDER = [
+  "상가임대",
+  "상가주택매매",
+  "상가건물매매",
+  "토지매매",
+  "원룸건물매매",
+  "공장·창고",
+  "기타"
+];
+
 const PROPERTY_CATEGORY_IMAGES = {
-  "전체": {
-    src: "images/category/city-investment.jpg",
-    alt: "전체 매물 카테고리"
-  },
   "상가임대": {
     src: "images/category/store-rent.jpg",
     alt: "상가임대 매물"
-  },
-  "상가매매": {
-    src: "images/category/store-sale.jpg",
-    alt: "상가매매 매물"
   },
   "상가주택매매": {
     src: "images/category/shop-house.jpg",
@@ -77,18 +79,15 @@ function renderCategoryRail() {
   const rail = document.querySelector("[data-property-categories]");
   if (!rail) return;
 
-  const categories = ["전체", ...window.PropertyService.categories];
-  rail.innerHTML = categories.map((category) => {
-    const count = category === "전체"
-      ? propertyState.properties.length
-      : propertyState.properties.filter((item) => item.category === category).length;
+  const categories = [...PROPERTY_CATEGORY_ORDER, ...PROPERTY_CATEGORY_ORDER];
+  rail.innerHTML = categories.map((category, index) => {
     const active = propertyState.category === category ? " active" : "";
     const visual = PROPERTY_CATEGORY_IMAGES[category] || PROPERTY_CATEGORY_IMAGES["기타"];
+    const duplicateAttrs = index >= PROPERTY_CATEGORY_ORDER.length ? ' aria-hidden="true" tabindex="-1"' : "";
     return `
-      <button class="property-category-card${active}" type="button" data-property-category="${category}">
+      <button class="property-category-card${active}" type="button" data-property-category="${category}"${duplicateAttrs}>
         <img src="${visual.src}" alt="${visual.alt}">
         <span>${category}</span>
-        <em>${count}개</em>
       </button>
     `;
   }).join("");
@@ -237,7 +236,7 @@ function initPropertyPage() {
   if (!window.PropertyService || !document.querySelector("[data-property-grid]")) return;
   propertyState.properties = window.PropertyService.getProperties();
   const requestedCategory = new URLSearchParams(window.location.search).get("category");
-  if (requestedCategory && window.PropertyService.categories.includes(requestedCategory)) {
+  if (requestedCategory && PROPERTY_CATEGORY_ORDER.includes(requestedCategory)) {
     propertyState.category = requestedCategory;
   }
   renderCategoryRail();

@@ -18,7 +18,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
-  margin: 18px 0 16px;
+  margin: 0 0 16px;
   overflow: hidden;
   padding: 0;
 }
@@ -40,14 +40,15 @@
 .property-category-rail {
   display: flex;
   gap: 14px;
-  overflow-x: auto;
-  padding: 0 2px 2px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  overflow: visible;
+  padding: 0;
+  width: max-content;
+  animation: propertyCategoryFlow 34s linear infinite;
+  will-change: transform;
 }
 
-.property-category-rail::-webkit-scrollbar {
-  display: none;
+.property-category-shell:hover .property-category-rail {
+  animation-play-state: paused;
 }
 
 .property-category-card {
@@ -89,7 +90,7 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.94);
   border-radius: 999px;
-  bottom: 18px;
+  bottom: 14px;
   box-shadow: 0 10px 24px rgba(11, 28, 61, 0.2);
   color: var(--navy-900);
   display: flex;
@@ -105,21 +106,7 @@
 }
 
 .property-category-card em {
-  align-items: center;
-  background: rgba(255, 138, 31, 0.92);
-  border-radius: 999px;
-  color: #fff;
-  display: flex;
-  font-size: 0.72rem;
-  font-weight: 800;
-  font-style: normal;
-  justify-content: center;
-  min-width: 44px;
-  padding: 4px 7px;
-  position: absolute;
-  right: 12px;
-  top: 12px;
-  z-index: 1;
+  display: none;
 }
 
 .property-category-card:hover,
@@ -136,6 +123,16 @@
 .property-category-card.active {
   border-color: rgba(255, 138, 31, 0.72);
   box-shadow: 0 16px 38px rgba(255, 138, 31, 0.22);
+}
+
+@keyframes propertyCategoryFlow {
+  from {
+    transform: translateX(calc(-50% - 7px));
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .property-toolbar {
@@ -584,6 +581,18 @@
   .property-category-shell,
   .property-toolbar {
     border-radius: var(--radius-sm);
+  }
+
+  .property-category-card {
+    flex-basis: min(42vw, 158px);
+  }
+
+  .property-category-card span {
+    bottom: 10px;
+    font-size: 0.82rem;
+    left: 10px;
+    padding: 7px 9px;
+    right: 10px;
   }
 
   .property-category-head {
