@@ -277,9 +277,9 @@
 }
 
 .site-footer {
-  background: #111;
-  border-top: 1px solid rgba(11, 28, 61, 0.08);
-  color: rgba(255, 255, 255, 0.78);
+  background: #fff8ef;
+  border-top: 1px solid rgba(255, 138, 31, 0.22);
+  color: var(--navy-900);
   padding: 0;
 }
 
@@ -452,13 +452,13 @@
 }
 
 .footer-main {
-  background: #111;
+  background: #fff8ef;
   padding: 16px 0 16px;
 }
 
 .footer-menu {
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 138, 31, 0.2);
   display: flex;
   flex-wrap: wrap;
   gap: 0;
@@ -468,7 +468,7 @@
 }
 
 .footer-menu a {
-  color: rgba(255, 255, 255, 0.84);
+  color: var(--navy-900);
   font-size: 12px;
   font-weight: 500;
   padding: 0 18px;
@@ -476,7 +476,7 @@
 }
 
 .footer-menu a + a::before {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(11, 28, 61, 0.18);
   content: "";
   height: 12px;
   left: 0;
@@ -504,7 +504,7 @@
 }
 
 .site-footer .brand-name {
-  color: var(--white);
+  color: var(--navy-900);
   font-size: 17px;
 }
 
@@ -515,7 +515,7 @@
 }
 
 .footer-title {
-  color: var(--white);
+  color: var(--navy-900);
   font-weight: 900;
   margin-bottom: 14px;
 }
@@ -531,7 +531,7 @@
 }
 
 .footer-info {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--navy-900);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -540,7 +540,7 @@
 }
 
 .footer-info strong {
-  color: rgba(255, 255, 255, 0.96);
+  color: var(--navy-900);
   font-weight: 600;
   margin-right: 4px;
 }
@@ -558,7 +558,7 @@
 
 .footer-phone-highlight strong,
 .footer-phone-highlight span {
-  color: rgba(255, 255, 255, 0.96);
+  color: var(--navy-900);
   font-size: 11px;
   font-weight: 600;
   text-shadow: none;
@@ -650,7 +650,7 @@
 }
 
 .footer-bottom {
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(11, 28, 61, 0.78);
   font-size: 11px;
   font-weight: 500;
   margin-top: 8px;
