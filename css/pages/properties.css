@@ -326,16 +326,15 @@
   background: #fff;
   border-radius: var(--radius-md);
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  display: block;
   left: 50%;
   max-height: min(88vh, 860px);
-  max-width: 1080px;
+  max-width: 960px;
   overflow: auto;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(calc(100vw - 36px), 1080px);
+  width: min(calc(100vw - 36px), 960px);
 }
 
 .property-modal-close {
@@ -358,12 +357,15 @@
 
 .property-modal-visual {
   background: var(--gray-50);
-  min-height: 100%;
+  border-bottom: 1px solid rgba(200, 208, 224, 0.72);
+  height: clamp(260px, 36vw, 390px);
+  overflow: hidden;
 }
 
 .property-modal-visual img {
   height: 100%;
   object-fit: cover;
+  object-position: center;
   width: 100%;
 }
 
@@ -560,10 +562,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .property-modal-panel {
-    grid-template-columns: 1fr;
-  }
-
   .property-modal-visual {
     height: 260px;
   }
@@ -615,6 +613,10 @@
   .property-modal-panel {
     max-height: 92vh;
     width: min(calc(100vw - 20px), 1080px);
+  }
+
+  .property-modal-visual {
+    height: 220px;
   }
 
   .property-grid {
