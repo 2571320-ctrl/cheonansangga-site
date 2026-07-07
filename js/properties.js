@@ -125,23 +125,23 @@ function renderPropertyMap(item) {
   const map = document.querySelector("[data-modal-map]");
   if (!map) return;
   const configuredURL = extractMapURL(item.map_url);
-  const searchURL = `https://map.naver.com/p/search/${encodeURIComponent(item.address || item.region || item.title || "")}`;
+  const mapQuery = item.address || item.region || item.title || "";
+  const encodedQuery = encodeURIComponent(mapQuery);
+  const searchURL = `https://map.naver.com/p/search/${encodedQuery}`;
+  const embedURL = `https://maps.google.com/maps?q=${encodedQuery}&output=embed`;
 
   if (configuredURL && /<iframe|\bembed\b/i.test(String(item.map_url || ""))) {
     map.innerHTML = `
       <iframe src="${escapeHTML(configuredURL)}" title="${escapeHTML(item.title)} 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <a href="${escapeHTML(configuredURL)}" target="_blank" rel="noopener">지도 크게 보기</a>
+      <a class="property-map-link" href="${escapeHTML(configuredURL)}" target="_blank" rel="noopener">지도 크게 보기</a>
     `;
     return;
   }
 
   const linkURL = configuredURL || searchURL;
   map.innerHTML = `
-    <div>
-      <strong>${escapeHTML(item.region || "매물 위치")}</strong>
-      <span>${escapeHTML(item.address || "소재지 기준으로 지도를 확인하세요.")}</span>
-      <a href="${escapeHTML(linkURL)}" target="_blank" rel="noopener">지도에서 위치 확인</a>
-    </div>
+    <iframe src="${escapeHTML(embedURL)}" title="${escapeHTML(item.title)} 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <a class="property-map-link" href="${escapeHTML(linkURL)}" target="_blank" rel="noopener">지도 크게 보기</a>
   `;
 }
 

@@ -493,12 +493,12 @@
 .property-map-placeholder {
   align-items: center;
   background: linear-gradient(135deg, #edf2fb, #f8fafc);
-  border: 1px dashed rgba(11, 28, 61, 0.22);
+  border: 1px solid rgba(11, 28, 61, 0.14);
   border-radius: var(--radius-sm);
   color: var(--navy-900);
   display: flex;
   font-weight: 900;
-  height: 130px;
+  height: 280px;
   justify-content: center;
   margin-top: 22px;
   overflow: hidden;
@@ -513,7 +513,7 @@
   width: 100%;
 }
 
-.property-map-placeholder iframe + a {
+.property-map-link {
   background: rgba(8, 24, 54, 0.88);
   border-radius: 999px;
   bottom: 12px;
@@ -522,6 +522,7 @@
   padding: 8px 12px;
   position: absolute;
   right: 12px;
+  text-decoration: none;
   z-index: 1;
 }
 
@@ -540,6 +541,11 @@
   color: var(--gold-500);
   font-weight: 900;
   text-decoration: underline;
+}
+
+.property-map-placeholder .property-map-link {
+  color: #fff;
+  text-decoration: none;
 }
 
 .property-detail-notice {
@@ -682,6 +688,10 @@
 
   .property-description-list div {
     grid-template-columns: minmax(78px, 0.38fr) minmax(0, 1fr);
+  }
+
+  .property-map-placeholder {
+    height: 220px;
   }
 
   .property-detail-row:nth-last-child(-n + 2) {
