@@ -13,14 +13,32 @@ function getFormSettings() {
   }
 }
 
+function pickText(...values) {
+  for (const value of values) {
+    const text = String(value || "").trim();
+    if (text) return text;
+  }
+  return "-";
+}
+
+function getFormType(tableName, data = {}) {
+  const labels = {
+    general_inquiries: "일반상담",
+    consulting_requests: "창업컨설팅",
+    investment_requests: "투자상담",
+    property_inquiries: "매물문의",
+    property_submissions: "매물접수"
+  };
+  return labels[tableName] || data.inquiry_type || tableName;
+}
+
 function formatSmsMessage(tableName, data) {
-  const pick = (...values) => values.map((value) => String(value || "").trim()).find(Boolean) || "-";
-  const name = pick(data.name, data.customer_name);
-  const phone = pick(data.phone, data.customer_phone);
-  const region = pick(data.region, data.preferred_area, data.area, data.address);
-  const business = pick(data.business, data.preferred_category, data.preferred_item, data.inquiry_type, data.category);
-  const message = pick(data.message, data.inquiry, data.memo, data.content);
-  return `[상권연구소]\n\n신규 상담 신청\n\n이름 : ${name}\n연락처 : ${phone}\n지역 : ${region}\n업종 : ${business}\n\n문의내용 :\n${message}`;
+  const name = pickText(data.name, data.customer_name);
+  const phone = pickText(data.phone, data.customer_phone);
+  const region = pickText(data.region, data.preferred_area, data.area, data.address);
+  const business = pickText(data.business, data.property_type, data.preferred_category, data.preferred_item, data.inquiry_type, data.category);
+  const message = pickText(data.message, data.inquiry, data.description, data.memo, data.content);
+  return `[상권연구소]\n\n신규 ${getFormType(tableName, data)} 접수\n\n이름 : ${name}\n연락처 : ${phone}\n지역 : ${region}\n구분 : ${business}\n\n문의내용 :\n${message}`;
 }
 
 function saveSmsFailureLog(tableName, data, result) {
@@ -59,12 +77,7 @@ async function notifySms(tableName, data) {
         data
       })
     });
-    let body = null;
-    try {
-      body = await response.json();
-    } catch {
-      body = null;
-    }
+    const body = await response.json().catch(() => null);
     const result = { ok: response.ok && (!body || body.ok !== false), status: response.status, body };
     if (!result.ok) saveSmsFailureLog(tableName, data, result);
     return result;
@@ -74,16 +87,6 @@ async function notifySms(tableName, data) {
     saveSmsFailureLog(tableName, data, result);
     return result;
   }
-}
-
-function getFormType(tableName, data) {
-  const labels = {
-    general_inquiries: "일반상담",
-    consulting_requests: "창업컨설팅",
-    investment_requests: "투자상담",
-    property_inquiries: "매물문의"
-  };
-  return labels[tableName] || data.inquiry_type || tableName;
 }
 
 async function notifyTelegram(tableName, data) {
@@ -98,12 +101,7 @@ async function notifyTelegram(tableName, data) {
         data
       })
     });
-    let body = null;
-    try {
-      body = await response.json();
-    } catch {
-      body = null;
-    }
+    const body = await response.json().catch(() => null);
     return { ok: response.ok && (!body || body.ok !== false), status: response.status, body };
   } catch (error) {
     console.warn("Telegram notification failed", error);
@@ -148,11 +146,25 @@ async function submitForm(tableName, data) {
   return { ok: true, server, telegram };
 }
 
+function fileListToText(fileList) {
+  return [...fileList].map((file) => file.name).filter(Boolean).join(", ");
+}
+
 function formToData(form) {
   const data = {};
   new FormData(form).forEach((value, key) => {
+    if (value instanceof File) {
+      if (!value.name) return;
+      data[key] = data[key] ? `${data[key]}, ${value.name}` : value.name;
+      return;
+    }
     data[key] = value;
   });
+
+  form.querySelectorAll("input[type='file'][multiple]").forEach((input) => {
+    if (input.files?.length) data[input.name] = fileListToText(input.files);
+  });
+
   return data;
 }
 
@@ -166,12 +178,16 @@ function handleFormSubmit() {
         return;
       }
       const table = form.dataset.form;
+      const submitButton = form.querySelector("[type='submit']");
+      if (submitButton) submitButton.disabled = true;
       const result = await submitForm(table, formToData(form));
+      if (submitButton) submitButton.disabled = false;
+
       if (result.ok) {
         form.reset();
-        showToast("상담 신청이 접수되었습니다. 빠르게 연락드리겠습니다.");
+        showToast(`${getFormType(table)}가 접수되었습니다. 빠르게 연락드리겠습니다.`);
       } else {
-        showToast("저장 중 문제가 발생했습니다.", "error");
+        showToast("접수 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.", "error");
       }
     });
   });

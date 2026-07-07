@@ -24,16 +24,55 @@ function getFormType(tableName, data = {}) {
     general_inquiries: "일반상담",
     consulting_requests: "창업컨설팅",
     investment_requests: "투자상담",
-    property_inquiries: "매물문의"
+    property_inquiries: "매물문의",
+    property_submissions: "매물접수"
   };
   return labels[tableName] || inquiryType || tableName || "문의";
 }
 
-function buildTelegramMessage({ table = "", formType = "", data = {}, timestamp = "" }) {
+function formatKoreanTime(value = "") {
+  const date = value ? new Date(value) : new Date();
+  if (Number.isNaN(date.getTime())) return value || new Date().toISOString();
+  return date.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+}
+
+function buildPropertySubmitMessage({ formType = "매물접수", data = {}, timestamp = "" }) {
   const name = pick(data.name, data.customer_name);
   const phone = pick(data.phone, data.customer_phone);
-  const message = pick(data.message, data.inquiry, data.memo, data.content, data.preferred_item, data.preferred_area);
-  const submittedAt = timestamp || data.submitted_at || new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+  const propertyType = pick(data.property_type, data.category);
+  const address = pick(data.address, data.region, data.preferred_area);
+  const description = pick(data.description, data.message, data.inquiry, data.memo, data.content);
+  const photos = pick(data.photos, data.photo_names, data.photo_file_names);
+  const submittedAt = formatKoreanTime(timestamp || data.submitted_at);
+
+  return `🔔 신규 매물접수
+
+구분: ${formType}
+
+이름: ${name}
+연락처: ${phone}
+매물종류: ${propertyType}
+주소: ${address}
+
+간단한 설명:
+${description}
+
+사진첨부:
+${photos}
+
+접수시간:
+${submittedAt}`;
+}
+
+function buildTelegramMessage({ table = "", formType = "", data = {}, timestamp = "" }) {
+  if (table === "property_submissions") {
+    return buildPropertySubmitMessage({ formType: formType || getFormType(table, data), data, timestamp });
+  }
+
+  const name = pick(data.name, data.customer_name);
+  const phone = pick(data.phone, data.customer_phone);
+  const message = pick(data.message, data.inquiry, data.description, data.memo, data.content, data.preferred_item, data.preferred_area);
+  const submittedAt = formatKoreanTime(timestamp || data.submitted_at);
 
   return `🔔 신규 문의 접수
 

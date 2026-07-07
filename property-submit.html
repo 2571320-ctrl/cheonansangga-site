@@ -16,7 +16,7 @@
   <meta name="twitter:description" content="천안 상가중개·창업컨설팅·투자상담 전문.">
   <meta name="twitter:image" content="https://xn--o39ao70bljdnqj.com/images/social-preview.png?v=20260619-og3">
   <link rel="icon" type="image/png" href="images/favicon.png?v=20260707-favicon1">
-  <link rel="apple-touch-icon" href="images/logo.png?v=20260704-site-logo1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"><link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/layout.css?v=20260706-footer-bg1"><link rel="stylesheet" href="css/pages/contact.css"><link rel="stylesheet" href="css/pages/property-submit.css?v=20260707-submit-ui1"></head><body>
+  <link rel="apple-touch-icon" href="images/logo.png?v=20260704-site-logo1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"><link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/layout.css?v=20260706-footer-bg1"><link rel="stylesheet" href="css/pages/contact.css"><link rel="stylesheet" href="css/pages/property-submit.css?v=20260707-submit-auto1"></head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><span class="brand-mark"><img src="images/logo.png?v=20260704-site-logo1" alt="중앙공인중개사사무소 로고"></span><span><span class="brand-name">중앙공인중개사사무소</span><span class="brand-sub">JUNGANG REAL ESTATE</span></span></a><nav class="nav"><a href="index.html">홈</a><a href="properties.html">상가매물</a><a href="property-submit.html">매물접수</a><a href="consulting.html">창업컨설팅</a><a href="investment.html">투자상담</a><a href="news.html">뉴스</a><a href="faq.html">FAQ</a><a href="contact.html">문의</a></nav><div class="header-cta"><a class="header-phone" data-setting="phone_mobile"></a><a class="btn btn-primary btn-sm" href="contact.html">무료상담 예약</a></div><button class="mobile-toggle" aria-label="메뉴"><i class="fa-solid fa-bars"></i></button></div></header>
 <main>
   <section class="page-hero property-submit-hero" style="--hero-image:url('images/category/commercial-building.jpg')">
@@ -33,24 +33,23 @@
 
   <section class="section property-submit-section">
     <div class="container property-submit-layout">
-      <form class="card contact-card property-submit-card" novalidate>
+      <form class="card contact-card property-submit-card" data-form="property_submissions">
         <div class="section-eyebrow">Property Submit</div>
-        <h2 class="section-title">매물 정보 남기기</h2>
-        <p class="property-submit-lead">현재는 화면 접수 양식만 준비된 상태입니다. 저장 기능과 알림 연동은 추후 연결 예정입니다.</p>
+        <h2 class="section-title">매물접수</h2>
         <div class="form-grid">
           <div class="field"><label>이름*</label><input name="name" autocomplete="name" required></div>
           <div class="field"><label>연락처*</label><input name="phone" inputmode="tel" autocomplete="tel" required></div>
           <div class="field"><label>매물종류*</label><select name="property_type" required><option>상가임대</option><option>상가주택매매</option><option>상가건물매매</option><option>토지매매</option><option>원룸건물매매</option><option>공장·창고</option><option>기타</option></select></div>
           <div class="field"><label>주소*</label><input name="address" placeholder="예: 천안시 서북구 두정동" required></div>
           <div class="field full"><label>간단한 설명*</label><textarea name="description" rows="6" placeholder="매물 위치, 면적, 희망 조건, 현재 사용 상태 등을 간단히 적어주세요." required></textarea></div>
-          <div class="field full"><label>사진첨부</label><input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple><small>jpg, png, webp 파일을 첨부할 수 있도록 화면만 준비했습니다.</small></div>
+          <div class="field full"><label>사진첨부</label><input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple><small>사진 파일은 관리자 목록과 텔레그램에 파일명으로 기록됩니다.</small></div>
         </div>
         <div class="privacy-box">
           <div class="privacy-box-header"><i class="fa-solid fa-shield-check"></i><span>개인정보 수집·이용 동의</span></div>
           <p class="privacy-box-text">매물 접수 상담을 위해 이름, 연락처, 주소, 매물 설명을 확인합니다.</p>
           <label class="privacy-check"><input type="checkbox" name="privacy_agree" required><span>개인정보 수집·이용에 동의합니다. <strong>(필수)</strong></span></label>
         </div>
-        <button class="btn btn-primary btn-full" type="button">매물접수</button>
+        <button class="btn btn-primary btn-full" type="submit">접수하기</button>
       </form>
 
       <aside class="property-submit-guide card contact-card">
@@ -69,7 +68,7 @@
   </section>
 </main>
 
-  <aside class="fixed-social-rail" aria-label="SNS 바로가기">
+<aside class="fixed-social-rail" aria-label="SNS 바로가기">
     <div class="fixed-social-title">SNS</div>
     <a class="fixed-social-item social-naver" href="https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjky&pkid=1&os=39660109&qvt=0&query=%EA%B9%80%ED%98%84%EC%8B%9D" title="네이버 프로필">
       <span class="naver-mark">N</span><em>네이버</em>
@@ -214,4 +213,4 @@
       </div>
     </div>
   </div>
-</footer><script src="js/core.js?v=20260619-sns2"></script></body></html>
+</footer><script src="js/core.js?v=20260619-sns2"></script><script src="js/forms.js?v=20260707-property-submit1"></script></body></html>

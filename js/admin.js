@@ -112,6 +112,7 @@ function allInquiries() {
     ...read("consulting_requests").map((x) => ({ ...x, type: "창업컨설팅" })),
     ...read("investment_requests").map((x) => ({ ...x, type: "투자상담" })),
     ...read("property_inquiries").map((x) => ({ ...x, type: "매물알림" })),
+    ...read("property_submissions").map((x) => ({ ...x, type: "매물접수" })),
     ...read("newsletter").map((x) => ({ ...x, type: "뉴스레터" }))
   ];
   const labels = {
@@ -119,6 +120,7 @@ function allInquiries() {
     consulting_requests: "창업컨설팅",
     investment_requests: "투자상담",
     property_inquiries: "매물문의",
+    property_submissions: "매물접수",
     newsletter: "뉴스레터"
   };
   const serverRows = SERVER_INQUIRIES.map((x) => ({
@@ -192,8 +194,11 @@ function renderInquiryDetail(item) {
     ["예산범위", item.budget],
     ["창업경험", item.startup_experience],
     ["희망아이템", item.preferred_item],
+    ["매물종류", item.property_type],
+    ["주소", item.address],
+    ["사진첨부", item.photos],
     ["개인정보동의", item.privacy_agree ? "동의" : "-"],
-    ["문의내용", item.inquiry, "full"]
+    ["문의내용", item.inquiry || item.description, "full"]
   ].filter(([, value]) => value !== undefined && value !== "");
   detail.innerHTML = rows.map(([label, value, full]) => `
     <div class="admin-detail-item ${full ? "full" : ""}">
