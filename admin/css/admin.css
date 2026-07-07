@@ -163,6 +163,13 @@ body {
   margin-top: 6px;
 }
 
+.property-admin-form textarea {
+  line-height: 1.75;
+  min-height: 130px;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
 .admin-photo-preview {
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-md);

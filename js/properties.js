@@ -75,6 +75,33 @@ function cleanDescriptionLine(line) {
     .trim();
 }
 
+function splitDescriptionParagraph(line) {
+  const cleaned = cleanDescriptionLine(line);
+  if (!cleaned) return [];
+  if (cleaned.length <= 85) return [cleaned];
+
+  const sentences = cleaned
+    .split(/(?<=[.!?。]|[.!?]|\uB2E4\.|\uC694\.|\uB2C8\uB2E4\.)\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+
+  if (sentences.length <= 1) return [cleaned];
+
+  const groups = [];
+  let buffer = "";
+  sentences.forEach((sentence) => {
+    const next = buffer ? `${buffer} ${sentence}` : sentence;
+    if (next.length > 110 && buffer) {
+      groups.push(buffer);
+      buffer = sentence;
+    } else {
+      buffer = next;
+    }
+  });
+  if (buffer) groups.push(buffer);
+  return groups;
+}
+
 function formatPropertyDescription(text) {
   const normalized = String(text || "")
     .replace(/\r/g, "")
@@ -99,7 +126,7 @@ function formatPropertyDescription(text) {
     if (match) {
       facts.push([match[1].trim(), match[2].trim()]);
     } else {
-      paragraphs.push(line);
+      paragraphs.push(...splitDescriptionParagraph(line));
     }
   });
 

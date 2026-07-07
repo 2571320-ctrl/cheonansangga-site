@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>매물 관리 | 중앙부동산 Admin</title>
-  <link rel="stylesheet" href="css/admin.css?v=20260704-logo-size1">
+  <link rel="stylesheet" href="css/admin.css?v=20260707-description-layout1">
 </head>
 <body>
   <div class="admin-shell">
@@ -62,7 +62,8 @@
           <div class="field"><label>토지정보 확인일</label><input name="land_register_checked_at" type="date"></div>
           <div class="field"><label>태그(쉼표 구분)</label><input name="tags"></div>
           <div class="field full"><label>매물 사진</label><input name="photo_file" type="file" accept="image/png,image/jpeg,image/webp"><small>jpg, png, webp 권장. 등록 전 실제 현황과 일치하는 사진인지 확인하세요.</small><img class="admin-photo-preview" data-photo-preview alt=""></div>
-          <div class="field full"><label>설명</label><textarea name="description"></textarea></div>
+          <div class="field full"><label>상세설명</label><textarea name="description" rows="7" placeholder="매물의 위치, 입지 장점, 주변 상권, 추천 업종을 문단별로 입력하세요. 줄바꿈을 넣으면 상세페이지에도 그대로 반영됩니다."></textarea></div>
+          <div class="field full"><label>중개사 코멘트</label><textarea name="broker_comment" rows="4" placeholder="현장 확인 후 상담 포인트, 계약 전 확인사항, 추천 이유 등을 입력하세요."></textarea></div>
           <label class="privacy-check"><input type="checkbox" name="is_featured"> 추천 매물</label>
         </div>
         <div class="compliance-box">
@@ -87,7 +88,7 @@
       <table class="admin-table"><thead><tr><th>매물명</th><th>주소/분류</th><th>거래</th><th>가격</th><th>확인일</th><th>상태</th><th>추천</th><th>관리</th></tr></thead><tbody data-properties-body></tbody></table>
     </main>
   </div>
-  <script src="../js/admin.js?v=20260707-price-fields1"></script>
+  <script src="../js/admin.js?v=20260707-description-layout1"></script>
 </body>
 </html>
 

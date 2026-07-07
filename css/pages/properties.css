@@ -445,11 +445,14 @@
 
 .property-detail-copy {
   color: var(--gray-600);
+  display: grid;
+  gap: 10px;
   line-height: 1.85;
+  word-break: keep-all;
 }
 
 .property-detail-copy p {
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .property-detail-copy p:last-child {
