@@ -221,7 +221,14 @@ export async function onRequest({ request, env = {} }) {
     })
   });
 
-  return jsonResponse(result, result.status || (result.ok ? 200 : 502));
+  const photos = Array.isArray(data.photo_previews)
+    ? await sendTelegramPhotos({ env, photos: data.photo_previews })
+    : { ok: true, skipped: true };
+
+  return jsonResponse({
+    ...result,
+    photos
+  }, result.status || (result.ok ? 200 : 502));
 }
 
 export { buildTelegramMessage, sendTelegramMessage, sendTelegramPhotos };

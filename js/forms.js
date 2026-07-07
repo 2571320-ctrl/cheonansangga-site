@@ -150,7 +150,20 @@ function fileListToText(fileList) {
   return [...fileList].map((file) => file.name).filter(Boolean).join(", ");
 }
 
-function resizeImageFile(file, maxWidth = 1000, quality = 0.72) {
+function makeImagePreview(image, file, maxWidth, quality) {
+  const scale = Math.min(1, maxWidth / image.width);
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(image.width * scale);
+  canvas.height = Math.round(image.height * scale);
+  canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+  return {
+    name: file.name,
+    type: "image/jpeg",
+    dataUrl: canvas.toDataURL("image/jpeg", quality)
+  };
+}
+
+function resizeImageFile(file, maxWidth = 640, quality = 0.58) {
   return new Promise((resolve) => {
     if (!file || !file.type?.startsWith("image/")) {
       resolve(null);
@@ -163,16 +176,11 @@ function resizeImageFile(file, maxWidth = 1000, quality = 0.72) {
       const image = new Image();
       image.onerror = () => resolve(null);
       image.onload = () => {
-        const scale = Math.min(1, maxWidth / image.width);
-        const canvas = document.createElement("canvas");
-        canvas.width = Math.round(image.width * scale);
-        canvas.height = Math.round(image.height * scale);
-        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
-        resolve({
-          name: file.name,
-          type: "image/jpeg",
-          dataUrl: canvas.toDataURL("image/jpeg", quality)
-        });
+        let preview = makeImagePreview(image, file, maxWidth, quality);
+        if (preview.dataUrl.length > 220000) {
+          preview = makeImagePreview(image, file, 480, 0.5);
+        }
+        resolve(preview);
       };
       image.src = reader.result;
     };
