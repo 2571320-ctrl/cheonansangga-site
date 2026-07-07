@@ -171,6 +171,29 @@ function formatDetailDate(value) {
   return date.toLocaleString("ko-KR");
 }
 
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function renderPhotoPreviews(photos = []) {
+  if (!Array.isArray(photos) || !photos.length) return "";
+  return `
+    <div class="admin-photo-grid">
+      ${photos.map((photo, index) => `
+        <a href="${photo.dataUrl}" target="_blank" rel="noopener" class="admin-photo-thumb">
+          <img src="${photo.dataUrl}" alt="${escapeHtml(photo.name || `첨부사진 ${index + 1}`)}">
+          <span>${escapeHtml(photo.name || `첨부사진 ${index + 1}`)}</span>
+        </a>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderInquiryDetail(item) {
   const detail = document.querySelector("[data-inquiry-detail]");
   const modal = document.querySelector("[data-inquiry-modal]");
@@ -197,13 +220,14 @@ function renderInquiryDetail(item) {
     ["매물종류", item.property_type],
     ["주소", item.address],
     ["사진첨부", item.photos],
+    ["사진보기", renderPhotoPreviews(item.photo_previews), "full", true],
     ["개인정보동의", item.privacy_agree ? "동의" : "-"],
     ["문의내용", item.inquiry || item.description, "full"]
   ].filter(([, value]) => value !== undefined && value !== "");
-  detail.innerHTML = rows.map(([label, value, full]) => `
+  detail.innerHTML = rows.map(([label, value, full, isHtml]) => `
     <div class="admin-detail-item ${full ? "full" : ""}">
       <div class="admin-detail-label">${label}</div>
-      <div class="admin-detail-value">${value || "-"}</div>
+      <div class="admin-detail-value">${isHtml ? value || "-" : escapeHtml(value || "-")}</div>
     </div>
   `).join("");
   modal.hidden = false;

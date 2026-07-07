@@ -1,4 +1,4 @@
-import { buildTelegramMessage, sendTelegramMessage } from "./telegram.js";
+import { buildTelegramMessage, sendTelegramMessage, sendTelegramPhotos } from "./telegram.js";
 
 const KV_BINDING_NAMES = ["INQUIRIES_KV", "INQUIRY_KV", "CONTACTS_KV"];
 const CACHE_STORAGE_URL = "https://sangkwon.local/admin-inquiries-cache";
@@ -164,11 +164,15 @@ export async function onRequest({ request, env = {} }) {
       timestamp: record.submitted_at
     })
   });
+  const telegramPhotos = record.table === "property_submissions" && Array.isArray(record.photo_previews)
+    ? await sendTelegramPhotos({ env, photos: record.photo_previews })
+    : { ok: true, skipped: true };
 
   return jsonResponse({
     ok: storage.ok && telegram.ok,
     stored: true,
     storage,
-    telegram
+    telegram,
+    telegramPhotos
   }, telegram.status || (telegram.ok ? 200 : 502));
 }

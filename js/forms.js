@@ -150,7 +150,51 @@ function fileListToText(fileList) {
   return [...fileList].map((file) => file.name).filter(Boolean).join(", ");
 }
 
-function formToData(form) {
+function resizeImageFile(file, maxWidth = 1000, quality = 0.72) {
+  return new Promise((resolve) => {
+    if (!file || !file.type?.startsWith("image/")) {
+      resolve(null);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onerror = () => resolve(null);
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => resolve(null);
+      image.onload = () => {
+        const scale = Math.min(1, maxWidth / image.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(image.width * scale);
+        canvas.height = Math.round(image.height * scale);
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve({
+          name: file.name,
+          type: "image/jpeg",
+          dataUrl: canvas.toDataURL("image/jpeg", quality)
+        });
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function collectPhotoPreviews(form) {
+  const photos = [];
+  const inputs = [...form.querySelectorAll("input[type='file']")];
+  for (const input of inputs) {
+    const files = [...(input.files || [])].slice(0, 4 - photos.length);
+    for (const file of files) {
+      const photo = await resizeImageFile(file);
+      if (photo) photos.push(photo);
+      if (photos.length >= 4) break;
+    }
+  }
+  return photos;
+}
+
+async function formToData(form) {
   const data = {};
   new FormData(form).forEach((value, key) => {
     if (value instanceof File) {
@@ -164,6 +208,9 @@ function formToData(form) {
   form.querySelectorAll("input[type='file'][multiple]").forEach((input) => {
     if (input.files?.length) data[input.name] = fileListToText(input.files);
   });
+
+  const photoPreviews = await collectPhotoPreviews(form);
+  if (photoPreviews.length) data.photo_previews = photoPreviews;
 
   return data;
 }
@@ -180,7 +227,7 @@ function handleFormSubmit() {
       const table = form.dataset.form;
       const submitButton = form.querySelector("[type='submit']");
       if (submitButton) submitButton.disabled = true;
-      const result = await submitForm(table, formToData(form));
+      const result = await submitForm(table, await formToData(form));
       if (submitButton) submitButton.disabled = false;
 
       if (result.ok) {

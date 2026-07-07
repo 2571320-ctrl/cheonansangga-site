@@ -143,6 +143,61 @@ async function sendTelegramMessage({ env = {}, text = "" }) {
   }
 }
 
+function dataUrlToBlob(dataUrl = "") {
+  const [header, base64] = String(dataUrl).split(",");
+  if (!header || !base64) return null;
+  const mime = header.match(/data:(.*?);base64/)?.[1] || "image/jpeg";
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return new Blob([bytes], { type: mime });
+}
+
+async function sendTelegramPhotos({ env = {}, photos = [] }) {
+  const token = String(env.TELEGRAM_BOT_TOKEN || "").trim();
+  const chatId = String(env.TELEGRAM_CHAT_ID || "").trim();
+
+  if (!token || !chatId || !Array.isArray(photos) || !photos.length) {
+    return { ok: false, skipped: true };
+  }
+
+  const results = [];
+  for (const [index, photo] of photos.slice(0, 4).entries()) {
+    const blob = dataUrlToBlob(photo.dataUrl);
+    if (!blob) continue;
+
+    try {
+      const form = new FormData();
+      form.append("chat_id", chatId);
+      form.append("caption", photo.name || `매물접수 사진 ${index + 1}`);
+      form.append("photo", blob, photo.name || `property-photo-${index + 1}.jpg`);
+
+      const response = await fetch(`${TELEGRAM_API_BASE}/bot${token}/sendPhoto`, {
+        method: "POST",
+        body: form
+      });
+      const result = await response.json().catch(() => null);
+      results.push({
+        ok: response.ok && (!result || result.ok !== false),
+        status: response.status,
+        result
+      });
+    } catch (error) {
+      results.push({
+        ok: false,
+        error: error && error.message ? error.message : String(error)
+      });
+    }
+  }
+
+  return {
+    ok: results.length > 0 && results.every((result) => result.ok),
+    results
+  };
+}
+
 export async function onRequest({ request, env = {} }) {
   if (request.method !== "POST") {
     return jsonResponse({ ok: false, error: "POST 요청만 사용할 수 있습니다." }, 405);
@@ -169,4 +224,4 @@ export async function onRequest({ request, env = {} }) {
   return jsonResponse(result, result.status || (result.ok ? 200 : 502));
 }
 
-export { buildTelegramMessage, sendTelegramMessage };
+export { buildTelegramMessage, sendTelegramMessage, sendTelegramPhotos };
