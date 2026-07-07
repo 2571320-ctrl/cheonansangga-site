@@ -57,6 +57,62 @@ function priceLabel(item) {
   return `보증금 ${item.deposit} / 월세 ${item.monthly_rent}`;
 }
 
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function cleanDescriptionLine(line) {
+  return String(line || "")
+    .replace(/#{1,6}/g, "")
+    .replace(/\*\*/g, "")
+    .replace(/^[\s*ㆍ•\-✓✔]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function formatPropertyDescription(text) {
+  const normalized = String(text || "")
+    .replace(/\r/g, "")
+    .replace(/#{1,6}\s*/g, "\n")
+    .replace(/[✓✔]/g, "\n")
+    .replace(/\s\*\s*(?=[^*:\n]{1,28}\s*[:：])/g, "\n")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+
+  const lines = normalized
+    .split(/\n+/)
+    .map(cleanDescriptionLine)
+    .filter(Boolean);
+
+  if (!lines.length) return "<p>-</p>";
+
+  const facts = [];
+  const paragraphs = [];
+
+  lines.forEach((line) => {
+    const match = line.match(/^([^:：]{1,18})\s*[:：]\s*(.+)$/);
+    if (match) {
+      facts.push([match[1].trim(), match[2].trim()]);
+    } else {
+      paragraphs.push(line);
+    }
+  });
+
+  const paragraphHTML = paragraphs.map((line) => `<p>${escapeHTML(line)}</p>`).join("");
+  const factHTML = facts.length
+    ? `<dl class="property-description-list">${facts.map(([label, value]) => `
+        <div><dt>${escapeHTML(label)}</dt><dd>${escapeHTML(value)}</dd></div>
+      `).join("")}</dl>`
+    : "";
+
+  return `${paragraphHTML}${factHTML}`;
+}
+
 function getFilteredProperties() {
   const query = propertyState.query.trim();
   const filtered = propertyState.properties.filter((item) => {
@@ -181,7 +237,7 @@ function openPropertyModal(id) {
       <dd>${value || "-"}</dd>
     </div>
   `).join("");
-  modal.querySelector("[data-modal-description]").textContent = item.description;
+  modal.querySelector("[data-modal-description]").innerHTML = formatPropertyDescription(item.description);
   modal.querySelector("[data-modal-comment]").textContent = item.broker_comment;
   modal.querySelector("[data-modal-map]").textContent = `${item.region} 지도 영역`;
   modal.hidden = false;
