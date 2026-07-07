@@ -269,12 +269,6 @@
   margin-bottom: 10px;
 }
 
-.property-card-desc {
-  color: var(--gray-600);
-  line-height: 1.7;
-  min-height: 54px;
-}
-
 .property-card-specs {
   border-top: 1px solid rgba(200, 208, 224, 0.72);
   display: grid;

@@ -128,7 +128,6 @@ function renderPropertyCards() {
           </div>
           <strong class="property-price">${priceLabel(item)}</strong>
           <h3>${item.title}</h3>
-          <p class="property-card-desc">${item.short_description}</p>
           <dl class="property-card-specs">
             <div><dt>지역</dt><dd>${item.region}</dd></div>
             <div><dt>면적</dt><dd>${formatArea(item)}</dd></div>
@@ -167,7 +166,7 @@ function detailRows(item) {
 }
 
 function openPropertyModal(id) {
-  const item = propertyState.properties.find((property) => property.id === id);
+  const item = propertyState.properties.find((property) => String(property.id) === String(id));
   const modal = document.querySelector("[data-property-modal]");
   if (!item || !modal) return;
 
