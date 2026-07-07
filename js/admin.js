@@ -1,5 +1,5 @@
 const ADMIN_PASSWORD_KEY = "admin_password";
-const DEFAULT_PASSWORD = "jungang2026";
+const DEFAULT_PASSWORD = "1234";
 const NEWS_REPORT_CATEGORIES = ["상권분석", "창업정보", "투자전략", "부동산뉴스"];
 const INQUIRY_API_ENDPOINT = "/api/inquiries";
 let SERVER_INQUIRIES = [];

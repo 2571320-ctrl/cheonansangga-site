@@ -21,7 +21,7 @@ function getInquiryKV(env = {}) {
 }
 
 function getAdminPassword(env = {}) {
-  return String(env.ADMIN_PASSWORD || "jungang2026").trim();
+  return String(env.ADMIN_PASSWORD || "1234").trim();
 }
 
 function normalizeRecord(input = {}) {
