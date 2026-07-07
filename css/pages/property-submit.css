@@ -1,0 +1,85 @@
+.property-submit-hero {
+  --hero-overlay: rgba(8, 24, 54, 0.62);
+}
+
+.property-submit-layout {
+  align-items: start;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.55fr);
+}
+
+.property-submit-card textarea {
+  line-height: 1.75;
+  resize: vertical;
+}
+
+.property-submit-lead {
+  color: var(--gray-600);
+  margin: -8px 0 20px;
+}
+
+.property-submit-guide {
+  position: sticky;
+  top: 104px;
+}
+
+.property-submit-guide h3 {
+  color: var(--navy-900);
+  margin-bottom: 12px;
+}
+
+.property-submit-guide ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.property-submit-guide li {
+  color: var(--gray-600);
+  line-height: 1.65;
+}
+
+.property-submit-contact {
+  background: var(--navy-800);
+  border-radius: var(--radius-md);
+  color: var(--white);
+  display: grid;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 18px;
+}
+
+.property-submit-contact span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+.property-submit-contact strong {
+  color: var(--gold-500);
+  font-family: var(--font-number);
+  font-size: 1.25rem;
+}
+
+@media (max-width: 960px) {
+  .property-submit-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .property-submit-guide {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .property-submit-layout {
+    gap: 18px;
+  }
+
+  .property-submit-card,
+  .property-submit-guide {
+    padding: 18px;
+  }
+}
