@@ -319,7 +319,123 @@ function getMockProperties() {
   return MOCK_PROPERTIES.map((item) => ({ ...item, badges: [...item.badges] }));
 }
 
+const ADMIN_PROPERTY_CATEGORY_ALIASES = {
+  "상가점포": "상가임대",
+  "상가임대": "상가임대",
+  "상가매매": "상가건물매매",
+  "상가건물": "상가건물매매",
+  "상가건물매매": "상가건물매매",
+  "근린상가": "상가임대",
+  "사무실": "상가임대",
+  "상가주택": "상가주택매매",
+  "상가주택매매": "상가주택매매",
+  "토지": "토지매매",
+  "토지매매": "토지매매",
+  "원룸": "원룸건물매매",
+  "원룸건물": "원룸건물매매",
+  "원룸건물매매": "원룸건물매매",
+  "공장": "공장·창고",
+  "창고": "공장·창고",
+  "공장·창고": "공장·창고",
+  "공장ㆍ창고": "공장·창고",
+  "기타": "기타"
+};
+
+function readAdminProperties() {
+  try {
+    const rows = JSON.parse(localStorage.getItem("properties") || "[]");
+    return Array.isArray(rows) ? rows : [];
+  } catch {
+    return [];
+  }
+}
+
+function normalizeAdminCategory(item) {
+  const type = String(item.property_type || item.category || "").trim();
+  return ADMIN_PROPERTY_CATEGORY_ALIASES[type] || PROPERTY_CATEGORIES.find((category) => type.includes(category)) || "기타";
+}
+
+function categoryImage(category) {
+  const imageMap = {
+    "상가임대": "images/category/store-rent.jpg",
+    "상가주택매매": "images/category/shop-house.jpg",
+    "상가건물매매": "images/category/commercial-building.jpg",
+    "토지매매": "images/category/land-sale.jpg",
+    "원룸건물매매": "images/category/studio-building.jpg",
+    "공장·창고": "images/category/warehouse.jpg",
+    "기타": "images/category/city-investment.jpg"
+  };
+  return imageMap[category] || imageMap["기타"];
+}
+
+function numberFromText(value) {
+  const text = String(value || "").replace(/,/g, "");
+  const match = text.match(/\d+(\.\d+)?/);
+  return match ? Number(match[0]) : 0;
+}
+
+function buildBadges(item) {
+  const badges = [];
+  if (item.is_featured) badges.push("추천");
+  if (String(item.transaction_status || "").includes("급")) badges.push("급매");
+  if (!String(item.transaction_status || "").includes("완료")) badges.push("계약가능");
+  return badges.length ? badges : ["계약가능"];
+}
+
+function normalizeAdminProperty(item, index) {
+  const category = normalizeAdminCategory(item);
+  const areaText = item.size_m2 ? `${item.size_m2}㎡` : "-";
+  const region = [item.city, item.area].filter(Boolean).join(" ") || item.address || "-";
+  const industry = item.category && item.category !== category ? item.category : "";
+  return {
+    id: `admin-${item.id || index}`,
+    property_no: item.property_no || `ADMIN-${item.id || index + 1}`,
+    title: item.title || "관리자 등록 매물",
+    category,
+    deal_type: item.deal_type || "확인필요",
+    region,
+    address: item.address || [item.province, item.city, item.area, item.address_detail].filter(Boolean).join(" "),
+    deposit: item.price_info || "-",
+    monthly_rent: "",
+    sale_price: item.deal_type === "매매" ? item.price_info || "-" : "-",
+    premium: item.premium || "-",
+    maintenance_fee: item.maintenance_fee || "-",
+    contract_area: item.area_basis === "계약면적" ? areaText : areaText,
+    exclusive_area: areaText,
+    floor: item.floor || "-",
+    total_floor: item.total_floor || "-",
+    direction: item.direction || "-",
+    parking: item.parking || "-",
+    elevator: item.elevator || "-",
+    move_in_date: item.available_date || "-",
+    approval_date: item.approval_date || item.verified_date || "-",
+    building_use: item.building_use || "-",
+    zoning: item.zoning || "-",
+    current_business: industry || item.current_business || "-",
+    recommended_business: industry || item.recommended_business || "-",
+    short_description: item.description || `${category} 조건을 확인할 수 있는 관리자 등록 매물입니다.`,
+    description: item.description || "관리자 모드에서 등록한 매물입니다. 상세 조건은 현장 확인 및 소유자 확인 과정에서 변경될 수 있습니다.",
+    broker_comment: item.broker_comment || "현장 조건과 공부서류 확인 후 상담을 진행합니다.",
+    badges: buildBadges(item),
+    image_url: item.photo_url || categoryImage(category),
+    is_featured: Boolean(item.is_featured),
+    is_urgent: String(item.transaction_status || "").includes("급"),
+    is_available: !String(item.transaction_status || "").includes("완료"),
+    price_info: item.price_info || "",
+    price_sort: numberFromText(item.price_info),
+    area_sort: Number(item.size_m2 || 0),
+    created_at: item.compliance_checked_at || item.verified_date || new Date().toISOString()
+  };
+}
+
+function getProperties() {
+  const adminProperties = readAdminProperties()
+    .filter((item) => item && item.is_active !== false)
+    .map(normalizeAdminProperty);
+  return [...adminProperties, ...getMockProperties()];
+}
+
 window.PropertyService = {
   categories: PROPERTY_CATEGORIES,
-  getProperties: getMockProperties
+  getProperties
 };

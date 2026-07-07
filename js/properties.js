@@ -51,6 +51,7 @@ function formatArea(item) {
 }
 
 function priceLabel(item) {
+  if (item.price_info) return item.price_info;
   if (item.deal_type === "매매") return item.sale_price;
   if (item.sale_price && item.sale_price !== "-") return item.sale_price;
   return `보증금 ${item.deposit} / 월세 ${item.monthly_rent}`;
