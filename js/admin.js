@@ -327,6 +327,21 @@ function resetPropertyForm() {
   setDefaultDates(form);
 }
 
+function compactPriceParts(data) {
+  const salePrice = String(data.sale_price || "").trim();
+  const deposit = String(data.deposit || "").trim();
+  const monthlyRent = String(data.monthly_rent || "").trim();
+  const premium = String(data.premium || "").trim();
+
+  if (String(data.price_info || "").trim()) return String(data.price_info).trim();
+  if (salePrice && salePrice !== "-") return `매매가 ${salePrice}`;
+  if (deposit && monthlyRent) return `보증금 ${deposit} / 월세 ${monthlyRent}`;
+  if (deposit) return `보증금 ${deposit}`;
+  if (monthlyRent) return `월세 ${monthlyRent}`;
+  if (premium) return `권리금 ${premium}`;
+  return "";
+}
+
 function populatePropertyForm(index) {
   const form = document.querySelector("[data-property-form]");
   if (!form) return;
@@ -382,6 +397,7 @@ async function saveProperty(form) {
     delete data.photo_file;
     data.id = previous.id || Date.now();
     data.address = [data.province, data.city, data.area, data.address_detail].filter(Boolean).join(" ");
+    data.price_info = compactPriceParts(data);
     data.verified_date = data.verified_date || new Date().toISOString().slice(0, 10);
     data.transaction_status = data.transaction_status || "거래가능";
     data.size_m2 = Number(data.size_m2 || 0);

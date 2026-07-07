@@ -38,7 +38,11 @@
           <div class="field"><label>매물 분류</label><select name="property_type" required><option>상가임대</option><option>상가주택매매</option><option>상가건물매매</option><option>토지매매</option><option>원룸건물매매</option><option>공장·창고</option><option>기타</option></select></div>
           <div class="field"><label>업종/용도</label><select name="category" required><option>음식점</option><option>카페</option><option>소매점</option><option>사무실</option><option>프랜차이즈</option><option>학원/교육</option><option>병원/의원</option><option>미용/뷰티</option><option>기타</option></select></div>
           <div class="field"><label>거래유형</label><select name="deal_type" required><option>월세</option><option>매매</option><option>전세</option><option>임대</option></select></div>
-          <div class="field"><label>가격정보</label><input name="price_info" placeholder="예: 보증금 3,000/월 150" required></div>
+          <div class="field"><label>매매금액</label><input name="sale_price" placeholder="예: 8억 9,000만원 / 협의"></div>
+          <div class="field"><label>보증금</label><input name="deposit" placeholder="예: 3,000만원 / 없음"></div>
+          <div class="field"><label>월세</label><input name="monthly_rent" placeholder="예: 150만원 / 없음"></div>
+          <div class="field"><label>권리금</label><input name="premium" placeholder="예: 5,000만원 / 협의 / 없음"></div>
+          <div class="field full"><label>가격정보 요약</label><input name="price_info" placeholder="비워두면 매매금액·보증금·월세·권리금 기준으로 자동 생성됩니다."></div>
           <div class="field"><label>관리비</label><input name="maintenance_fee" placeholder="예: 월 10만원 / 없음 / 확인필요"></div>
           <div class="field"><label>면적(㎡)</label><input name="size_m2" type="number"></div>
           <div class="field"><label>전용/계약면적 구분</label><select name="area_basis"><option>전용면적</option><option>계약면적</option><option>공급면적</option><option>대지면적</option><option>확인필요</option></select></div>
@@ -83,7 +87,7 @@
       <table class="admin-table"><thead><tr><th>매물명</th><th>주소/분류</th><th>거래</th><th>가격</th><th>확인일</th><th>상태</th><th>추천</th><th>관리</th></tr></thead><tbody data-properties-body></tbody></table>
     </main>
   </div>
-  <script src="../js/admin.js?v=20260707-map-url1"></script>
+  <script src="../js/admin.js?v=20260707-price-fields1"></script>
 </body>
 </html>
 
