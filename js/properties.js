@@ -113,6 +113,38 @@ function formatPropertyDescription(text) {
   return `${paragraphHTML}${factHTML}`;
 }
 
+function extractMapURL(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const srcMatch = raw.match(/\ssrc=["']([^"']+)["']/i);
+  const url = srcMatch ? srcMatch[1] : raw;
+  return /^https?:\/\//i.test(url) ? url : "";
+}
+
+function renderPropertyMap(item) {
+  const map = document.querySelector("[data-modal-map]");
+  if (!map) return;
+  const configuredURL = extractMapURL(item.map_url);
+  const searchURL = `https://map.naver.com/p/search/${encodeURIComponent(item.address || item.region || item.title || "")}`;
+
+  if (configuredURL && /<iframe|\bembed\b/i.test(String(item.map_url || ""))) {
+    map.innerHTML = `
+      <iframe src="${escapeHTML(configuredURL)}" title="${escapeHTML(item.title)} 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a href="${escapeHTML(configuredURL)}" target="_blank" rel="noopener">지도 크게 보기</a>
+    `;
+    return;
+  }
+
+  const linkURL = configuredURL || searchURL;
+  map.innerHTML = `
+    <div>
+      <strong>${escapeHTML(item.region || "매물 위치")}</strong>
+      <span>${escapeHTML(item.address || "소재지 기준으로 지도를 확인하세요.")}</span>
+      <a href="${escapeHTML(linkURL)}" target="_blank" rel="noopener">지도에서 위치 확인</a>
+    </div>
+  `;
+}
+
 function getFilteredProperties() {
   const query = propertyState.query.trim();
   const filtered = propertyState.properties.filter((item) => {
@@ -239,7 +271,7 @@ function openPropertyModal(id) {
   `).join("");
   modal.querySelector("[data-modal-description]").innerHTML = formatPropertyDescription(item.description);
   modal.querySelector("[data-modal-comment]").textContent = item.broker_comment;
-  modal.querySelector("[data-modal-map]").textContent = `${item.region} 지도 영역`;
+  renderPropertyMap(item);
   modal.hidden = false;
   document.body.classList.add("modal-open");
 }

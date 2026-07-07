@@ -34,6 +34,7 @@
           <div class="field"><label>시·군·구</label><select name="city" required><option>천안시 서북구</option><option>천안시 동남구</option><option>아산시</option><option>기타</option></select></div>
           <div class="field"><label>읍·면·동</label><select name="area" required><option>두정동</option><option>성정동</option><option>불당동</option><option>원성동</option><option>신방동</option><option>백석동</option><option>쌍용동</option><option>배방읍</option><option>기타</option></select></div>
           <div class="field"><label>상세주소</label><input name="address_detail" placeholder="예: 원두정9길 18, 101호" required></div>
+          <div class="field full"><label>지도 URL / iframe</label><input name="map_url" placeholder="네이버·카카오 지도 공유 링크 또는 iframe 코드를 붙여넣으세요"><small>비워두면 소재지 기준 지도 검색 링크가 자동으로 표시됩니다.</small></div>
           <div class="field"><label>매물 분류</label><select name="property_type" required><option>상가임대</option><option>상가주택매매</option><option>상가건물매매</option><option>토지매매</option><option>원룸건물매매</option><option>공장·창고</option><option>기타</option></select></div>
           <div class="field"><label>업종/용도</label><select name="category" required><option>음식점</option><option>카페</option><option>소매점</option><option>사무실</option><option>프랜차이즈</option><option>학원/교육</option><option>병원/의원</option><option>미용/뷰티</option><option>기타</option></select></div>
           <div class="field"><label>거래유형</label><select name="deal_type" required><option>월세</option><option>매매</option><option>전세</option><option>임대</option></select></div>
@@ -82,7 +83,7 @@
       <table class="admin-table"><thead><tr><th>매물명</th><th>주소/분류</th><th>거래</th><th>가격</th><th>확인일</th><th>상태</th><th>추천</th><th>관리</th></tr></thead><tbody data-properties-body></tbody></table>
     </main>
   </div>
-  <script src="../js/admin.js?v=20260707-admin-category1"></script>
+  <script src="../js/admin.js?v=20260707-map-url1"></script>
 </body>
 </html>
 

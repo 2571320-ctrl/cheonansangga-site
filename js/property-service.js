@@ -413,6 +413,7 @@ function normalizeAdminProperty(item, index) {
     zoning: item.zoning || "-",
     current_business: industry || item.current_business || "-",
     recommended_business: industry || item.recommended_business || "-",
+    map_url: item.map_url || "",
     short_description: item.description || `${category} 조건을 확인할 수 있는 관리자 등록 매물입니다.`,
     description: item.description || "관리자 모드에서 등록한 매물입니다. 상세 조건은 현장 확인 및 소유자 확인 과정에서 변경될 수 있습니다.",
     broker_comment: item.broker_comment || "현장 조건과 공부서류 확인 후 상담을 진행합니다.",
