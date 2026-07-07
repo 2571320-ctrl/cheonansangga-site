@@ -175,7 +175,6 @@ function openPropertyModal(id) {
   modal.querySelector("[data-modal-image]").alt = item.title;
   modal.querySelector("[data-modal-title]").textContent = item.title;
   modal.querySelector("[data-modal-price]").textContent = priceLabel(item);
-  modal.querySelector("[data-modal-summary]").textContent = item.short_description;
   modal.querySelector("[data-modal-badges]").innerHTML = item.badges.map((badge) => `<span class="property-badge">${badge}</span>`).join("");
   modal.querySelector("[data-modal-table]").innerHTML = detailRows(item).map(([label, value]) => `
     <div class="property-detail-row">
