@@ -4197,6 +4197,10 @@ body {
   max-width: 760px;
 }
 
+.home-hero .hero-subtitle::before {
+  display: none;
+}
+
 .home-hero .hero-cta {
   justify-content: flex-start;
 }
