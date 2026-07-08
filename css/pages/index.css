@@ -3500,12 +3500,12 @@ body {
 .hero-title {
   color: #fff;
   font-family: "Anton", var(--font-display);
-  font-size: clamp(3.7rem, 8.4vw, 8.1rem);
+  font-size: clamp(2.6rem, 5.6vw, 4.7rem);
   letter-spacing: 0;
-  line-height: 0.98;
+  line-height: 1.14;
   margin-left: 0;
   margin-right: auto;
-  max-width: 1020px;
+  max-width: 900px;
   text-shadow: 0 3px 0 rgba(11, 28, 61, 0.18), 0 14px 30px rgba(3, 8, 18, 0.48);
 }
 
