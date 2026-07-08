@@ -3464,7 +3464,8 @@ body {
 .home-hero {
   align-items: center;
   background:
-    linear-gradient(160deg, rgba(5, 13, 24, 0.82), rgba(10, 31, 56, 0.72), rgba(20, 58, 96, 0.64)),
+    linear-gradient(155deg, rgba(11, 19, 36, 0.9) 0%, rgba(15, 27, 51, 0.82) 38%, rgba(22, 38, 66, 0.76) 66%, rgba(30, 58, 95, 0.68) 100%),
+    radial-gradient(circle at 88% 86%, rgba(44, 80, 122, 0.42) 0%, rgba(30, 58, 95, 0.2) 34%, rgba(11, 19, 36, 0) 64%),
     url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80");
   background-position: center;
   background-repeat: no-repeat;
