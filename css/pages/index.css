@@ -4187,7 +4187,7 @@ body {
   height: 2px;
   left: 0;
   position: absolute;
-  width: 100%;
+  width: min(460px, 62%);
 }
 
 .home-hero .hero-subtitle,
