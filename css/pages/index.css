@@ -4173,11 +4173,21 @@ body {
   line-height: 1.08;
   margin-left: 0;
   margin-right: auto;
+  padding-bottom: 26px;
+  position: relative;
   max-width: 760px;
 }
 
 .home-hero .hero-title::after {
-  display: none;
+  background: #ff8a1f;
+  border-radius: 999px;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .home-hero .hero-subtitle,
