@@ -3464,7 +3464,7 @@ body {
 .home-hero {
   align-items: center;
   background:
-    linear-gradient(160deg, rgba(31, 78, 132, 0.68), rgba(64, 119, 176, 0.5), rgba(19, 45, 88, 0.62)),
+    linear-gradient(160deg, rgba(5, 13, 24, 0.82), rgba(10, 31, 56, 0.72), rgba(20, 58, 96, 0.64)),
     url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80");
   background-position: center;
   background-repeat: no-repeat;
@@ -3498,6 +3498,7 @@ body {
 
 .hero-title {
   color: #fff;
+  font-family: "Anton", var(--font-display);
   font-size: clamp(2.2rem, 5.4vw, 3.9rem);
   letter-spacing: 0;
   line-height: 1.16;
