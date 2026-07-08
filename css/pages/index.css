@@ -4173,13 +4173,23 @@ body {
   line-height: 1.08;
   margin-left: 0;
   margin-right: auto;
+  padding-bottom: 28px;
+  position: relative;
   max-width: 760px;
 }
 
 .home-hero .hero-title::after {
-  margin-left: 0;
-  margin-right: auto;
-  width: min(760px, 60vw);
+  background: linear-gradient(90deg, #a86b17 0%, #ff9a26 24%, #ffd56a 50%, #ff9a26 76%, #9c6416 100%);
+  border-radius: 999px;
+  bottom: 0;
+  box-shadow: 0 0 16px rgba(255, 181, 55, 0.28);
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .home-hero .hero-subtitle,
