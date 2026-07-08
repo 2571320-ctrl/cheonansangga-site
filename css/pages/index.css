@@ -4147,6 +4147,16 @@ body {
 }
 
 /* Hero final placement: match the left-weighted premium title layout. */
+.home-hero {
+  background:
+    radial-gradient(circle at 52% 47%, rgba(88, 130, 176, 0.32) 0%, rgba(50, 88, 132, 0.2) 30%, rgba(4, 8, 16, 0) 62%),
+    linear-gradient(153deg, rgba(4, 8, 16, 0.92) 0%, rgba(11, 19, 36, 0.84) 34%, rgba(22, 38, 66, 0.74) 66%, rgba(44, 80, 122, 0.62) 100%),
+    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .home-hero .hero-content {
   margin-left: auto;
   margin-right: auto;
@@ -4169,7 +4179,7 @@ body {
 .home-hero .hero-title::after {
   margin-left: 0;
   margin-right: auto;
-  width: min(520px, 42vw);
+  width: min(760px, 60vw);
 }
 
 .home-hero .hero-subtitle,
