@@ -4168,7 +4168,7 @@ body {
 .home-hero .hero-title {
   font-family: var(--font-body);
   font-size: clamp(4.25rem, 7.2vw, 6.75rem);
-  font-weight: 750;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: 1.08;
   margin-left: 0;
