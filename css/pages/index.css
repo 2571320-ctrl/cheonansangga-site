@@ -4146,43 +4146,66 @@ body {
   width: 100%;
 }
 
-/* Hero final placement: match the left-weighted premium title layout. */
+/* Hero final placement: bright premium consulting tone. */
 .home-hero {
   background:
-    linear-gradient(90deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.96) 38%, rgba(245, 247, 251, 0.72) 54%, rgba(238, 243, 248, 0.18) 74%, rgba(16, 42, 67, 0.08) 100%),
-    radial-gradient(circle at 16% 18%, rgba(199, 169, 107, 0.18) 0%, rgba(199, 169, 107, 0) 32%),
-    linear-gradient(135deg, #f8fafc 0%, #f5f7fb 48%, #eef3f8 100%),
-    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80");
-  background-position: center, center, center, right center;
+    radial-gradient(circle at 15% 18%, rgba(199, 169, 107, 0.16) 0%, rgba(199, 169, 107, 0) 28%),
+    radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 32%),
+    linear-gradient(135deg, #fbfcfd 0%, #f8fafc 46%, #eef3f8 100%);
+  background-position: center, center, center;
   background-repeat: no-repeat;
-  background-size: cover, cover, cover, 68% auto;
+  background-size: cover, cover, cover;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-hero::after {
+  background:
+    linear-gradient(90deg, #f8fafc 0%, rgba(248, 250, 252, 0.98) 41%, rgba(248, 250, 252, 0.7) 54%, rgba(248, 250, 252, 0.12) 72%, rgba(248, 250, 252, 0) 100%),
+    url("../../images/investment/investment-income-building.png");
+  background-position: right bottom, right bottom;
+  background-repeat: no-repeat;
+  background-size: cover, min(780px, 61vw) auto;
+  content: "";
+  display: block;
+  inset: 0;
+  opacity: 0.92;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
 }
 
 .home-hero .hero-content {
   margin-left: auto;
   margin-right: auto;
   max-width: 1180px;
-  padding: 72px 24px 92px;
+  padding: 78px 24px 92px;
+  position: relative;
   text-align: left;
+  z-index: 1;
 }
 
 .home-hero .hero-title {
   font-family: var(--font-body);
   color: #102a43;
-  font-size: clamp(2.7rem, 4.7vw, 4.6rem);
-  font-weight: 800;
-  letter-spacing: -0.018em;
-  line-height: 1.08;
+  font-size: clamp(2.85rem, 4.9vw, 4.95rem);
+  font-weight: 850;
+  letter-spacing: -0.026em;
+  line-height: 1.05;
   margin-left: 0;
   margin-right: auto;
-  padding-bottom: 24px;
+  padding-bottom: 28px;
   position: relative;
-  max-width: 640px;
-  text-shadow: 0 10px 32px rgba(255, 255, 255, 0.58);
+  max-width: 590px;
+  text-shadow: none;
+}
+
+.home-hero .hero-accent {
+  color: #c7a96b;
 }
 
 .home-hero .hero-title::after {
-  background: linear-gradient(90deg, #c7a96b 0%, #e3c985 48%, rgba(199, 169, 107, 0.12) 100%);
+  background: linear-gradient(90deg, #c7a96b 0%, #e3c985 62%, rgba(199, 169, 107, 0.22) 100%);
   border-radius: 999px;
   bottom: 0;
   content: "";
@@ -4190,7 +4213,7 @@ body {
   height: 2px;
   left: 0;
   position: absolute;
-  width: min(460px, 62%);
+  width: min(520px, 94%);
 }
 
 .home-hero .hero-subtitle,
@@ -4198,8 +4221,16 @@ body {
   color: #102a43;
   margin-left: 0;
   margin-right: auto;
-  max-width: 620px;
-  text-shadow: 0 8px 24px rgba(255, 255, 255, 0.72);
+  max-width: 600px;
+  text-shadow: none;
+}
+
+.home-hero .hero-subtitle {
+  font-weight: 800;
+}
+
+.home-hero .hero-desc {
+  color: #5c6c7d;
 }
 
 .home-hero .hero-subtitle::before {
@@ -4211,9 +4242,10 @@ body {
 }
 
 .home-hero .hero-badge {
-  background: rgba(255, 255, 255, 0.68);
-  border-color: rgba(199, 169, 107, 0.7);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(199, 169, 107, 0.78);
   color: #102a43;
+  box-shadow: 0 14px 36px rgba(16, 42, 67, 0.08);
 }
 
 .home-hero .hero-cta .btn-primary {
@@ -4223,8 +4255,8 @@ body {
 }
 
 .home-hero .hero-cta .btn-outline {
-  background: rgba(255, 255, 255, 0.74);
-  border-color: rgba(16, 42, 67, 0.42);
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(199, 169, 107, 0.55);
   color: #102a43;
 }
 
@@ -4236,6 +4268,20 @@ body {
 }
 
 @media (max-width: 980px) {
+  .home-hero {
+    background:
+      radial-gradient(circle at 17% 18%, rgba(199, 169, 107, 0.14) 0%, rgba(199, 169, 107, 0) 36%),
+      linear-gradient(135deg, #fbfcfd 0%, #f8fafc 48%, #eef3f8 100%);
+    background-position: center, center;
+    background-repeat: no-repeat;
+    background-size: cover, cover;
+  }
+
+  .home-hero::after {
+    background-size: cover, min(720px, 72vw) auto;
+    opacity: 0.72;
+  }
+
   .home-hero .hero-content {
     padding: 62px 22px 64px;
   }
@@ -4249,11 +4295,16 @@ body {
 @media (max-width: 560px) {
   .home-hero {
     background:
-      linear-gradient(180deg, rgba(248, 250, 252, 0.94) 0%, rgba(245, 247, 251, 0.88) 44%, rgba(16, 42, 67, 0.14) 100%),
-      radial-gradient(circle at 50% 16%, rgba(199, 169, 107, 0.15) 0%, rgba(199, 169, 107, 0) 42%),
-      url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80");
-    background-position: center, center, center bottom;
-    background-size: cover, cover, auto 72%;
+      linear-gradient(180deg, rgba(248, 250, 252, 0.97) 0%, rgba(248, 250, 252, 0.92) 48%, rgba(238, 243, 248, 0.72) 100%),
+      radial-gradient(circle at 50% 16%, rgba(199, 169, 107, 0.14) 0%, rgba(199, 169, 107, 0) 42%);
+    background-position: center, center;
+    background-size: cover, cover;
+  }
+
+  .home-hero::after {
+    background-position: center bottom, 62% bottom;
+    background-size: cover, auto 62%;
+    opacity: 0.34;
   }
 
   .home-hero .hero-content {
@@ -4262,8 +4313,8 @@ body {
   }
 
   .home-hero .hero-title {
-    font-size: clamp(2rem, 9vw, 2.52rem);
-    line-height: 1.14;
+    font-size: clamp(2.05rem, 9vw, 2.6rem);
+    line-height: 1.13;
     margin-left: auto;
     margin-right: auto;
     max-width: 340px;
