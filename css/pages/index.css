@@ -4223,11 +4223,11 @@ body {
   }
 
   .home-hero .hero-title {
-    font-size: clamp(1.62rem, 7.8vw, 2.1rem);
-    line-height: 1.2;
+    font-size: clamp(1.9rem, 8.8vw, 2.42rem);
+    line-height: 1.16;
     margin-left: auto;
     margin-right: auto;
-    max-width: 320px;
+    max-width: 340px;
   }
 
   .home-hero .hero-title::after,
@@ -4235,6 +4235,18 @@ body {
   .home-hero .hero-desc {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .home-hero .hero-subtitle {
+    font-size: clamp(0.92rem, 4.2vw, 1.05rem);
+    line-height: 1.62;
+    max-width: 300px;
+  }
+
+  .home-hero .hero-desc {
+    font-size: clamp(0.78rem, 3.6vw, 0.9rem);
+    line-height: 1.75;
+    max-width: 290px;
   }
 
   .home-hero .hero-cta {
