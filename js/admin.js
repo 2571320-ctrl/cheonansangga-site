@@ -2,6 +2,7 @@ const ADMIN_PASSWORD_KEY = "admin_password";
 const DEFAULT_PASSWORD = "1234";
 const NEWS_REPORT_CATEGORIES = ["상권분석", "창업정보", "투자전략", "부동산뉴스"];
 const INQUIRY_API_ENDPOINT = "/api/inquiries";
+const SITE_SETTINGS_API_ENDPOINT = "/api/site-settings";
 let SERVER_INQUIRIES = [];
 
 const ADMIN_SITE_DEFAULTS = {
@@ -56,9 +57,13 @@ function setNewsReports(reports) {
   write("news_reports", reports);
 }
 
+function getAdminPassword() {
+  return localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASSWORD;
+}
+
 async function loadServerInquiries() {
   try {
-    const password = localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASSWORD;
+    const password = getAdminPassword();
     let response = await fetch(INQUIRY_API_ENDPOINT, {
       headers: { "x-admin-password": password }
     });
@@ -582,20 +587,56 @@ function bindNewsReportForm() {
   document.querySelector("[data-news-report-cancel]")?.addEventListener("click", resetNewsReportForm);
 }
 
-function initSettingsForm() {
+async function loadSiteSettingsForAdmin() {
+  const localSettings = { ...ADMIN_SITE_DEFAULTS, ...JSON.parse(localStorage.getItem("site_settings") || "{}") };
+  try {
+    const response = await fetch(SITE_SETTINGS_API_ENDPOINT, { cache: "no-store" });
+    const body = await response.json().catch(() => null);
+    if (response.ok && body?.settings) {
+      const settings = { ...ADMIN_SITE_DEFAULTS, ...body.settings };
+      localStorage.setItem("site_settings", JSON.stringify(settings));
+      return settings;
+    }
+  } catch (error) {
+    console.warn("Site settings load failed", error);
+  }
+  return localSettings;
+}
+
+async function saveSiteSettingsForAdmin(settings) {
+  localStorage.setItem("site_settings", JSON.stringify(settings));
+  const response = await fetch(SITE_SETTINGS_API_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-admin-password": getAdminPassword()
+    },
+    body: JSON.stringify({ settings })
+  });
+  const body = await response.json().catch(() => null);
+  if (!response.ok || !body?.ok) {
+    throw new Error(body?.error || "사이트 설정 서버 저장에 실패했습니다.");
+  }
+  return body;
+}
+
+async function initSettingsForm() {
   const form = document.querySelector("[data-settings-form]");
   if (!form) return;
-  const settings = { ...ADMIN_SITE_DEFAULTS, ...JSON.parse(localStorage.getItem("site_settings") || "{}") };
-  ["sns_blog", "sns_naver_profile", "sns_youtube", "sns_instagram"].forEach((key) => {
-    settings[key] = ADMIN_SITE_DEFAULTS[key];
-  });
+  const settings = await loadSiteSettingsForAdmin();
   Object.entries(settings).forEach(([key, value]) => {
     if (form.elements[key]) form.elements[key].value = value;
   });
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    localStorage.setItem("site_settings", JSON.stringify(Object.fromEntries(new FormData(form))));
-    alert("설정이 저장되었습니다. 일반 페이지를 Ctrl+F5로 새로고침하면 SNS 링크가 반영됩니다.");
+    const nextSettings = Object.fromEntries(new FormData(form));
+    try {
+      await saveSiteSettingsForAdmin(nextSettings);
+      alert("설정이 저장되었습니다. 일반 페이지를 새로고침하면 반영됩니다.");
+    } catch (error) {
+      console.error(error);
+      alert(`설정 저장에 실패했습니다. ${error.message}`);
+    }
   });
 }
 
@@ -643,7 +684,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderInquiries();
   renderPropertyTable();
   renderNewsReportTable();
-  initSettingsForm();
+  await initSettingsForm();
   bindPropertyForm();
   bindNewsReportForm();
   document.querySelector("[data-export]")?.addEventListener("click", exportCSV);

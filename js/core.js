@@ -13,6 +13,8 @@ const SITE_DEFAULTS = {
   sms_notify_url: "/api/aligo-sms",
   registration_no: "제44133-2015-04204호"
 };
+const SITE_SETTINGS_API_ENDPOINT = "/api/site-settings";
+let ACTIVE_SITE_SETTINGS = { ...SITE_DEFAULTS };
 
 function normalizeUrl(value) {
   if (!value) return "#";
@@ -21,19 +23,14 @@ function normalizeUrl(value) {
 }
 
 function normalizeSocialValue(key, value) {
-  const canonicalSocialLinks = {
-    sns_blog: SITE_DEFAULTS.sns_blog,
-    sns_naver_profile: SITE_DEFAULTS.sns_naver_profile,
-    sns_youtube: SITE_DEFAULTS.sns_youtube,
-    sns_instagram: SITE_DEFAULTS.sns_instagram
-  };
-  if (canonicalSocialLinks[key]) {
-    return canonicalSocialLinks[key];
-  }
   return value;
 }
 
 function getSettings() {
+  return { ...ACTIVE_SITE_SETTINGS };
+}
+
+function getLocalSettings() {
   try {
     return { ...SITE_DEFAULTS, ...JSON.parse(localStorage.getItem("site_settings") || "{}") };
   } catch {
@@ -42,8 +39,26 @@ function getSettings() {
   }
 }
 
-function initSiteSettings() {
-  const settings = getSettings();
+async function loadSiteSettings() {
+  const localSettings = getLocalSettings();
+  ACTIVE_SITE_SETTINGS = localSettings;
+
+  try {
+    const response = await fetch(SITE_SETTINGS_API_ENDPOINT, { cache: "no-store" });
+    const body = await response.json().catch(() => null);
+    if (response.ok && body?.settings) {
+      ACTIVE_SITE_SETTINGS = { ...SITE_DEFAULTS, ...body.settings };
+      localStorage.setItem("site_settings", JSON.stringify(ACTIVE_SITE_SETTINGS));
+    }
+  } catch (error) {
+    console.warn("Site settings load failed", error);
+  }
+
+  return ACTIVE_SITE_SETTINGS;
+}
+
+async function initSiteSettings() {
+  const settings = await loadSiteSettings();
   document.querySelectorAll("[data-setting]").forEach((node) => {
     const key = node.dataset.setting;
     const value = normalizeSocialValue(key, settings[key] || "");
@@ -66,11 +81,12 @@ function initSiteSettings() {
 }
 
 function initFixedSocialLinks() {
+  const settings = getSettings();
   const links = {
-    ".fixed-social-item.social-naver": SITE_DEFAULTS.sns_naver_profile,
-    ".fixed-social-item.social-youtube": SITE_DEFAULTS.sns_youtube,
-    ".fixed-social-item.social-instagram": SITE_DEFAULTS.sns_instagram,
-    ".fixed-social-item.social-blog": SITE_DEFAULTS.sns_blog
+    ".fixed-social-item.social-naver": settings.sns_naver_profile,
+    ".fixed-social-item.social-youtube": settings.sns_youtube,
+    ".fixed-social-item.social-instagram": settings.sns_instagram,
+    ".fixed-social-item.social-blog": settings.sns_blog
   };
 
   Object.entries(links).forEach(([selector, href]) => {
@@ -182,8 +198,8 @@ function initPartnerSlider() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initSiteSettings();
+document.addEventListener("DOMContentLoaded", async () => {
+  await initSiteSettings();
   initHeader();
   initMobileNav();
   markActiveNav();
