@@ -178,7 +178,7 @@ window.NEWS_REPORTS = {
     check: "수익률, 공실률, 관리비, 임차 안정성",
     date: "2026-06-13",
     views: 399,
-    image: "images/investment/investment-analysis-desk.jpg",
+    image: "images/investment/investment-retail-consulting.png",
     body: [["판단 기준", ["표면수익률과 실수익률을 구분합니다.", "공실 기간과 중개수수료, 수선비를 반영합니다.", "임차인의 업종과 계약기간을 확인합니다."]], ["투자 관점", "수익형 부동산은 가격보다 지속 가능한 현금흐름이 핵심입니다."]]
   },
   "investment-vacancy-risk": {
