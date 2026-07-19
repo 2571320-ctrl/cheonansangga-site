@@ -1176,3 +1176,12 @@
     text-align: center;
   }
 }
+
+/* Final header tone override: keep the top navigation background pure white. */
+.site-header {
+  background: #fff;
+}
+
+.site-header .header-inner {
+  background: transparent;
+}
