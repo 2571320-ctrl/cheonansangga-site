@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="naver-site-verification" content="9c5942901ece553586e3f6266d8fd8fc719401d6" />
   <link rel="canonical" href="https://xn--o39ao70bljdnqj.com/news-detail.html">
-  <title>뉴스 & 상권 리포트 상세 | 중앙부동산</title>
+  <title>상권리포트 상세 | 중앙부동산</title>
   <meta name="description" content="천안 상가중개, 창업컨설팅, 투자상담을 23년 현장 경험과 데이터 분석으로 돕는 중앙공인중개사사무소입니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="중앙공인중개사사무소">
@@ -41,7 +41,7 @@
         <a href="properties.html">상가매물</a><a href="property-submit.html">매물접수</a>
         <a href="consulting.html">창업컨설팅</a>
         <a href="investment.html">투자상담</a>
-        <a href="news.html">뉴스</a>
+        <a href="news.html">상권리포트</a>
         <a href="faq.html">FAQ</a>
         <a href="contact.html">문의</a>
       </nav>
@@ -76,7 +76,7 @@
           <div data-report-body></div>
           <div class="report-cta">
             <a class="btn btn-primary" href="contact.html">상담 예약하고 내 조건 점검하기</a>
-            <a class="btn btn-secondary" href="news.html">뉴스 목록으로 돌아가기</a>
+            <a class="btn btn-secondary" href="news.html">상권리포트 목록으로 돌아가기</a>
           </div>
         </article>
 
@@ -141,7 +141,7 @@
           <a href="properties.html">상가매물</a>
           <a href="consulting.html">창업컨설팅</a>
           <a href="investment.html">투자상담</a>
-          <a href="news.html">뉴스</a>
+          <a href="news.html">상권리포트</a>
           <a href="contact.html">찾아오시는 길</a>
         </nav>
         <div class="footer-grid">
@@ -292,7 +292,7 @@
     const reportStore = { ...reports, ...(window.NEWS_REPORTS || {}), ...adminReports };
     const params = new URLSearchParams(location.search);
     const report = reportStore[params.get("id")] || reportStore["market-dujeong-2026"] || reports["dujeong-report"];
-    document.title = `${report.title} | 뉴스 & 상권 리포트 상세 | 중앙부동산`;
+    document.title = `${report.title} | 상권리포트 상세 | 중앙부동산`;
 
     const setText = (selector, value) => {
       const el = document.querySelector(selector);

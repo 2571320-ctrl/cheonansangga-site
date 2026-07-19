@@ -158,7 +158,7 @@ function renderDashboard() {
     ["상담 신청", consulting],
     ["매물알림", alerts],
     ["뉴스레터", newsletter],
-    ["뉴스·리포트", newsReports]
+    ["상권리포트", newsReports]
   ].map(([label, value]) => `<article class="card stat-card"><span>${label}</span><strong>${value}</strong></article>`).join("");
 }
 
@@ -483,7 +483,7 @@ function renderNewsReportTable() {
         <button type="button" class="btn btn-secondary btn-sm" data-news-report-delete="${index}">삭제</button>
       </td>
     </tr>
-  `).join("") || `<tr><td colspan="5">아직 등록한 뉴스·리포트가 없습니다.</td></tr>`;
+  `).join("") || `<tr><td colspan="5">아직 등록한 상권리포트가 없습니다.</td></tr>`;
 }
 
 function setNewsReportFormMode(mode, index = "") {
@@ -494,9 +494,9 @@ function setNewsReportFormMode(mode, index = "") {
   if (!form) return;
   form.dataset.mode = mode;
   form.dataset.editIndex = String(index);
-  if (submit) submit.textContent = mode === "edit" ? "뉴스·리포트 수정 저장" : "뉴스·리포트 추가";
+  if (submit) submit.textContent = mode === "edit" ? "상권리포트 수정 저장" : "상권리포트 추가";
   if (cancel) cancel.hidden = mode !== "edit";
-  if (title) title.textContent = mode === "edit" ? "뉴스·리포트 수정" : "뉴스·리포트 등록";
+  if (title) title.textContent = mode === "edit" ? "상권리포트 수정" : "상권리포트 등록";
 }
 
 function resetNewsReportForm() {
@@ -505,6 +505,8 @@ function resetNewsReportForm() {
   form.reset();
   if (form.elements.date) form.elements.date.value = new Date().toISOString().slice(0, 10);
   if (form.elements.views) form.elements.views.value = 0;
+  if (form.elements.image_file) form.elements.image_file.value = "";
+  setNewsImagePreview("");
   setNewsReportFormMode("create");
 }
 
@@ -527,13 +529,41 @@ function populateNewsReportForm(index) {
     if (form.elements[key]) form.elements[key].value = report[key] ?? "";
   });
   if (form.elements.body_text) form.elements.body_text.value = reportBodyToText(report.body);
+  if (form.elements.image_file) form.elements.image_file.value = "";
+  setNewsImagePreview(report.image);
   setNewsReportFormMode("edit", index);
-  setNewsReportStatus("수정할 내용을 반영한 뒤 '뉴스·리포트 수정 저장'을 눌러주세요.", "success");
+  setNewsReportStatus("수정할 내용을 반영한 뒤 '상권리포트 수정 저장'을 눌러주세요.", "success");
 }
 
-function saveNewsReport(form) {
+function setNewsImagePreview(src) {
+  const preview = document.querySelector("[data-news-image-preview]");
+  if (!preview) return;
+  if (src) {
+    preview.src = src;
+    preview.classList.add("visible");
+    return;
+  }
+  preview.removeAttribute("src");
+  preview.classList.remove("visible");
+}
+
+async function getNewsReportImageValue(form, previous = {}) {
+  const file = form.elements.image_file?.files?.[0];
+  if (file) {
+    if (!file.type.startsWith("image/")) {
+      throw new Error("image_type");
+    }
+    if (file.size > 12 * 1024 * 1024) {
+      throw new Error("image_size");
+    }
+    return compressImage(file, 1200, 0.78);
+  }
+  return String(form.elements.image?.value || previous.image || "").trim();
+}
+
+async function saveNewsReport(form) {
   const data = Object.fromEntries(new FormData(form));
-  const required = ["title", "subtitle", "category", "date", "image", "heading", "lead", "body_text"];
+  const required = ["title", "subtitle", "category", "date", "heading", "lead", "body_text"];
   const missing = required.find((key) => !String(data[key] || "").trim());
   if (missing) {
     form.elements[missing]?.focus?.();
@@ -549,6 +579,21 @@ function saveNewsReport(form) {
   const mode = form.dataset.mode || "create";
   const editIndex = Number(form.dataset.editIndex);
   const previous = mode === "edit" ? reports[editIndex] || {} : {};
+  let image = "";
+  try {
+    image = await getNewsReportImageValue(form, previous);
+  } catch (error) {
+    const message = error.message === "image_size"
+      ? "대표 이미지는 12MB 이하 파일로 선택해 주세요."
+      : "대표 이미지는 JPG, PNG, WEBP 등 이미지 파일만 사용할 수 있습니다.";
+    setNewsReportStatus(message, "error");
+    return;
+  }
+  if (!image) {
+    form.elements.image_file?.focus?.();
+    setNewsReportStatus("대표 이미지 경로를 입력하거나 이미지 파일을 업로드해 주세요.", "error");
+    return;
+  }
   const report = {
     id: previous.id || `admin-report-${Date.now()}`,
     title: data.title.trim(),
@@ -561,7 +606,7 @@ function saveNewsReport(form) {
     check: (data.check || "-").trim(),
     date: data.date,
     views: Number(data.views || 0),
-    image: data.image.trim(),
+    image,
     body: textToReportBody(data.body_text)
   };
 
@@ -573,16 +618,33 @@ function saveNewsReport(form) {
   setNewsReports(reports);
   renderNewsReportTable();
   resetNewsReportForm();
-  setNewsReportStatus("뉴스·리포트가 저장되었습니다. 뉴스 페이지의 최신 상권 리포트 목록에 자동 반영됩니다.", "success");
+  setNewsReportStatus("상권리포트가 저장되었습니다. 상권리포트 페이지의 최신 상권 리포트 목록에 자동 반영됩니다.", "success");
 }
 
 function bindNewsReportForm() {
   const form = document.querySelector("[data-news-report-form]");
   if (!form) return;
   resetNewsReportForm();
-  form.addEventListener("submit", (event) => {
+  form.elements.image?.addEventListener("input", () => {
+    setNewsImagePreview(form.elements.image.value.trim());
+  });
+  form.elements.image_file?.addEventListener("change", async () => {
+    const file = form.elements.image_file.files?.[0];
+    if (!file) {
+      setNewsImagePreview(form.elements.image?.value.trim() || "");
+      return;
+    }
+    try {
+      const previewSrc = await compressImage(file, 900, 0.72);
+      setNewsImagePreview(previewSrc);
+    } catch (error) {
+      setNewsImagePreview("");
+      setNewsReportStatus("대표 이미지 미리보기를 만들 수 없습니다. 다른 이미지 파일을 선택해 주세요.", "error");
+    }
+  });
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    saveNewsReport(form);
+    await saveNewsReport(form);
   });
   document.querySelector("[data-news-report-cancel]")?.addEventListener("click", resetNewsReportForm);
 }
@@ -712,13 +774,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (reportEdit) populateNewsReportForm(Number(reportEdit.dataset.newsReportEdit));
 
     const reportDelete = event.target.closest("[data-news-report-delete]");
-    if (reportDelete && confirm("이 뉴스·리포트를 삭제할까요?")) {
+    if (reportDelete && confirm("이 상권리포트를 삭제할까요?")) {
       const reports = getNewsReports();
       reports.splice(Number(reportDelete.dataset.newsReportDelete), 1);
       setNewsReports(reports);
       renderNewsReportTable();
       resetNewsReportForm();
-      setNewsReportStatus("뉴스·리포트가 삭제되었습니다.", "success");
+      setNewsReportStatus("상권리포트가 삭제되었습니다.", "success");
     }
 
     const clear = event.target.closest("[data-clear-properties]");
@@ -730,11 +792,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const clearReports = event.target.closest("[data-clear-news-reports]");
-    if (clearReports && confirm("등록한 뉴스·리포트를 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
+    if (clearReports && confirm("등록한 상권리포트를 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
       setNewsReports([]);
       renderNewsReportTable();
       resetNewsReportForm();
-      setNewsReportStatus("모든 뉴스·리포트가 삭제되었습니다.", "success");
+      setNewsReportStatus("모든 상권리포트가 삭제되었습니다.", "success");
     }
   });
 });
