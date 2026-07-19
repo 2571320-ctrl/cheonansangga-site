@@ -4167,7 +4167,7 @@ body {
 
 .home-hero .hero-title {
   font-family: var(--font-body);
-  font-size: clamp(1.9rem, 3.2vw, 3rem);
+  font-size: clamp(1.72rem, 2.9vw, 2.72rem);
   font-weight: 700;
   letter-spacing: 0.018em;
   line-height: 1.26;
@@ -4175,7 +4175,7 @@ body {
   margin-right: auto;
   padding-bottom: 24px;
   position: relative;
-  max-width: 560px;
+  max-width: 520px;
 }
 
 .home-hero .hero-title::after {
@@ -4211,8 +4211,8 @@ body {
   }
 
   .home-hero .hero-title {
-    font-size: clamp(1.6rem, 5.2vw, 2.35rem);
-    max-width: 460px;
+    font-size: clamp(1.48rem, 4.8vw, 2.12rem);
+    max-width: 430px;
   }
 }
 
@@ -4223,7 +4223,7 @@ body {
   }
 
   .home-hero .hero-title {
-    font-size: clamp(1.35rem, 6.3vw, 1.7rem);
+    font-size: clamp(1.25rem, 5.8vw, 1.56rem);
     margin-left: auto;
     margin-right: auto;
   }
