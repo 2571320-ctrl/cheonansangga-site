@@ -4223,9 +4223,11 @@ body {
   }
 
   .home-hero .hero-title {
-    font-size: clamp(1.25rem, 5.8vw, 1.56rem);
+    font-size: clamp(1.62rem, 7.8vw, 2.1rem);
+    line-height: 1.2;
     margin-left: auto;
     margin-right: auto;
+    max-width: 320px;
   }
 
   .home-hero .hero-title::after,
