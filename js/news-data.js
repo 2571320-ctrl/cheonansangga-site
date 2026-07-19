@@ -234,7 +234,7 @@ window.NEWS_REPORTS = {
     check: "업종 분산, 지역 분산, 임차인 안정성",
     date: "2026-06-05",
     views: 342,
-    image: "images/investment/investment-architecture.jpg",
+    image: "images/investment/investment-income-building.png",
     body: [["분산 기준", ["업종 경기 민감도를 나누어 봅니다.", "한 임차인 의존도가 큰 자산은 보수적으로 평가합니다.", "지역별 개발 호재와 공급 리스크를 함께 봅니다."]], ["투자 방향", "목표수익률보다 손실 가능성을 먼저 낮추는 것이 장기 투자에 유리합니다."]]
   },
   "investment-tenant-quality": {
