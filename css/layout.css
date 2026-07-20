@@ -666,9 +666,10 @@
   gap: 7px;
   padding: 9px 6px;
   position: fixed;
+  bottom: 92px;
   right: 0;
-  top: 42%;
-  transform: translateY(-50%);
+  top: auto;
+  transform: none;
   width: 64px;
   z-index: 900;
 }
@@ -953,9 +954,10 @@
     gap: 5px;
     left: auto;
     padding: 7px 5px;
+    bottom: 84px;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: auto;
+    transform: none;
     width: auto;
     z-index: 1002;
   }
