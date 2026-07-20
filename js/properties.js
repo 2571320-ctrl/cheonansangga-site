@@ -199,9 +199,8 @@ function renderCategoryRail() {
   rail.innerHTML = categories.map((category, index) => {
     const active = propertyState.category === category ? " active" : "";
     const visual = PROPERTY_CATEGORY_IMAGES[category] || PROPERTY_CATEGORY_IMAGES["기타"];
-    const duplicateAttrs = index >= PROPERTY_CATEGORY_ORDER.length ? ' aria-hidden="true" tabindex="-1"' : "";
     return `
-      <button class="property-category-card${active}" type="button" data-property-category="${category}"${duplicateAttrs}>
+      <button class="property-category-card${active}" type="button" data-property-category="${category}">
         <img src="${visual.src}" alt="${visual.alt}">
         <span>${category}</span>
       </button>
