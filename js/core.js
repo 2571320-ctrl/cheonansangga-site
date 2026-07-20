@@ -99,6 +99,14 @@ function initFixedSocialLinks() {
   });
 }
 
+function moveSocialLinksToFooter() {
+  const rail = document.querySelector(".fixed-social-rail");
+  const footerGrid = document.querySelector(".site-footer .footer-grid");
+  if (!rail || !footerGrid) return;
+  rail.classList.add("footer-social-rail");
+  footerGrid.appendChild(rail);
+}
+
 function initHeader() {
   const header = document.querySelector(".site-header");
   const onScroll = () => header?.classList.toggle("scrolled", window.scrollY > 20);
@@ -206,5 +214,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initScrollFadeIn();
   initPartnerSlider();
   initFixedSocialLinks();
+  moveSocialLinksToFooter();
   initBackToTop();
 });
