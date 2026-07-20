@@ -4534,6 +4534,13 @@ body {
   display: none !important;
 }
 
+/* Category theme labels: system font with a calmer weight. */
+.home-category-card span {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
 /* PFV philosophy section: visual-only refinement, copy and structure unchanged. */
 .brand-philosophy-section {
   background:
