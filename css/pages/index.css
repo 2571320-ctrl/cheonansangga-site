@@ -4755,3 +4755,16 @@ body {
     padding: 24px 22px 22px !important;
   }
 }
+
+/* Main page section headings: use a clean system font instead of the decorative display face. */
+.brand-philosophy-hero .section-title,
+.visual-strip-head .section-title,
+.services-section .section-title,
+.company-intro-copy .section-title,
+.office-showcase .section-title,
+.final-cta-panel h2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.035em !important;
+  word-break: keep-all !important;
+}
