@@ -4529,3 +4529,7 @@ body {
     justify-content: center;
   }
 }
+
+.property-category-marquee {
+  display: none !important;
+}
