@@ -7,6 +7,7 @@ const PROPERTY_CATEGORIES = [
   "공장·창고",
   "기타"
 ];
+const PROPERTY_API_ENDPOINT = "/api/properties";
 
 const MOCK_PROPERTIES = [
   {
@@ -350,6 +351,16 @@ function readAdminProperties() {
   }
 }
 
+async function readServerProperties() {
+  try {
+    const response = await fetch(PROPERTY_API_ENDPOINT, { cache: "no-store" });
+    const body = await response.json().catch(() => null);
+    return response.ok && Array.isArray(body?.records) ? body.records : [];
+  } catch {
+    return [];
+  }
+}
+
 function normalizeAdminCategory(item) {
   const type = String(item.property_type || item.category || "").trim();
   return ADMIN_PROPERTY_CATEGORY_ALIASES[type] || PROPERTY_CATEGORIES.find((category) => type.includes(category)) || "기타";
@@ -436,7 +447,21 @@ function getProperties() {
   return [...adminProperties, ...getMockProperties()];
 }
 
+async function fetchProperties() {
+  const serverProperties = await readServerProperties();
+  const activeServerProperties = serverProperties
+    .filter((item) => item && item.is_active !== false)
+    .map(normalizeAdminProperty);
+
+  if (activeServerProperties.length) {
+    return [...activeServerProperties, ...getMockProperties()];
+  }
+
+  return getProperties();
+}
+
 window.PropertyService = {
   categories: PROPERTY_CATEGORIES,
-  getProperties
+  getProperties,
+  fetchProperties
 };

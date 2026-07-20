@@ -345,7 +345,7 @@ function bindPropertyEvents() {
   });
 }
 
-function initPropertyPage() {
+async function initPropertyPage() {
   if (!window.PropertyService || !document.querySelector("[data-property-grid]")) return;
   propertyState.properties = window.PropertyService.getProperties();
   const requestedCategory = new URLSearchParams(window.location.search).get("category");
@@ -355,6 +355,14 @@ function initPropertyPage() {
   renderCategoryRail();
   renderPropertyCards();
   bindPropertyEvents();
+
+  if (typeof window.PropertyService.fetchProperties === "function") {
+    const serverProperties = await window.PropertyService.fetchProperties();
+    if (Array.isArray(serverProperties) && serverProperties.length) {
+      propertyState.properties = serverProperties;
+      renderPropertyCards();
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", initPropertyPage);

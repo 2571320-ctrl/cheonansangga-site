@@ -2,6 +2,7 @@ const ADMIN_PASSWORD_KEY = "admin_password";
 const DEFAULT_PASSWORD = "1234";
 const NEWS_REPORT_CATEGORIES = ["상권분석", "창업정보", "투자전략", "부동산뉴스"];
 const INQUIRY_API_ENDPOINT = "/api/inquiries";
+const PROPERTY_API_ENDPOINT = "/api/properties";
 const SITE_SETTINGS_API_ENDPOINT = "/api/site-settings";
 let SERVER_INQUIRIES = [];
 
@@ -77,6 +78,49 @@ async function loadServerInquiries() {
   } catch (error) {
     console.warn("Server inquiries load failed", error);
     SERVER_INQUIRIES = [];
+  }
+}
+
+async function loadServerProperties() {
+  try {
+    const response = await fetch(PROPERTY_API_ENDPOINT, { cache: "no-store" });
+    const body = await response.json().catch(() => null);
+    if (response.ok && Array.isArray(body?.records) && body.records.length) {
+      setProperties(body.records);
+      return body.records.length;
+    }
+    return 0;
+  } catch (error) {
+    console.warn("Server properties load failed", error);
+    return 0;
+  }
+}
+
+async function saveServerProperties(properties) {
+  try {
+    const password = getAdminPassword();
+    let response = await fetch(PROPERTY_API_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-admin-password": password
+      },
+      body: JSON.stringify({ records: properties })
+    });
+    if (response.status === 401 && password !== DEFAULT_PASSWORD) {
+      response = await fetch(PROPERTY_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": DEFAULT_PASSWORD
+        },
+        body: JSON.stringify({ records: properties })
+      });
+    }
+    return response.ok;
+  } catch (error) {
+    console.warn("Server properties save failed", error);
+    return false;
   }
 }
 
@@ -449,9 +493,10 @@ async function saveProperty(form) {
       props.push(data);
     }
     setProperties(props);
+    await saveServerProperties(props);
     renderPropertyTable();
     resetPropertyForm();
-    setPropertyStatus(mode === "edit" ? "매물이 수정되었습니다." : "매물이 정상 등록되었습니다. 상가매물 페이지에 바로 반영됩니다.", "success");
+    setPropertyStatus(mode === "edit" ? "매물이 수정되었습니다. PC와 모바일 상가매물 페이지에 반영됩니다." : "매물이 정상 등록되었습니다. PC와 모바일 상가매물 페이지에 반영됩니다.", "success");
   } catch (error) {
     setPropertyStatus("매물 저장 중 오류가 발생했습니다. 사진 용량을 줄이거나 필수 항목을 다시 확인해 주세요.", "error");
   }
@@ -740,8 +785,13 @@ function bindPropertyForm() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   requireAuth();
+  const hadLocalProperties = Boolean(localStorage.getItem("properties"));
   ensurePropertySeed();
   await loadServerInquiries();
+  const serverPropertyCount = await loadServerProperties();
+  if (!serverPropertyCount && hadLocalProperties) {
+    await saveServerProperties(getProperties());
+  }
   renderDashboard();
   renderInquiries();
   renderPropertyTable();
@@ -751,7 +801,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindNewsReportForm();
   document.querySelector("[data-export]")?.addEventListener("click", exportCSV);
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", async (event) => {
     const detail = event.target.closest("[data-detail]");
     if (detail) renderInquiryDetail(JSON.parse(detail.dataset.detail));
 
@@ -765,6 +815,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const props = getProperties();
       props.splice(Number(del.dataset.delete), 1);
       setProperties(props);
+      await saveServerProperties(props);
       renderPropertyTable();
       resetPropertyForm();
       setPropertyStatus("매물이 삭제되었습니다.", "success");
@@ -786,6 +837,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const clear = event.target.closest("[data-clear-properties]");
     if (clear && confirm("등록된 매물을 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
       setProperties([]);
+      await saveServerProperties([]);
       renderPropertyTable();
       resetPropertyForm();
       setPropertyStatus("모든 매물이 삭제되었습니다.", "success");
