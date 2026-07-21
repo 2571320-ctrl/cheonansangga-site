@@ -4342,8 +4342,9 @@ body {
   font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   font-size: clamp(4.25rem, 6.8vw, 7rem);
   font-weight: 760;
-  letter-spacing: -0.045em;
-  line-height: 1.04;
+  letter-spacing: -0.018em;
+  line-height: 1.1;
+  margin-bottom: 26px;
   margin-left: 0;
   margin-right: auto;
   padding-bottom: 28px;
@@ -4401,6 +4402,7 @@ body {
 
 .home-hero .hero-subtitle {
   font-weight: 740;
+  margin-bottom: 28px;
   white-space: nowrap;
 }
 
@@ -4413,13 +4415,16 @@ body {
 }
 
 .home-hero .hero-cta {
+  gap: 14px;
   justify-content: flex-start;
+  margin-top: 8px;
 }
 
 .home-hero .hero-badge {
   background: rgba(255, 255, 255, 0.96);
   border-color: rgba(199, 169, 107, 0.92);
   color: #061a34;
+  margin-bottom: 26px;
   box-shadow: 0 12px 28px rgba(16, 42, 67, 0.14);
 }
 
@@ -4473,6 +4478,8 @@ body {
 
   .home-hero .hero-title {
     font-size: clamp(3.4rem, 7.8vw, 4.9rem);
+    letter-spacing: -0.014em;
+    line-height: 1.12;
     max-width: 760px;
   }
 }
@@ -4508,7 +4515,9 @@ body {
 
   .home-hero .hero-title {
     font-size: clamp(2.35rem, 10.4vw, 3.15rem);
-    line-height: 1.1;
+    letter-spacing: -0.01em;
+    line-height: 1.16;
+    margin-bottom: 22px;
     margin-left: auto;
     margin-right: auto;
     max-width: 360px;
@@ -4524,6 +4533,7 @@ body {
   .home-hero .hero-subtitle {
     font-size: clamp(0.92rem, 4.2vw, 1.05rem);
     line-height: 1.62;
+    margin-bottom: 22px;
     max-width: 300px;
     white-space: normal;
   }
