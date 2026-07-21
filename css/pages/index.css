@@ -4338,7 +4338,7 @@ body {
 }
 
 .home-hero .hero-title {
-  color: #061f3f;
+  color: #082d68;
   font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   font-size: clamp(2.85rem, 4.9vw, 4.95rem);
   font-weight: 800;
@@ -4352,17 +4352,17 @@ body {
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.76),
     0 14px 34px rgba(255, 255, 255, 0.28),
-    0 18px 42px rgba(4, 23, 52, 0.16);
+    0 18px 42px rgba(4, 35, 90, 0.18);
 }
 
 .home-hero .hero-accent {
-  color: #c7a96b;
+  color: #0b63ce;
   display: inline-block;
   min-width: 2.9em;
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.72),
-    0 16px 32px rgba(199, 169, 107, 0.18);
-  transition: opacity 0.26s ease, transform 0.26s ease;
+    0 1px 0 rgba(255, 255, 255, 0.78),
+    0 16px 34px rgba(11, 99, 206, 0.18);
+  transition: opacity 0.34s ease, transform 0.34s ease, filter 0.34s ease;
 }
 
 .home-hero .hero-rotator {
@@ -4373,12 +4373,13 @@ body {
 }
 
 .home-hero .hero-rotator.is-changing .hero-accent {
+  filter: blur(3px);
   opacity: 0;
-  transform: translateY(0.08em);
+  transform: translateY(0.12em);
 }
 
 .home-hero .hero-title::after {
-  background: linear-gradient(90deg, #c7a96b 0%, #e3c985 62%, rgba(199, 169, 107, 0.22) 100%);
+  background: linear-gradient(90deg, #0b63ce 0%, #2f80ed 62%, rgba(47, 128, 237, 0.18) 100%);
   border-radius: 999px;
   bottom: 0;
   content: "";

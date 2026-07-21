@@ -148,7 +148,7 @@ function initHeroWordRotator() {
       wordNode.textContent = nextWord;
       rotator.classList.remove("is-changing");
       timerId = window.setTimeout(next, 2600);
-    }, 260);
+    }, 340);
   }
 
   function next() {
