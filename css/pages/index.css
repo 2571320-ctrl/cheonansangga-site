@@ -4803,3 +4803,12 @@ body {
     letter-spacing: -0.03em !important;
   }
 }
+
+/* PFV logo: remove the outer navy frame so only the logo artwork remains. */
+.brand-philosophy-logo {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
