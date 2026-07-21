@@ -4777,6 +4777,12 @@ body {
   max-width: 720px !important;
 }
 
+.brand-philosophy-hero .section-title {
+  font-size: clamp(1.72rem, 2.55vw, 2.18rem) !important;
+  line-height: 1.26 !important;
+  max-width: 820px !important;
+}
+
 .visual-strip-head .section-title,
 .services-section .section-title {
   margin-left: auto !important;
