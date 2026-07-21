@@ -124,8 +124,32 @@ function initCategorySlider() {
   });
 }
 
+function initHeroWordRotator() {
+  const rotator = document.querySelector(".hero-rotator");
+  if (!rotator) return;
+
+  const words = (rotator.dataset.words || "")
+    .split(",")
+    .map((word) => word.trim())
+    .filter(Boolean);
+  const wordNode = rotator.querySelector(".hero-accent");
+  if (!wordNode || words.length < 2) return;
+
+  let index = Math.max(0, words.indexOf(wordNode.textContent.trim()));
+
+  window.setInterval(() => {
+    index = (index + 1) % words.length;
+    rotator.classList.add("is-fading");
+    window.setTimeout(() => {
+      wordNode.textContent = words[index];
+      rotator.classList.remove("is-fading");
+    }, 360);
+  }, 3600);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initParticles();
   initCountUp();
   initCategorySlider();
+  initHeroWordRotator();
 });

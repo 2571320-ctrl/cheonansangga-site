@@ -4317,8 +4317,8 @@ body {
 
 .home-hero::before {
   background:
-    linear-gradient(90deg, rgba(5, 18, 38, 0.18) 0%, rgba(5, 18, 38, 0.06) 42%, rgba(5, 18, 38, 0) 100%),
-    radial-gradient(ellipse at 18% 28%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%);
+    linear-gradient(90deg, rgba(248, 250, 252, 0.42) 0%, rgba(248, 250, 252, 0.2) 40%, rgba(248, 250, 252, 0.02) 72%),
+    linear-gradient(180deg, rgba(5, 18, 38, 0.08) 0%, rgba(5, 18, 38, 0.02) 54%, rgba(5, 18, 38, 0.06) 100%);
   content: "";
   display: block;
   inset: 0;
@@ -4349,11 +4349,27 @@ body {
   padding-bottom: 28px;
   position: relative;
   max-width: 590px;
-  text-shadow: none;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.58),
+    0 14px 34px rgba(255, 255, 255, 0.34),
+    0 20px 46px rgba(16, 42, 67, 0.12);
 }
 
 .home-hero .hero-accent {
   color: #c7a96b;
+}
+
+.home-hero .hero-rotator {
+  display: inline-block;
+  min-width: 3.15em;
+  transition: opacity 360ms ease, transform 360ms ease, filter 360ms ease;
+  will-change: opacity, transform;
+}
+
+.home-hero .hero-rotator.is-fading {
+  filter: blur(2px);
+  opacity: 0;
+  transform: translateY(0.08em);
 }
 
 .home-hero .hero-title::after {
@@ -4374,7 +4390,9 @@ body {
   margin-left: 0;
   margin-right: auto;
   max-width: 600px;
-  text-shadow: none;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.68),
+    0 10px 28px rgba(255, 255, 255, 0.26);
 }
 
 .home-hero .hero-subtitle {
@@ -4440,8 +4458,8 @@ body {
 
   .home-hero::before {
     background:
-      linear-gradient(90deg, rgba(5, 18, 38, 0.16) 0%, rgba(5, 18, 38, 0.05) 54%, rgba(5, 18, 38, 0) 100%),
-      radial-gradient(ellipse at 26% 18%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 46%);
+      linear-gradient(90deg, rgba(248, 250, 252, 0.46) 0%, rgba(248, 250, 252, 0.2) 54%, rgba(248, 250, 252, 0.02) 100%),
+      linear-gradient(180deg, rgba(5, 18, 38, 0.07) 0%, rgba(5, 18, 38, 0.02) 58%, rgba(5, 18, 38, 0.06) 100%);
   }
 
   .home-hero .hero-content {
@@ -4474,8 +4492,8 @@ body {
 
   .home-hero::before {
     background:
-      linear-gradient(180deg, rgba(5, 18, 38, 0.08) 0%, rgba(5, 18, 38, 0.04) 58%, rgba(5, 18, 38, 0) 100%),
-      radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 48%);
+      linear-gradient(180deg, rgba(248, 250, 252, 0.38) 0%, rgba(248, 250, 252, 0.22) 54%, rgba(248, 250, 252, 0.04) 100%),
+      linear-gradient(90deg, rgba(5, 18, 38, 0.08) 0%, rgba(5, 18, 38, 0.02) 54%, rgba(5, 18, 38, 0.08) 100%);
   }
 
   .home-hero .hero-content {
