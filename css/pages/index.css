@@ -4931,3 +4931,201 @@ body {
     820px 120px 220px rgba(255, 255, 255, 0.08),
     700px 430px 220px rgba(0, 18, 82, 0.28) !important;
 }
+
+/* PFV section: premium full-width brand statement, matching the requested reference mood. */
+.brand-philosophy-section {
+  background:
+    linear-gradient(90deg, rgba(8, 26, 56, 0.94) 0%, rgba(12, 49, 96, 0.82) 42%, rgba(8, 26, 56, 0.28) 100%),
+    linear-gradient(180deg, rgba(5, 14, 30, 0.22), rgba(5, 14, 30, 0.42)),
+    url("../../images/field-map-close.jpg") center / cover no-repeat !important;
+  border: 0 !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.14) !important;
+  overflow: hidden !important;
+  padding: 92px 0 !important;
+  position: relative !important;
+}
+
+.brand-philosophy-section::before {
+  background:
+    radial-gradient(circle at 16% 48%, rgba(24, 86, 160, 0.44) 0%, rgba(24, 86, 160, 0) 34%),
+    linear-gradient(90deg, rgba(4, 18, 42, 0.72) 0%, rgba(4, 18, 42, 0.12) 100%) !important;
+  box-shadow: none !important;
+  content: "" !important;
+  inset: 0 !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+
+.brand-philosophy-wrap {
+  display: grid !important;
+  gap: 28px !important;
+  max-width: 1200px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.brand-philosophy-hero {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: grid !important;
+  gap: 48px !important;
+  grid-template-columns: minmax(0, 0.76fr) minmax(220px, 0.24fr) !important;
+  min-height: 292px !important;
+  padding: 0 !important;
+}
+
+.brand-philosophy-hero > div:last-child {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  max-width: 650px !important;
+}
+
+.brand-philosophy-logo {
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  display: flex !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-content: center !important;
+  min-height: 210px !important;
+  padding: 28px !important;
+}
+
+.brand-philosophy-logo img {
+  max-height: 162px !important;
+  max-width: 88% !important;
+  object-fit: contain !important;
+}
+
+.brand-philosophy-hero .section-eyebrow {
+  color: #f2c56f !important;
+  letter-spacing: 0.18em !important;
+  margin-bottom: 22px !important;
+}
+
+.brand-philosophy-hero .section-title {
+  color: #ffffff !important;
+  font-size: clamp(2.2rem, 4vw, 4.15rem) !important;
+  font-weight: 720 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.14 !important;
+  max-width: 720px !important;
+}
+
+.brand-philosophy-hero p {
+  border-left: 0 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 1.04rem !important;
+  font-weight: 500 !important;
+  line-height: 1.88 !important;
+  margin: 26px 0 0 !important;
+  max-width: 620px !important;
+  padding-left: 0 !important;
+}
+
+.brand-philosophy-hero p::before {
+  background: rgba(199, 169, 107, 0.88) !important;
+  border-radius: 999px !important;
+  content: "" !important;
+  display: block !important;
+  height: 1px !important;
+  margin-bottom: 24px !important;
+  width: min(420px, 74%) !important;
+}
+
+.brand-principle-grid {
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.brand-principle-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  min-height: 170px !important;
+  padding: 24px 24px 22px !important;
+}
+
+.brand-principle-card::before {
+  background: linear-gradient(90deg, rgba(242, 197, 111, 0.94), rgba(242, 197, 111, 0.18)) !important;
+  left: 24px !important;
+  right: 24px !important;
+}
+
+.brand-principle-card span {
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #081a38 !important;
+}
+
+.brand-principle-card small {
+  color: #f2c56f !important;
+}
+
+.brand-principle-card h3 {
+  color: #ffffff !important;
+}
+
+.brand-principle-card p {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+@media (max-width: 900px) {
+  .brand-philosophy-section {
+    padding: 68px 0 !important;
+  }
+
+  .brand-philosophy-hero {
+    gap: 26px !important;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+
+  .brand-philosophy-hero > div:last-child,
+  .brand-philosophy-logo {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  .brand-philosophy-logo {
+    justify-content: flex-start !important;
+    max-width: 280px !important;
+    min-height: 150px !important;
+  }
+
+  .brand-principle-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-philosophy-section {
+    padding: 54px 0 !important;
+  }
+
+  .brand-philosophy-hero {
+    text-align: left !important;
+  }
+
+  .brand-philosophy-logo {
+    max-width: 220px !important;
+    min-height: 128px !important;
+    padding: 20px !important;
+  }
+
+  .brand-philosophy-logo img {
+    max-height: 96px !important;
+  }
+
+  .brand-philosophy-hero .section-title {
+    font-size: clamp(1.9rem, 8vw, 2.55rem) !important;
+  }
+}
