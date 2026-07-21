@@ -4888,3 +4888,8 @@ body {
     margin-bottom: 22px !important;
   }
 }
+
+/* Remove the PFV hero card border line while keeping the white panel. */
+.brand-philosophy-hero {
+  border: 0 !important;
+}
