@@ -4893,3 +4893,19 @@ body {
 .brand-philosophy-hero {
   border: 0 !important;
 }
+
+/* PFV section background: soft blue gradient instead of warm beige. */
+.brand-philosophy-section {
+  background:
+    linear-gradient(rgba(16, 42, 67, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 42, 67, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 18% 12%, rgba(211, 231, 250, 0.92), transparent 34%),
+    radial-gradient(circle at 86% 22%, rgba(229, 240, 251, 0.88), transparent 38%),
+    linear-gradient(135deg, #f8fbff 0%, #eef6fd 48%, #f7fbff 100%) !important;
+  background-size: 64px 64px, 64px 64px, auto, auto, auto !important;
+}
+
+.brand-philosophy-section::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(226, 240, 252, 0.28), rgba(255, 255, 255, 0.74)) !important;
+}
