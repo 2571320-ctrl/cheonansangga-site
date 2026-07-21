@@ -4894,18 +4894,19 @@ body {
   border: 0 !important;
 }
 
-/* PFV section background: refined blue-gray gradient, not sky blue. */
+/* PFV section background: premium deep blue gradient. */
 .brand-philosophy-section {
   background:
-    linear-gradient(rgba(16, 42, 67, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 42, 67, 0.055) 1px, transparent 1px),
-    radial-gradient(circle at 14% 10%, rgba(91, 120, 153, 0.30), transparent 34%),
-    radial-gradient(circle at 86% 16%, rgba(126, 151, 180, 0.24), transparent 38%),
-    linear-gradient(135deg, #eef3f8 0%, #c6d5e5 48%, #e8eef6 100%) !important;
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 24% 18%, rgba(0, 116, 255, 0.62), transparent 34%),
+    radial-gradient(circle at 72% 40%, rgba(29, 188, 236, 0.38), transparent 34%),
+    radial-gradient(circle at 50% 70%, rgba(5, 26, 95, 0.72), transparent 46%),
+    linear-gradient(135deg, #071a64 0%, #004fe0 42%, #052174 100%) !important;
   background-size: 64px 64px, 64px 64px, auto, auto, auto !important;
 }
 
 .brand-philosophy-section::before {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.48), rgba(88, 117, 150, 0.20), rgba(255, 255, 255, 0.58)) !important;
+    linear-gradient(120deg, rgba(2, 9, 42, 0.44), rgba(0, 96, 236, 0.16), rgba(1, 15, 55, 0.38)) !important;
 }
