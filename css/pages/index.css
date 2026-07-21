@@ -4812,3 +4812,22 @@ body {
   box-shadow: none !important;
   padding: 0 !important;
 }
+
+/* Align the trust card with the strip behind it instead of floating over the hero. */
+.hero-trust-strip {
+  padding: 16px 0 !important;
+}
+
+.hero-trust-inner {
+  margin: 0 auto !important;
+}
+
+@media (max-width: 900px) {
+  .hero-trust-strip {
+    padding: 14px 0 !important;
+  }
+
+  .hero-trust-inner {
+    margin: 0 16px !important;
+  }
+}
