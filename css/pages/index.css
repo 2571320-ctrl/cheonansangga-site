@@ -4417,10 +4417,10 @@ body {
 }
 
 .home-hero .hero-badge {
-  background: rgba(255, 255, 255, 0.82);
-  border-color: rgba(199, 169, 107, 0.78);
-  color: #102a43;
-  box-shadow: 0 14px 36px rgba(16, 42, 67, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(199, 169, 107, 0.92);
+  color: #061a34;
+  box-shadow: 0 12px 28px rgba(16, 42, 67, 0.14);
 }
 
 .home-hero .hero-cta .btn-primary {
