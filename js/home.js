@@ -136,15 +136,45 @@ function initHeroWordRotator() {
   if (!wordNode || words.length < 2) return;
 
   let index = Math.max(0, words.indexOf(wordNode.textContent.trim()));
+  let isTyping = false;
+
+  function setWord(nextWord) {
+    if (isTyping) return;
+    isTyping = true;
+
+    const currentWord = wordNode.textContent;
+    const deleteSpeed = 46;
+    const typeSpeed = 74;
+    let deleteIndex = currentWord.length;
+    let typeIndex = 0;
+
+    function erase() {
+      wordNode.textContent = currentWord.slice(0, deleteIndex);
+      deleteIndex -= 1;
+      if (deleteIndex >= 0) {
+        window.setTimeout(erase, deleteSpeed);
+        return;
+      }
+      window.setTimeout(type, 120);
+    }
+
+    function type() {
+      wordNode.textContent = nextWord.slice(0, typeIndex);
+      typeIndex += 1;
+      if (typeIndex <= nextWord.length) {
+        window.setTimeout(type, typeSpeed);
+        return;
+      }
+      isTyping = false;
+    }
+
+    erase();
+  }
 
   window.setInterval(() => {
     index = (index + 1) % words.length;
-    rotator.classList.add("is-fading");
-    window.setTimeout(() => {
-      wordNode.textContent = words[index];
-      rotator.classList.remove("is-fading");
-    }, 360);
-  }, 3600);
+    setWord(words[index]);
+  }, 3800);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
