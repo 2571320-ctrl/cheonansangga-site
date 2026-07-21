@@ -197,6 +197,16 @@
   white-space: nowrap;
 }
 
+.header-cta .btn-primary {
+  background: linear-gradient(135deg, #1f5fa8 0%, #143f7b 100%);
+  color: var(--white);
+}
+
+.header-cta .btn-primary:hover {
+  background: linear-gradient(135deg, #2a6fbd 0%, #173f78 100%);
+  color: var(--white);
+}
+
 .mobile-toggle {
   background: transparent;
   border: 0;

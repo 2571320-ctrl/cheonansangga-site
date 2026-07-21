@@ -4425,8 +4425,8 @@ body {
 }
 
 .home-hero .hero-cta .btn-primary {
-  background: #c7a96b;
-  border-color: #c7a96b;
+  background: linear-gradient(135deg, #1f5fa8 0%, #143f7b 100%);
+  border-color: #1f5fa8;
   color: #fff;
 }
 
@@ -4438,8 +4438,8 @@ body {
 
 .home-hero .hero-cta .btn-primary:hover,
 .home-hero .hero-cta .btn-outline:hover {
-  background: #b79555;
-  border-color: #b79555;
+  background: linear-gradient(135deg, #2a6fbd 0%, #173f78 100%);
+  border-color: #2a6fbd;
   color: #fff;
 }
 
