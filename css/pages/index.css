@@ -4831,3 +4831,60 @@ body {
     margin: 0 16px !important;
   }
 }
+
+/* Main page vertical rhythm: reduce oversized gaps between sections. */
+.brand-philosophy-section,
+.visual-strip-section,
+.services-section,
+.company-intro-section,
+.office-section,
+.home-final-cta {
+  padding-bottom: 54px !important;
+  padding-top: 54px !important;
+}
+
+.brand-philosophy-section {
+  padding-top: 46px !important;
+}
+
+.brand-philosophy-wrap,
+.visual-strip-section .container,
+.services-section .container,
+.company-intro-wrap,
+.office-showcase {
+  row-gap: 28px !important;
+}
+
+.section-head,
+.visual-strip-head,
+.services-section .section-head {
+  margin-bottom: 28px !important;
+}
+
+.brand-principle-grid,
+.process-grid,
+.grid-3 {
+  margin-top: 0 !important;
+}
+
+.home-final-cta {
+  padding-top: 48px !important;
+}
+
+@media (max-width: 768px) {
+  .brand-philosophy-section,
+  .visual-strip-section,
+  .services-section,
+  .company-intro-section,
+  .office-section,
+  .home-final-cta {
+    padding-bottom: 40px !important;
+    padding-top: 40px !important;
+  }
+
+  .section-head,
+  .visual-strip-head,
+  .services-section .section-head {
+    margin-bottom: 22px !important;
+  }
+}
