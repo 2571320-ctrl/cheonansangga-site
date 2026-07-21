@@ -136,45 +136,49 @@ function initHeroWordRotator() {
   if (!wordNode || words.length < 2) return;
 
   let index = Math.max(0, words.indexOf(wordNode.textContent.trim()));
-  let isTyping = false;
+  let timerId = 0;
 
   function setWord(nextWord) {
-    if (isTyping) return;
-    isTyping = true;
-
     const currentWord = wordNode.textContent;
-    const deleteSpeed = 46;
-    const typeSpeed = 74;
+    const deleteSpeed = 42;
+    const typeSpeed = 82;
     let deleteIndex = currentWord.length;
     let typeIndex = 0;
 
     function erase() {
+      rotator.classList.add("is-changing");
       wordNode.textContent = currentWord.slice(0, deleteIndex);
       deleteIndex -= 1;
       if (deleteIndex >= 0) {
-        window.setTimeout(erase, deleteSpeed);
+        timerId = window.setTimeout(erase, deleteSpeed);
         return;
       }
-      window.setTimeout(type, 120);
+      timerId = window.setTimeout(type, 150);
     }
 
     function type() {
       wordNode.textContent = nextWord.slice(0, typeIndex);
       typeIndex += 1;
       if (typeIndex <= nextWord.length) {
-        window.setTimeout(type, typeSpeed);
+        timerId = window.setTimeout(type, typeSpeed);
         return;
       }
-      isTyping = false;
+      rotator.classList.remove("is-changing");
+      timerId = window.setTimeout(next, 2800);
     }
 
+    if (timerId) {
+      window.clearTimeout(timerId);
+    }
     erase();
   }
 
-  window.setInterval(() => {
+  function next() {
     index = (index + 1) % words.length;
     setWord(words[index]);
-  }, 3800);
+  }
+
+  timerId = window.setTimeout(next, 2400);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

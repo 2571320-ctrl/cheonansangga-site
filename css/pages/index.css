@@ -4338,24 +4338,24 @@ body {
 }
 
 .home-hero .hero-title {
-  background: linear-gradient(90deg, #0078ff 0%, #0755d6 42%, #132182 100%);
+  background: linear-gradient(90deg, #0078ff 0%, #0757d8 45%, #14217c 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: #0755d6;
-  font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color: #0757d8;
+  font-family: "Black Han Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   font-size: clamp(2.85rem, 4.9vw, 4.95rem);
-  font-weight: 850;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
   margin-left: 0;
   margin-right: auto;
   padding-bottom: 28px;
   position: relative;
   max-width: 590px;
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.5),
-    0 12px 34px rgba(255, 255, 255, 0.28),
-    0 18px 42px rgba(4, 41, 110, 0.18);
+    0 1px 0 rgba(255, 255, 255, 0.58),
+    0 12px 34px rgba(255, 255, 255, 0.24),
+    0 18px 42px rgba(4, 41, 110, 0.2);
   -webkit-text-fill-color: transparent;
 }
 
@@ -4368,18 +4368,20 @@ body {
   display: inline-block;
   min-width: 3.15em;
   position: relative;
+  white-space: nowrap;
 }
 
 .home-hero .hero-rotator::after {
-  animation: heroCaretBlink 1s steps(2, start) infinite;
-  background: rgba(0, 120, 255, 0.86);
+  animation: heroCaretBlink 0.9s steps(2, start) infinite;
+  background: linear-gradient(180deg, rgba(0, 120, 255, 0.95), rgba(16, 33, 124, 0.95));
   border-radius: 999px;
   content: "";
   display: inline-block;
-  height: 0.82em;
-  margin-left: 0.08em;
+  height: 0.78em;
+  margin-left: 0.06em;
+  opacity: 0.9;
   transform: translateY(0.08em);
-  width: 0.05em;
+  width: 0.045em;
 }
 
 .home-hero .hero-title::after {
