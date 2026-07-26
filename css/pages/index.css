@@ -4350,19 +4350,14 @@ body {
   padding-bottom: 28px;
   position: relative;
   max-width: 880px;
-  text-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.18),
-    0 5px 18px rgba(6, 18, 38, 0.34),
-    0 20px 48px rgba(6, 18, 38, 0.28);
+  text-shadow: none;
 }
 
 .home-hero .hero-accent {
   color: #0b63ce;
   display: inline-block;
   min-width: 2.9em;
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.78),
-    0 16px 34px rgba(11, 99, 206, 0.18);
+  text-shadow: none;
   transition: opacity 0.34s ease, transform 0.34s ease, filter 0.34s ease;
 }
 
