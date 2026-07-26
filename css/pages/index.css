@@ -5409,3 +5409,223 @@ body {
     min-height: 116px !important;
   }
 }
+
+/* Research process: premium overlapping-circle flow inspired by consulting process pages. */
+.visual-strip-section {
+  background: #ffffff !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  padding-block: clamp(68px, 8vw, 104px) !important;
+  position: relative !important;
+}
+
+.visual-strip-section::before,
+.visual-strip-section::after {
+  border: 1px dashed rgba(16, 42, 67, 0.18) !important;
+  border-radius: 50% !important;
+  content: "" !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -1 !important;
+}
+
+.visual-strip-section::before {
+  height: 680px !important;
+  left: -150px !important;
+  top: -240px !important;
+  width: 680px !important;
+}
+
+.visual-strip-section::after {
+  height: 860px !important;
+  right: -260px !important;
+  top: -360px !important;
+  width: 860px !important;
+}
+
+.visual-strip-section .container {
+  max-width: 1180px !important;
+}
+
+.visual-strip-head {
+  align-items: flex-start !important;
+  margin-bottom: clamp(42px, 6vw, 76px) !important;
+  max-width: 760px !important;
+  text-align: left !important;
+}
+
+.visual-strip-head .section-eyebrow {
+  color: #0f766e !important;
+  letter-spacing: 0.04em !important;
+  margin-bottom: 12px !important;
+}
+
+.visual-strip-head .section-title {
+  color: #1f2933 !important;
+  font-size: clamp(2.6rem, 6vw, 5.35rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.03em !important;
+  margin-bottom: 22px !important;
+  text-align: left !important;
+}
+
+.visual-strip-head .section-desc {
+  color: #52606d !important;
+  font-size: 1.06rem !important;
+  line-height: 1.8 !important;
+  max-width: 620px !important;
+  text-align: left !important;
+}
+
+.process-grid {
+  align-items: center !important;
+  display: flex !important;
+  gap: 0 !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  max-width: 1120px !important;
+  overflow: visible !important;
+  padding: 42px 0 18px !important;
+  position: relative !important;
+}
+
+.process-grid::before {
+  background: rgba(31, 41, 51, 0.28) !important;
+  content: "" !important;
+  height: 1px !important;
+  left: 4% !important;
+  position: absolute !important;
+  right: 4% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 0 !important;
+}
+
+.process-card {
+  align-items: flex-start !important;
+  aspect-ratio: 1 !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(31, 41, 51, 0.26) !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  color: #1f2933 !important;
+  display: flex !important;
+  flex: 0 0 clamp(190px, 19vw, 252px) !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: clamp(28px, 3vw, 46px) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.process-card + .process-card {
+  margin-left: clamp(-44px, -3.2vw, -28px) !important;
+}
+
+.process-card:nth-child(2) {
+  background: rgba(229, 231, 235, 0.9) !important;
+}
+
+.process-card:nth-child(3) {
+  background: #1f2933 !important;
+  border-color: #1f2933 !important;
+  color: #ffffff !important;
+  transform: scale(1.04) !important;
+  z-index: 2 !important;
+}
+
+.process-card:nth-child(3) p,
+.process-card:nth-child(3) h3 {
+  color: #ffffff !important;
+}
+
+.process-card::before,
+.process-card::after {
+  display: none !important;
+}
+
+.process-card:hover {
+  box-shadow: none !important;
+  transform: translateY(-6px) !important;
+}
+
+.process-card:nth-child(3):hover {
+  transform: scale(1.04) translateY(-6px) !important;
+}
+
+.process-card span {
+  background: transparent !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  display: block !important;
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  height: auto !important;
+  line-height: 1 !important;
+  margin-bottom: 24px !important;
+  width: auto !important;
+}
+
+.process-card span::after {
+  background: currentColor !important;
+  content: "" !important;
+  display: block !important;
+  height: 1px !important;
+  margin-top: 14px !important;
+  opacity: 0.42 !important;
+  width: 64px !important;
+}
+
+.process-card h3 {
+  color: inherit !important;
+  font-size: clamp(1.25rem, 2vw, 1.62rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  margin-bottom: 8px !important;
+}
+
+.process-card p {
+  color: rgba(31, 41, 51, 0.78) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 980px) {
+  .process-grid {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    padding: 28px 2px 18px !important;
+    scroll-snap-type: x proximity !important;
+  }
+
+  .process-card {
+    flex-basis: 220px !important;
+    scroll-snap-align: center !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .visual-strip-section {
+    padding-block: 54px !important;
+  }
+
+  .visual-strip-head {
+    margin-bottom: 24px !important;
+    text-align: left !important;
+  }
+
+  .visual-strip-head .section-title {
+    font-size: clamp(2.25rem, 11vw, 3.25rem) !important;
+  }
+
+  .process-grid::before {
+    display: none !important;
+  }
+
+  .process-card + .process-card {
+    margin-left: -22px !important;
+  }
+}
