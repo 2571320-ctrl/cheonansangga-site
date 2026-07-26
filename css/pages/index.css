@@ -5087,3 +5087,39 @@ body {
     font-size: clamp(1.9rem, 8vw, 2.55rem) !important;
   }
 }
+
+/* Core services: match the brighter premium blue used in the PFV section. */
+.services-section {
+  background:
+    radial-gradient(circle at 22% 28%, rgba(67, 147, 255, 0.42) 0%, rgba(67, 147, 255, 0) 32%),
+    radial-gradient(circle at 78% 22%, rgba(114, 178, 255, 0.28) 0%, rgba(114, 178, 255, 0) 34%),
+    linear-gradient(135deg, #0c4fbd 0%, #145ed2 42%, #0f3f94 100%) !important;
+  position: relative !important;
+}
+
+.services-section::before {
+  background:
+    linear-gradient(115deg, rgba(3, 24, 82, 0.34) 0%, rgba(3, 24, 82, 0.08) 45%, rgba(255, 255, 255, 0.08) 100%),
+    radial-gradient(circle at 50% 56%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 44%) !important;
+  content: "" !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+
+.services-section .container {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.services-section .section-eyebrow {
+  color: #f2c56f !important;
+}
+
+.services-section .section-title {
+  color: #ffffff !important;
+}
+
+.services-section .section-desc {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
