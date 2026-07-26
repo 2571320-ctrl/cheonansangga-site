@@ -5123,3 +5123,51 @@ body {
 .services-section .section-desc {
   color: rgba(255, 255, 255, 0.82) !important;
 }
+
+/* PFV items: remove the heavy card boxes and keep a clean column layout. */
+.brand-principle-grid {
+  gap: 0 !important;
+}
+
+.brand-principle-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  padding: 10px 34px 8px !important;
+}
+
+.brand-principle-card + .brand-principle-card {
+  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.brand-principle-card::before {
+  display: none !important;
+}
+
+.brand-principle-card:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.brand-principle-card span {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-radius: 12px !important;
+  color: #0c4fbd !important;
+  height: 42px !important;
+  margin-bottom: 18px !important;
+  width: 42px !important;
+}
+
+@media (max-width: 900px) {
+  .brand-principle-card {
+    padding: 18px 4px !important;
+  }
+
+  .brand-principle-card + .brand-principle-card {
+    border-left: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+  }
+}
