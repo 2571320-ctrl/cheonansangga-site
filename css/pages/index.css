@@ -5171,3 +5171,115 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
   }
 }
+
+/* Core services: remove boxed-card feeling and present services as a clean premium list. */
+.services-section .grid-3 {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+  display: grid !important;
+  gap: 0 !important;
+  grid-template-columns: 1fr !important;
+  margin: 38px auto 0 !important;
+  max-width: 1080px !important;
+}
+
+.services-section .service-card {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: grid !important;
+  grid-template-columns: 230px minmax(0, 1fr) 168px !important;
+  gap: 28px !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 22px 0 !important;
+}
+
+.services-section .service-card:last-child {
+  border-bottom: 0 !important;
+}
+
+.services-section .service-card::before {
+  display: none !important;
+}
+
+.services-section .service-card:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.services-section .service-photo {
+  aspect-ratio: 16 / 10 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 44px rgba(1, 21, 66, 0.2) !important;
+  height: auto !important;
+  object-fit: cover !important;
+  width: 100% !important;
+}
+
+.services-section .service-body {
+  display: grid !important;
+  gap: 9px !important;
+  padding: 0 !important;
+}
+
+.services-section .service-label {
+  color: #f2c56f !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 !important;
+}
+
+.services-section .service-card h3 {
+  color: #ffffff !important;
+  font-size: clamp(1.35rem, 2.2vw, 1.72rem) !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+.services-section .service-card p {
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+  margin: 0 !important;
+  max-width: 520px !important;
+}
+
+.services-section .service-card .badge {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  color: #0c4fbd !important;
+  left: 16px !important;
+  top: 16px !important;
+}
+
+.services-section .service-card .btn {
+  align-self: center !important;
+  justify-self: end !important;
+  min-width: 156px !important;
+}
+
+@media (max-width: 900px) {
+  .services-section .grid-3 {
+    margin-top: 28px !important;
+  }
+
+  .services-section .service-card {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 24px 0 !important;
+  }
+
+  .services-section .service-photo {
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  .services-section .service-card .btn {
+    justify-self: stretch !important;
+    width: 100% !important;
+  }
+}
