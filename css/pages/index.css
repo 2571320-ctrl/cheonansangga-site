@@ -6308,6 +6308,7 @@ body {
 .company-intro-copy {
   align-content: center !important;
   max-width: 620px !important;
+  order: 2 !important;
 }
 
 .company-intro-copy .section-title {
@@ -6376,6 +6377,7 @@ body {
   gap: clamp(22px, 3vw, 34px) !important;
   grid-template-columns: minmax(210px, 0.92fr) minmax(240px, 1fr) !important;
   height: auto !important;
+  order: 1 !important;
 }
 
 .intro-profile-media {
@@ -6440,6 +6442,7 @@ body {
 
   .company-intro-copy {
     max-width: 760px !important;
+    order: 1 !important;
   }
 
   .intro-letter,
@@ -6449,6 +6452,7 @@ body {
 
   .company-profile-card {
     grid-template-columns: minmax(220px, 320px) minmax(0, 1fr) !important;
+    order: 2 !important;
   }
 }
 
