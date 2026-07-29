@@ -6119,12 +6119,12 @@ body {
   border-radius: 12px !important;
   flex: 0 0 116px !important;
   box-shadow: none !important;
-  filter: grayscale(0.2) saturate(0.95) contrast(1.03) brightness(0.72) !important;
+  filter: saturate(1.06) contrast(1.04) brightness(1.04) !important;
   height: 116px !important;
   margin: 8px 0 26px !important;
   min-height: 0 !important;
   object-fit: cover !important;
-  opacity: 0.38 !important;
+  opacity: 1 !important;
   position: relative !important;
   transition: opacity 0.28s ease, transform 0.28s ease !important;
   width: 100% !important;
@@ -6132,8 +6132,8 @@ body {
 }
 
 .services-section .service-card:hover .service-photo {
-  filter: grayscale(0.12) saturate(1.02) contrast(1.04) brightness(0.82) !important;
-  opacity: 0.5 !important;
+  filter: saturate(1.1) contrast(1.06) brightness(1.08) !important;
+  opacity: 1 !important;
   transform: scale(1.02) !important;
 }
 
