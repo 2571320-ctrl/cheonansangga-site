@@ -6521,3 +6521,18 @@ body {
   position: relative !important;
   z-index: 1 !important;
 }
+
+/* PFV title: reduce scale so the headline settles into two balanced lines. */
+.brand-philosophy-hero .section-title {
+  font-size: clamp(2rem, 3.05vw, 3.15rem) !important;
+  line-height: 1.18 !important;
+  letter-spacing: 0 !important;
+  max-width: 860px !important;
+}
+
+@media (max-width: 680px) {
+  .brand-philosophy-hero .section-title {
+    font-size: clamp(1.72rem, 7.2vw, 2.15rem) !important;
+    max-width: 100% !important;
+  }
+}
