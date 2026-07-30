@@ -6540,3 +6540,98 @@ body {
     max-width: 100% !important;
   }
 }
+
+/* Office Proof: convert the proof block into a premium visual statement. */
+.office-section {
+  background:
+    linear-gradient(90deg, rgba(4, 19, 45, 0.96) 0%, rgba(7, 31, 68, 0.9) 36%, rgba(7, 31, 68, 0.48) 67%, rgba(7, 31, 68, 0.18) 100%),
+    url("../../images/office-proof-analysis-bg.png") center right / cover no-repeat !important;
+  color: #fff !important;
+  overflow: hidden !important;
+  padding: clamp(82px, 8vw, 118px) 0 !important;
+  position: relative !important;
+}
+
+.office-section::before {
+  background:
+    radial-gradient(circle at 22% 42%, rgba(30, 90, 160, 0.34), transparent 38%),
+    linear-gradient(90deg, rgba(5, 24, 58, 0.82), rgba(5, 24, 58, 0.08) 78%) !important;
+  content: "" !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+
+.office-section .office-showcase {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  max-width: 1200px !important;
+  min-height: clamp(330px, 32vw, 430px) !important;
+  padding: 0 clamp(22px, 4vw, 54px) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.office-section .office-photo {
+  display: none !important;
+}
+
+.office-section .office-copy {
+  align-content: center !important;
+  color: #fff !important;
+  display: grid !important;
+  min-height: clamp(330px, 32vw, 430px) !important;
+  max-width: 620px !important;
+  padding: 0 !important;
+}
+
+.office-section .section-eyebrow {
+  color: #ff9a24 !important;
+}
+
+.office-section .section-title {
+  color: #fff !important;
+  font-size: clamp(2.25rem, 4.4vw, 4rem) !important;
+  line-height: 1.18 !important;
+  max-width: 650px !important;
+}
+
+.office-section .section-title span {
+  color: #ff981f !important;
+}
+
+.office-section .section-desc {
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-size: clamp(1rem, 1.3vw, 1.2rem) !important;
+  line-height: 1.85 !important;
+  max-width: 520px !important;
+}
+
+@media (max-width: 760px) {
+  .office-section {
+    background-position: 62% center !important;
+    padding: 64px 0 !important;
+  }
+
+  .office-section::before {
+    background:
+      linear-gradient(90deg, rgba(4, 19, 45, 0.92), rgba(4, 19, 45, 0.72)),
+      linear-gradient(0deg, rgba(4, 19, 45, 0.72), rgba(4, 19, 45, 0.24)) !important;
+  }
+
+  .office-section .office-showcase {
+    min-height: 360px !important;
+    padding: 0 22px !important;
+  }
+
+  .office-section .office-copy {
+    min-height: 360px !important;
+  }
+
+  .office-section .section-title {
+    font-size: clamp(2rem, 8.8vw, 2.75rem) !important;
+  }
+}
