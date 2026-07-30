@@ -6594,13 +6594,20 @@ body {
 
 .office-section .section-title {
   color: #fff !important;
-  font-size: clamp(2.25rem, 4.4vw, 4rem) !important;
+  font-size: clamp(2.1rem, 3.55vw, 3.35rem) !important;
   line-height: 1.18 !important;
-  max-width: 650px !important;
+  max-width: 760px !important;
 }
 
-.office-section .section-title span {
+.office-section .office-title-line {
+  color: #fff !important;
+  display: block !important;
+  white-space: nowrap !important;
+}
+
+.office-section .section-title em {
   color: #ff981f !important;
+  font-style: normal !important;
 }
 
 .office-section .section-desc {
@@ -6633,5 +6640,9 @@ body {
 
   .office-section .section-title {
     font-size: clamp(2rem, 8.8vw, 2.75rem) !important;
+  }
+
+  .office-section .office-title-line {
+    white-space: normal !important;
   }
 }
