@@ -6530,6 +6530,10 @@ body {
   max-width: 860px !important;
 }
 
+.brand-philosophy-hero .section-title br {
+  display: block !important;
+}
+
 @media (max-width: 680px) {
   .brand-philosophy-hero .section-title {
     font-size: clamp(1.72rem, 7.2vw, 2.15rem) !important;
