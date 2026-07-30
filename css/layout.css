@@ -674,7 +674,7 @@
   border: 1px solid rgba(11, 28, 61, 0.12);
   border-radius: 12px 0 0 12px;
   box-shadow: 0 14px 34px rgba(11, 28, 61, 0.18);
-  display: grid;
+  display: none;
   gap: 7px;
   padding: 9px 6px;
   position: fixed;
@@ -684,6 +684,12 @@
   transform: none;
   width: 64px;
   z-index: 900;
+}
+
+.fixed-social-rail:not(.footer-social-rail) {
+  display: none !important;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .fixed-social-title {
