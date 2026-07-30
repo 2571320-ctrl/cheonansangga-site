@@ -4805,6 +4805,10 @@ body {
   text-align: center !important;
 }
 
+.visual-strip-head .section-title {
+  font-size: clamp(1.82rem, 2.9vw, 2.38rem) !important;
+}
+
 @media (max-width: 768px) {
   .brand-philosophy-hero .section-title,
   .visual-strip-head .section-title,
@@ -4815,6 +4819,10 @@ body {
     font-size: clamp(1.65rem, 7vw, 2.05rem) !important;
     line-height: 1.28 !important;
     letter-spacing: -0.03em !important;
+  }
+
+  .visual-strip-head .section-title {
+    font-size: clamp(1.52rem, 6.4vw, 1.9rem) !important;
   }
 }
 
