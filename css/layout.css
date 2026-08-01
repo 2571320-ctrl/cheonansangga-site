@@ -416,6 +416,42 @@
   width: 22px;
 }
 
+.partner-card-logo-only {
+  justify-content: center;
+  padding: 0 14px;
+}
+
+.partner-card-logo-only .partner-logo-image {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  flex: 0 1 164px;
+  height: 30px;
+  width: 164px;
+}
+
+.partner-card-logo-only .partner-logo-image img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.partner-card-logo-only .partner-name {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .partner-mark {
   display: block;
   height: 24px;
