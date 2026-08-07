@@ -180,7 +180,7 @@ main .card,
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0 max(18px, calc((100vw - 1180px) / 2)) 4px;
+  padding: 0 max(18px, calc((100% - 1180px) / 2)) 4px;
   scrollbar-width: none;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
