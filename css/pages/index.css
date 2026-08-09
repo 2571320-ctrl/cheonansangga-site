@@ -6814,3 +6814,44 @@ body {
     flex: 1 1 150px;
   }
 }
+
+/* Mobile width guard: every section stays inside the viewport. */
+@media (max-width: 900px) {
+  .hero-trust-inner {
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: calc(100% - 32px) !important;
+    width: calc(100% - 32px) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .process-grid {
+    display: grid !important;
+    gap: 14px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    padding: 22px 0 8px !important;
+    width: 100% !important;
+  }
+
+  .process-card,
+  .process-card:nth-child(3) {
+    aspect-ratio: auto !important;
+    border-radius: 18px !important;
+    box-sizing: border-box !important;
+    flex: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    padding: 22px 24px !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .process-card + .process-card {
+    margin-left: 0 !important;
+  }
+}

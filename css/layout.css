@@ -1317,3 +1317,36 @@
 .site-header .header-inner {
   background: transparent;
 }
+
+/* Keep the continuously moving partner track inside the page viewport. */
+.partner-strip {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.partner-slider {
+  contain: layout paint;
+  max-width: min(1120px, 100%);
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.partner-links {
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .partner-strip .container,
+  .partner-slider,
+  .partner-links {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .partner-links {
+    overflow-x: hidden;
+    overscroll-behavior-x: contain;
+  }
+}
