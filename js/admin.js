@@ -91,7 +91,8 @@ async function loadServerProperties() {
         for (const item of local) backup.set(String(item.id), item);
         write("properties_recovery_backup", [...backup.values()]);
       }
-      setProperties(body.records);
+      // A newly connected empty KV must never hide the only local copy.
+      if (body.records.length || !local.length) setProperties(body.records);
       return body.records.length;
     }
     return 0;
@@ -819,10 +820,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         throw new Error("운영 서버의 영구 저장소(KV) 연결이 필요합니다. 기존 매물은 이 브라우저에 보관됩니다.");
       }
       const records = new Map();
-      for (const item of [...read("properties_recovery_backup"), ...read("properties"), ...body.records]) {
+      const legacyResponse = await fetch(`${PROPERTY_API_ENDPOINT}?recovery=legacy-cache`, { cache: "no-store" });
+      const legacy = await legacyResponse.json().catch(() => null);
+      const legacyRecords = legacyResponse.ok && legacy?.storage === "legacy-cache" && Array.isArray(legacy.records) ? legacy.records : [];
+      for (const item of [...legacyRecords, ...read("properties_recovery_backup"), ...read("properties"), ...body.records]) {
         records.set(String(item.id), item);
       }
       const merged = [...records.values()];
+      if (!merged.length) throw new Error("복구할 매물을 찾지 못했습니다. 0건으로 저장하지 않았습니다. 기존 매물이 보이던 브라우저와 주소에서 다시 확인해 주세요.");
+      write("properties_recovery_backup", merged);
       await saveServerProperties(merged);
       setProperties(merged);
       renderPropertyTable();

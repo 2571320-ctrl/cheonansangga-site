@@ -45,3 +45,10 @@ validate actual Edge/Chrome sessions or deployed Cloudflare bindings.
 General inquiry submission can display success after server failure. Reports authored
 in admin are browser-local. Admin HTML output/authentication need security review.
 These concerns are outside this property-sync change.
+
+## Recovery incident
+- Production binding PROPERTIES_KV -> sangkwon-properties and deployment 0e743c3 verified.
+- User reported empty admin list after sync; production KV reads zero records.
+- Recovery fix preserves local rows when KV is empty, reads legacy Cache API through an explicit recovery query, merges browser backup and server records, and refuses empty recovery writes.
+- Browser backup contents and legacy cache availability remain unverified; do not claim recovery complete.
+

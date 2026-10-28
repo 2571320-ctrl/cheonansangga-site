@@ -34,7 +34,7 @@ state = admin({ ok: true, storage: { storage: 'kv' } });
 assert.equal(await vm.runInContext('saveServerProperties([])', state.context), true);
 state = admin({ ok: true, storage: 'kv', records: [] });
 await vm.runInContext('loadServerProperties()', state.context);
-assert.equal(JSON.parse(state.values.get('properties')).length, 0);
+assert.equal(JSON.parse(state.values.get('properties'))[0].id, 'edge-only');
 assert.equal(JSON.parse(state.values.get('properties_recovery_backup'))[0].id, 'edge-only');
 
 const publicSource = readFileSync(new URL('../js/property-service.js', import.meta.url), 'utf8');

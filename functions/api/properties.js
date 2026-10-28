@@ -104,6 +104,9 @@ async function saveProperties(env, records) {
 
 export async function onRequest({ request, env = {} }) {
   if (request.method === "GET") {
+    if (new URL(request.url).searchParams.get("recovery") === "legacy-cache") {
+      return jsonResponse({ ok: true, storage: "legacy-cache", records: await readCacheRecords() });
+    }
     return jsonResponse(await listProperties(env));
   }
 
