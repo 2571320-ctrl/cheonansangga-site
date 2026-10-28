@@ -94,7 +94,12 @@ async function saveProperties(env, records) {
     return { ok: true, configured: true, storage: "kv" };
   }
 
-  return writeCacheRecords(records);
+  return {
+    ok: false,
+    configured: false,
+    storage: "cache",
+    error: "매물 공유를 위한 영구 저장소(KV)가 연결되지 않았습니다. PROPERTIES_KV 바인딩을 확인해 주세요."
+  };
 }
 
 export async function onRequest({ request, env = {} }) {

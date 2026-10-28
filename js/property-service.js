@@ -355,9 +355,9 @@ async function readServerProperties() {
   try {
     const response = await fetch(PROPERTY_API_ENDPOINT, { cache: "no-store" });
     const body = await response.json().catch(() => null);
-    return response.ok && Array.isArray(body?.records) ? body.records : [];
+    return response.ok && body?.ok === true && Array.isArray(body.records) ? body.records : null;
   } catch {
-    return [];
+    return null;
   }
 }
 
@@ -449,15 +449,12 @@ function getProperties() {
 
 async function fetchProperties() {
   const serverProperties = await readServerProperties();
+  if (!Array.isArray(serverProperties)) return getProperties();
   const activeServerProperties = serverProperties
     .filter((item) => item && item.is_active !== false)
     .map(normalizeAdminProperty);
 
-  if (activeServerProperties.length) {
-    return [...activeServerProperties, ...getMockProperties()];
-  }
-
-  return getProperties();
+  return [...activeServerProperties, ...getMockProperties()];
 }
 
 window.PropertyService = {

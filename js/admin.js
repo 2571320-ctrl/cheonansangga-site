@@ -42,7 +42,6 @@ function write(key, value) {
 }
 
 function getProperties() {
-  ensurePropertySeed();
   return read("properties");
 }
 
@@ -85,7 +84,13 @@ async function loadServerProperties() {
   try {
     const response = await fetch(PROPERTY_API_ENDPOINT, { cache: "no-store" });
     const body = await response.json().catch(() => null);
-    if (response.ok && Array.isArray(body?.records) && body.records.length) {
+    if (response.ok && body?.ok === true && body.storage === "kv" && Array.isArray(body.records)) {
+      const local = read("properties");
+      if (local.length && JSON.stringify(local) !== JSON.stringify(body.records)) {
+        const backup = new Map(read("properties_recovery_backup").map(item => [String(item.id), item]));
+        for (const item of local) backup.set(String(item.id), item);
+        write("properties_recovery_backup", [...backup.values()]);
+      }
       setProperties(body.records);
       return body.records.length;
     }
@@ -117,10 +122,14 @@ async function saveServerProperties(properties) {
         body: JSON.stringify({ records: properties })
       });
     }
-    return response.ok;
+    const body = await response.json().catch(() => null);
+    if (!response.ok || body?.ok !== true || body.storage?.storage !== "kv") {
+      throw new Error(body?.error || body?.storage?.error || "서버 영구 저장에 실패했습니다. 운영 KV 연결과 관리자 인증을 확인해 주세요.");
+    }
+    return true;
   } catch (error) {
     console.warn("Server properties save failed", error);
-    return false;
+    throw error;
   }
 }
 
@@ -493,7 +502,13 @@ async function saveProperty(form) {
       props.push(data);
     }
     setProperties(props);
-    await saveServerProperties(props);
+    try {
+      await saveServerProperties(props);
+    } catch (error) {
+      renderPropertyTable();
+      setPropertyStatus(`이 브라우저에 임시 보관했습니다. 다른 브라우저에는 아직 반영되지 않았습니다. ${error.message}`, "error");
+      return;
+    }
     renderPropertyTable();
     resetPropertyForm();
     setPropertyStatus(mode === "edit" ? "매물이 수정되었습니다. PC와 모바일 상가매물 페이지에 반영됩니다." : "매물이 정상 등록되었습니다. PC와 모바일 상가매물 페이지에 반영됩니다.", "success");
@@ -785,13 +800,8 @@ function bindPropertyForm() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   requireAuth();
-  const hadLocalProperties = Boolean(localStorage.getItem("properties"));
-  ensurePropertySeed();
   await loadServerInquiries();
-  const serverPropertyCount = await loadServerProperties();
-  if (!serverPropertyCount && hadLocalProperties) {
-    await saveServerProperties(getProperties());
-  }
+  await loadServerProperties();
   renderDashboard();
   renderInquiries();
   renderPropertyTable();
@@ -799,6 +809,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initSettingsForm();
   bindPropertyForm();
   bindNewsReportForm();
+  document.querySelector("[data-sync-properties]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    try {
+      const response = await fetch(PROPERTY_API_ENDPOINT, { cache: "no-store" });
+      const body = await response.json();
+      if (!response.ok || body?.ok !== true || body.storage !== "kv" || !Array.isArray(body.records)) {
+        throw new Error("운영 서버의 영구 저장소(KV) 연결이 필요합니다. 기존 매물은 이 브라우저에 보관됩니다.");
+      }
+      const records = new Map();
+      for (const item of [...read("properties_recovery_backup"), ...read("properties"), ...body.records]) {
+        records.set(String(item.id), item);
+      }
+      const merged = [...records.values()];
+      await saveServerProperties(merged);
+      setProperties(merged);
+      renderPropertyTable();
+      setPropertyStatus(`매물 ${merged.length}건을 서버에 동기화했습니다. 다른 브라우저의 상가매물 페이지를 새로고침해 주세요.`, "success");
+    } catch (error) {
+      setPropertyStatus(error.message, "error");
+    } finally {
+      button.disabled = false;
+    }
+  });
   document.querySelector("[data-export]")?.addEventListener("click", exportCSV);
 
   document.addEventListener("click", async (event) => {
@@ -814,8 +848,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (del && confirm("이 매물을 삭제할까요?")) {
       const props = getProperties();
       props.splice(Number(del.dataset.delete), 1);
+      try { await saveServerProperties(props); }
+      catch (error) { setPropertyStatus(error.message, "error"); return; }
       setProperties(props);
-      await saveServerProperties(props);
       renderPropertyTable();
       resetPropertyForm();
       setPropertyStatus("매물이 삭제되었습니다.", "success");
@@ -836,8 +871,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const clear = event.target.closest("[data-clear-properties]");
     if (clear && confirm("등록된 매물을 모두 삭제할까요? 이 작업은 되돌릴 수 없습니다.")) {
+      try { await saveServerProperties([]); }
+      catch (error) { setPropertyStatus(error.message, "error"); return; }
       setProperties([]);
-      await saveServerProperties([]);
       renderPropertyTable();
       resetPropertyForm();
       setPropertyStatus("모든 매물이 삭제되었습니다.", "success");
